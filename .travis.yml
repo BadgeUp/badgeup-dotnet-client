@@ -1,0 +1,8 @@
+language: csharp
+dotnet: 1.1.5
+mono: none
+install:
+  - dotnet restore
+  - dotnet build
+script:
+  - dotnet test BadgeUpClient.Tests/BadgeUpClient.Tests.csproj --no-build
