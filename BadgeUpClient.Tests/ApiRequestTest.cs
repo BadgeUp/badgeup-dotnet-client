@@ -32,33 +32,33 @@ namespace BadgeUpClient.Tests
 
 			string responseJson =
 @"{
-  'event': {
-    'id': 'cja92jvpj1gummf5lf3jj5fx3',
-    'applicationId': '1337',
-    'subject': '100',
-    'key': 'eat:apple',
-    'timestamp': '2017-11-21T03:37:03.559Z',
-    'modifier': {
-      '@inc': 1
-    }
-  },
-  'progress': [
-    {
-      'achievementId': 'cj1sp5nse02j9zkruwhb3zwik',
-      'earnedAchievementId': 'cj1ss153y02k1zkrun39g8itq',
-      'isComplete': true,
-      'isNew': true,
-      'percentComplete': 1,
-      'progressTree': {
-        'type': 'GROUP',
-        'groups': [],
-        'criteria': {
-          'cj1sp461o02imzkruqkqi8amh': 1
-        },
-        'condition': 'AND'
-      }
-    }
-  ]
+	'event': {
+		'id': 'cja92jvpj1gummf5lf3jj5fx3',
+		'applicationId': '1337',
+		'subject': '100',
+		'key': 'eat:apple',
+		'timestamp': '2017-11-21T03:37:03.559Z',
+		'modifier': {
+			'@inc': 1
+		}
+	},
+	'progress': [
+		{
+			'achievementId': 'cj1sp5nse02j9zkruwhb3zwik',
+			'earnedAchievementId': 'cj1ss153y02k1zkrun39g8itq',
+			'isComplete': true,
+			'isNew': true,
+			'percentComplete': 1,
+			'progressTree': {
+				'type': 'GROUP',
+				'groups': [],
+				'criteria': {
+					'cj1sp461o02imzkruqkqi8amh': 1
+				},
+				'condition': 'AND'
+			}
+		}
+	]
 }".Replace("'", "\"");
 
 			// setup the response
