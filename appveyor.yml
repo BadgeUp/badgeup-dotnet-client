@@ -2,7 +2,7 @@ version: 1.0.{build}
 image: Visual Studio 2017
 before_build:
   - dotnet restore
-build_scropt:
+build_script:
   - dotnet build
 test_script:
   - dotnet test
