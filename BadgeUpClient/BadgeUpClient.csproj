@@ -1,8 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFrameworks>net46;netcoreapp2.0;netcoreapp1.1;</TargetFrameworks>
+    <Copyright>BadgeUp LLC</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.0.1</Version>
+    <RepositoryUrl>https://github.com/BadgeUp/badgeup-dotnet-core-client</RepositoryUrl>
+    <PackageTags />
+    <Authors>BadgeUp</Authors>
+    <Company>BadgeUp LLC</Company>
+    <Product>BadgeUp .NET Client</Product>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
 </Project>
