@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using RichardSzalay.MockHttp;
 using Xunit;
 
@@ -15,7 +15,7 @@ namespace BadgeUpClient.Tests
 
 			using (var client = new BadgeUpClient( ApiKey ))
 			{
-				var result = client.SendEvent( new Types.Event( "subject_foo", "eat:apple", new Types.Modifier { Inc = 1 } ) ).Result;
+				var result = client.Event.Send( new Types.Event( "subject_foo", "eat:apple", new Types.Modifier { Inc = 1 } ) ).Result;
 
 				Assert.Equal( "subject_foo", result.Event.Subject );
 				Assert.Equal( "eat:apple", result.Event.Key );
@@ -76,7 +76,7 @@ namespace BadgeUpClient.Tests
 
 				client._SetHttpClient(mockHttp.ToHttpClient());
 
-				var result = await client.SendEvent( new Types.Event( "subject_foo", "eat:apple", new Types.Modifier { Inc = 1 } ) );
+				var result = await client.Event.Send( new Types.Event( "subject_foo", "eat:apple", new Types.Modifier { Inc = 1 } ) );
 
 				Assert.NotNull(result.Event);
 				Assert.Single(result.Progress);

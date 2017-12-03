@@ -1,4 +1,4 @@
-﻿namespace BadgeUpClient.Types
+namespace BadgeUpClient.Types
 {
 	public class Options
 	{

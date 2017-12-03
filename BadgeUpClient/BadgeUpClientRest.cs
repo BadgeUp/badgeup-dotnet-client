@@ -1,84 +1,69 @@
-﻿using System;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using BadgeUpClient.Http;
-using BadgeUpClient.Requests;
-using BadgeUpClient.Responses;
-using BadgeUpClient.Types;
+using BadgeUpClient.ResourceClients;
 
 namespace BadgeUpClient
 {
-	public class BadgeUpClient : BadgeUpClientInterface, IDisposable
+	/// <summary>
+	/// BadgeUp Client
+	/// </summary>
+	public class BadgeUpClient : BadgeUpClientInterface, System.IDisposable
 	{
+		const string DEFAULT_HOST = "https://api.useast1.badgeup.io";
 		protected string m_host;
 		protected ApiKey m_apiKey;
-		protected HttpClient m_httpClient;
+		protected BadgeUpHttpClient m_httpClient;
 
+		// resource clients
+
+		/// <summary>
+		/// Interact with BadgeUp achievements
+		/// </summary>
+		public AchievementClient Achievement;
+		/// <summary>
+		/// Interact with BadgeUp awards
+		/// </summary>
+		public AwardClient Award;
+		/// <summary>
+		/// Interact with BadgeUp earned achievements
+		/// </summary>
+		public EarnedAchievementClient EarnedAchievement;
+		/// <summary>
+		/// Interact with BadgeUp events
+		/// </summary>
+		public EventClient Event;
+
+		/// <summary>
+		/// Instantiate the BadgeUpClient, providing an instance of <see cref="ApiKey"/>
+		/// </summary>
+		/// <param name="apiKey">API key generated from the BadgeUp dashboard</param>
+		/// <param name="host">Optional. BadgeUp instance to use.</param>
 		public BadgeUpClient( ApiKey apiKey, string host )
 		{
-			m_apiKey = apiKey;
-			m_host = host;
+			this.m_apiKey = apiKey;
+			this.m_host = host;
 
-			m_httpClient = CreateHttpClient();
+			this.m_httpClient = new BadgeUpHttpClient(apiKey, host);
+
+			this.Achievement = new AchievementClient(this.m_httpClient);
+			this.Award = new AwardClient(this.m_httpClient);
+			this.EarnedAchievement = new EarnedAchievementClient(this.m_httpClient);
+			this.Event = new EventClient(this.m_httpClient);
 		}
 
-		public BadgeUpClient( string apiKey, string host = "https://api.useast1.badgeup.io" )
+		/// <summary>
+		/// Instantiate the BadgeUpClient, providing an apiKey
+		/// </summary>
+		/// <param name="apiKey">API key generated from the BadgeUp dashboard</param>
+		/// <param name="host">Optional. BadgeUp instance to use.</param>
+		public BadgeUpClient( string apiKey, string host = DEFAULT_HOST )
 			: this( ApiKey.Create( apiKey ), host )
 		{
 		}
 
-		public override async Task<EventResponse> SendEvent( Event @event, bool? showIncomplete = null, bool? discard = null )
-		{
-			HttpQuery query = new HttpQuery();
-
-			if (showIncomplete.HasValue)
-			{
-				query.Add( "showIncomplete", showIncomplete.Value );
-			}
-
-			if (discard.HasValue)
-			{
-				query.Add( "showIncomplete", discard.Value );
-			}
-
-			return await Post<EventResponse>( new EventRequest( @event ), "events", query: query.ToString() );
-		}
-
-		protected HttpClient CreateHttpClient()
-		{
-			var result = new HttpClient();
-			result.DefaultRequestHeaders.Accept.Clear();
-			result.DefaultRequestHeaders.Accept.Add( new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue( "application/json" ) );
-			result.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue( "Basic", m_apiKey.Auth );
-
-			return result;
-		}
-
-		protected async Task<TResponse> Post<TResponse>( Request data, string endpointName, string path = "/v1/apps/{applicationId}", string query = null )
-		{
-			path = path.Replace( "{applicationId}", m_apiKey.ApplicationId );
-
-			var content = new StringContent( data.ToJson(), Encoding.UTF8, "application/json" );
-
-			var response = await m_httpClient.PostAsync(
-				m_host + path + "/" + endpointName + (query != null ? '?' + query : ""),
-				content );
-
-			var responseContent = await response.Content.ReadAsStringAsync();
-
-			if (response.StatusCode != System.Net.HttpStatusCode.Created)
-			{
-				throw new BadgeUpClientException( responseContent );
-			}
-
-			return Json.Deserialize<TResponse>( responseContent );
-		}
-
 		// for test purposes only
-		public void _SetHttpClient(HttpClient h)
+		public void _SetHttpClient(System.Net.Http.HttpClient h)
 		{
-			this.m_httpClient = h;
+			this.m_httpClient._SetHttpClient(h);
 		}
 
 		public void Dispose()

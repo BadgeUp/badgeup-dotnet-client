@@ -1,4 +1,4 @@
-﻿using BadgeUpClient.Types;
+using BadgeUpClient.Types;
 
 namespace BadgeUpClient.Requests
 {

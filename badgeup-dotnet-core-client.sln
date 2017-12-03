@@ -1,10 +1,15 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BadgeUpClient", "BadgeUpClient\BadgeUpClient.csproj", "{11EF7DF4-A8EB-407A-939E-1898C0A6695F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BadgeUpClient.Tests", "BadgeUpClient.Tests\BadgeUpClient.Tests.csproj", "{15F31477-0BDE-4820-87E8-388608F18F51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D4CB7347-BCEA-4BE8-9C0E-7BE56DA5E707}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
