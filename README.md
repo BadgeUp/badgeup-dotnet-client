@@ -1,7 +1,8 @@
 # BadgeUp .NET Client
 Official .NET client for working with [BadgeUp](https://www.badgeup.io/). Targets compatibility with .NET 4.6 and .NET Core v1.1 (LTS).
 
-[![Build Status](https://travis-ci.org/BadgeUp/badgeup-dotnet-core-client.svg?branch=master)](https://travis-ci.org/BadgeUp/badgeup-dotnet-core-client)
+[![Build Status](https://travis-ci.org/BadgeUp/badgeup-dotnet-client.svg?branch=master)](https://travis-ci.org/BadgeUp/badgeup-dotnet-client)
+[![Build status](https://ci.appveyor.com/api/projects/status/ayanietgkkcvjjk8?svg=true)](https://ci.appveyor.com/project/MarkHerhold/badgeup-dotnet-client)
 
 ## Quickstart
 
