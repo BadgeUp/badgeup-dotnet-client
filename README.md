@@ -7,7 +7,7 @@ Official .NET client for working with [BadgeUp](https://www.badgeup.io/). Target
 ## Quickstart
 
 ### Install
-Install the package [from nuget here](https://www.nuget.org/packages/BadgeUpClient/)
+Install the package [from nuget here](https://www.nuget.org/packages/BadgeUpClient/).
 
 ### Example Use
 The BadgeUp .NET client is initialized with an API key which can be generated in the BadgeUp dashboard.
