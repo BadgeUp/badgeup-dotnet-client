@@ -9,7 +9,7 @@ before_build:
 build_script:
   - dotnet build
 test_script:
-  - dotnet test
+  - dotnet test .\BadgeUpClient.Tests\BadgeUpClient.Tests.csproj --no-build
 after_test:
   - dotnet pack -o package
 artifacts:
