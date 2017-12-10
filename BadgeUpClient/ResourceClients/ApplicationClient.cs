@@ -6,7 +6,7 @@ namespace BadgeUpClient.ResourceClients
 {
 	public class ApplicationClient
 	{
-		const string ENDPOINT = "apps";
+		const string ENDPOINT = "v1/apps";
 		protected BadgeUpHttpClient m_httpClient;
 
 		public ApplicationClient(BadgeUpHttpClient httpClient)
@@ -21,7 +21,7 @@ namespace BadgeUpClient.ResourceClients
 		/// <returns><see cref="ApplicationResponse"/></returns>
 		public async Task<ApplicationResponse> GetById(string id)
 		{
-			return await this.m_httpClient.Get<ApplicationResponse>(ENDPOINT + "/" + id, "/v1");
+			return await this.m_httpClient.Get<ApplicationResponse>(ENDPOINT + "/" + id, "");
 		}
 	}
 }

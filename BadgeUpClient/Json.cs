@@ -20,7 +20,6 @@ namespace BadgeUpClient
 					ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver(),
 					Converters = new List<JsonConverter>() {new StringEnumConverter {CamelCaseText = true}}
 				});
-			//return JsonConvert.DeserializeObject<T>( v );
 		}
 
 		public static string Serialize<T>(T o)
