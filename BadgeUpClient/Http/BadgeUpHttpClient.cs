@@ -14,7 +14,7 @@ namespace BadgeUpClient.Http
 
 		public BadgeUpHttpClient(ApiKey apiKey, string host)
 		{
-		    this.m_apiKey = apiKey;
+			this.m_apiKey = apiKey;
 			this.m_host = host;
 
 			HttpClient httpClient = new HttpClient();
