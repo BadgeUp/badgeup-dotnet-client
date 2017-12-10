@@ -34,21 +34,21 @@ namespace BadgeUpClient.Tests
 	public class ProgressSerializationTest
 	{
 		string ProgressJson =
-@"{
-	'achievementId': 'cj1sp5nse02j9zkruwhb3zwik',
-	'earnedAchievementId': 'cj1ss153y02k1zkrun39g8itq',
-	'isComplete': true,
-	'isNew': true,
-	'percentComplete': 0.81,
-	'progressTree': {
-		'type': 'GROUP',
-		'groups': [],
-		'criteria': {
-			'cj1sp461o02imzkruqkqi8amh': 1
-		},
-		'condition': 'AND'
-	}
-}".Replace("'", "\"").Replace("(\"(?:[^\"\\\\]|\\\\.)*\")|\\s+", "$1");
+			@"{
+				""achievementId"": ""cj1sp5nse02j9zkruwhb3zwik"",
+				""earnedAchievementId"": ""cj1ss153y02k1zkrun39g8itq"",
+				""isComplete"": true,
+				""isNew"": true,
+				""percentComplete"": 0.81,
+				""progressTree"": {
+					""type"": ""GROUP"",
+					""groups"": [],
+					""criteria"": {
+						""cj1sp461o02imzkruqkqi8amh"": 1
+					},
+					""condition"": ""AND""
+				}
+			}";
 
 		[Fact]
 		public void Serialization_ProgressDeserialize()
@@ -65,31 +65,31 @@ namespace BadgeUpClient.Tests
 
 	public class AchievementSerializationTest
 	{
-		string AchievementJson =
-@"{
-	'id': 'cj1sp5nse02j9zkruwhb3zwik',
-	'applicationId': 'y70ujss',
-	'name': 'Anger Management',
-	'description': 'Relentlessly punish inanimate objects',
-	'evalTree': {
-		'type': 'GROUP',
-		'groups': [],
-		'criteria': [
-			'cirjx77kw0004113jlb0h5l51'
-		],
-		'condition': 'AND'
-	},
-	'awards': [
-		'ciqjx77kw2684513jlb0p5l51'
-	],
-	'meta': {
-		'created': '2016-08-07T01:18:19.061Z',
-		'icon': 'https://example.com/image'
-	},
-	'options': {
-		'suspended': true
-	}
-}".Replace("'", "\"").Replace("(\"(?:[^\"\\\\]|\\\\.)*\")|\\s+", "$1");
+		private string AchievementJson =
+			@"{
+				""id"": ""cj1sp5nse02j9zkruwhb3zwik"",
+				""applicationId"": ""y70ujss"",
+				""name"": ""Anger Management"",
+				""description"": ""Relentlessly punish inanimate objects"",
+				""evalTree"": {
+					""type"": ""GROUP"",
+					""groups"": [],
+					""criteria"": [
+						""cirjx77kw0004113jlb0h5l51""
+					],
+					""condition"": ""AND""
+				},
+				""awards"": [
+					""ciqjx77kw2684513jlb0p5l51""
+				],
+				""meta"": {
+					""created"": ""2016-08-07T01:18:19.061Z"",
+					""icon"": ""https://example.com/image""
+				},
+				""options"": {
+					""suspended"": true
+				}
+			}";
 
 		[Fact]
 		public void Serialization_AchievementDeserialize()
@@ -121,18 +121,18 @@ namespace BadgeUpClient.Tests
 	public class AwardSerializationTest
 	{
 		string awardJson =
-@"{
-	'id': 'cj1syiekxnxrb6kovpsxglcdx',
-	'applicationId': 'y70ujss',
-	'name': '20 Gold',
-	'description': '20 Gold reward from the king!',
-	'data': {
-		'gold': 20,
-		'otherNestedData': {
-			'bool': true
-		}
-	}
-}".Replace("'", "\"").Replace("(\"(?:[^\"\\\\]|\\\\.)*\")|\\s+", "$1");
+			@"{
+				""id"": ""cj1syiekxnxrb6kovpsxglcdx"",
+				""applicationId"": ""y70ujss"",
+				""name"": ""20 Gold"",
+				""description"": ""20 Gold reward from the king!"",
+				""data"": {
+					""gold"": 20,
+					""otherNestedData"": {
+						""bool"": true
+					}
+				}
+			}";
 
 		[Fact]
 		public void Serialization_AwardDeserialize()
@@ -151,13 +151,13 @@ namespace BadgeUpClient.Tests
 
 	public class AccountSerializationTest
 	{
-		private string accountJson =
+		string accountJson =
 			@"{
-				""id"" : ""3eknqblf51"",
-				""name"" : ""Account name with sybmols !@#$%^&*()_+"",
-				""description"" : ""Account description content"",
+				""id"": ""3eknqblf51"",
+				""name"": ""Account name with sybmols !@#$%^&*()_+"",
+				""description"": ""Account description content"",
 				""meta"" : {
-					""created"" : ""2017-11-19T20:08:33.48""
+					""created"": ""2017-11-19T20:08:33.48""
 				}
 			}";
 
@@ -165,10 +165,74 @@ namespace BadgeUpClient.Tests
 		public void Serialization_AccountDeserialize()
 		{
 			var account = Json.Deserialize<AccountResponse>(accountJson);
+
 			Assert.Equal("3eknqblf51", account.Id);
 			Assert.Equal(@"Account name with sybmols !@#$%^&*()_+", account.Name);
 			Assert.Equal("Account description content", account.Description);
 			Assert.Equal(DateTime.Parse("2017-11-19T20:08:33.48"), account.Meta.Created);
+		}
+	}
+
+	public class ApplicationSerializationTest
+	{
+		string applicationJson =
+			@"{
+				""id"": ""9hk14dln35"",
+				""accountId"": ""3eknqblf51"",
+				""name"": ""vagabond volcano"",
+				""description"": ""Application description content"",
+				""meta"": {
+					""created"": ""2017-11-19T20:08:59.62""
+				}
+			}";
+
+		[Fact]
+		public void Serialization_ApplicationDeserialize()
+		{
+			var application = Json.Deserialize<ApplicationResponse>(applicationJson);
+
+			Assert.Equal("9hk14dln35", application.Id);
+			Assert.Equal("3eknqblf51", application.AccountId);
+			Assert.Equal("vagabond volcano", application.Name);
+			Assert.Equal("Application description content", application.Description);
+			Assert.Equal(DateTime.Parse("2017-11-19T20:08:59.62"), application.Meta.Created);
+		}
+	}
+	public class CriterionSerializationTest
+	{
+		string criterionJson =
+			@"{
+				""id"": ""cjb0ln006esruzz6gymu12c6f"",
+				""applicationId"": ""9hk14dln35"",
+				""name"": ""criterion name"",
+				""description"": ""criterion description"",
+				""key"": ""key content"",
+				""evaluation"": {
+					""type"": ""standard"",
+					""operator"": ""@gte"",
+					""threshold"": 5
+				},
+				""meta"": {
+					""created"": ""2017-12-10T10:01:08.55""
+				}
+			}";
+
+		[Fact]
+		public void Serialization_CriterionDeserialize()
+		{
+			var criterion = Json.Deserialize<CriterionResponse>(criterionJson);
+
+			Assert.Equal("cjb0ln006esruzz6gymu12c6f", criterion.Id);
+			Assert.Equal("9hk14dln35", criterion.ApplicationId);
+			Assert.Equal("criterion name", criterion.Name);
+			Assert.Equal("criterion description", criterion.Description);
+			Assert.Equal("key content", criterion.Key);
+
+			Assert.Equal("standard", criterion.Evaluation.Type);
+			Assert.Equal(CriterionOperator.GreaterOrEqual, criterion.Evaluation.Operator);
+			Assert.Equal(5, criterion.Evaluation.Threshold);
+
+			Assert.Equal(DateTime.Parse("2017-12-10T10:01:08.55"), criterion.Meta.Created);
 		}
 	}
 }
