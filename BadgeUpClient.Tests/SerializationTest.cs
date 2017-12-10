@@ -198,6 +198,7 @@ namespace BadgeUpClient.Tests
 			Assert.Equal(DateTime.Parse("2017-11-19T20:08:59.62"), application.Meta.Created);
 		}
 	}
+
 	public class CriterionSerializationTest
 	{
 		string criterionJson =
