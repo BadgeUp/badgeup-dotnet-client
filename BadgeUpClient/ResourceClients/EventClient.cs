@@ -28,7 +28,7 @@ namespace BadgeUpClient.ResourceClients
 
 			if (showIncomplete.HasValue)
 			{
-				query.Add("showIncomplete", showIncomplete.Value);
+			    query.Add("showIncomplete", showIncomplete.Value.ToString().ToLower());
 			}
 
 			return await this.m_httpClient.Post<EventResponse>(new EventRequest(@event), "events", query: query.ToString());

@@ -1,13 +1,15 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using BadgeUpClient.Responses;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace BadgeUpClient.Http
 {
 	public class BadgeUpHttpClient : System.IDisposable
 	{
 		protected string m_host;
-		protected ApiKey m_apiKey;
+		private ApiKey m_apiKey;
 		protected HttpClient m_httpClient;
 
 		public BadgeUpHttpClient(ApiKey apiKey, string host)
@@ -39,8 +41,17 @@ namespace BadgeUpClient.Http
 				throw new BadgeUpClientException( responseContent );
 			}
 
-			return Json.Deserialize<TResponse>( responseContent );
-		}
+		    JsonConvert.DefaultSettings = (() =>
+		    {
+		        var settings = new JsonSerializerSettings();
+		        settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+		        return settings;
+		    });
+            return JsonConvert.DeserializeObject<TResponse>(responseContent);
+
+            return Json.Deserialize<TResponse>( responseContent );
+
+        }
 
 		public async Task<TResponse> Post<TResponse>( Request data, string endpointName, string path = "/v1/apps/{applicationId}", string query = null )
 		{

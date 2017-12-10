@@ -13,16 +13,29 @@ namespace BadgeUpClient
 		protected ApiKey m_apiKey;
 		protected BadgeUpHttpClient m_httpClient;
 
-		// resource clients
+        // resource clients
 
-		/// <summary>
-		/// Interact with BadgeUp achievements
-		/// </summary>
-		public AchievementClient Achievement;
-		/// <summary>
-		/// Interact with BadgeUp awards
-		/// </summary>
-		public AwardClient Award;
+
+	    /// <summary>
+	    /// Interact with BadgeUp accounts
+	    /// </summary>
+	    public AccountClient Account; 
+        /// <summary>
+        /// Interact with BadgeUp achievements
+        /// </summary>
+        public AchievementClient Achievement;
+	    /// <summary>
+	    /// Interact with BadgeUp applications
+	    /// </summary>
+	    public ApplicationClient Application;
+        /// <summary>
+        /// Interact with BadgeUp awards
+        /// </summary>
+        public AwardClient Award; 
+        /// <summary>
+        /// Interact with BadgeUp criteria
+        /// </summary>
+        public CriterionClient Criterion;
 		/// <summary>
 		/// Interact with BadgeUp earned achievements
 		/// </summary>
@@ -44,8 +57,11 @@ namespace BadgeUpClient
 
 			this.m_httpClient = new BadgeUpHttpClient(apiKey, host);
 
+            this.Account = new AccountClient(this.m_httpClient);
 			this.Achievement = new AchievementClient(this.m_httpClient);
+			this.Application = new ApplicationClient(this.m_httpClient);
 			this.Award = new AwardClient(this.m_httpClient);
+			this.Criterion = new CriterionClient(this.m_httpClient);
 			this.EarnedAchievement = new EarnedAchievementClient(this.m_httpClient);
 			this.Event = new EventClient(this.m_httpClient);
 		}
