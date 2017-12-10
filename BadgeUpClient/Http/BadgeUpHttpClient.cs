@@ -14,7 +14,7 @@ namespace BadgeUpClient.Http
 
 		public BadgeUpHttpClient(ApiKey apiKey, string host)
 		{
-			this.m_apiKey = apiKey;
+		    this.m_apiKey = apiKey;
 			this.m_host = host;
 
 			HttpClient httpClient = new HttpClient();
@@ -41,17 +41,8 @@ namespace BadgeUpClient.Http
 				throw new BadgeUpClientException( responseContent );
 			}
 
-		    JsonConvert.DefaultSettings = (() =>
-		    {
-		        var settings = new JsonSerializerSettings();
-		        settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
-		        return settings;
-		    });
-            return JsonConvert.DeserializeObject<TResponse>(responseContent);
-
-            return Json.Deserialize<TResponse>( responseContent );
-
-        }
+			return Json.Deserialize<TResponse>(responseContent);
+		}
 
 		public async Task<TResponse> Post<TResponse>( Request data, string endpointName, string path = "/v1/apps/{applicationId}", string query = null )
 		{
