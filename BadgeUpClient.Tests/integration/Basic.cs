@@ -12,8 +12,8 @@ namespace BadgeUpClient.Tests
 		[Fact]
 		public async void BasicIntegration_SendEvent()
 		{
-			Assert.NotNull(API_KEY);
-			Assert.NotEqual(string.Empty, API_KEY);
+			if (string.IsNullOrEmpty(API_KEY))
+				return;
 
 			var client = new BadgeUpClient(API_KEY);
 			System.Random rand = new System.Random();
@@ -80,8 +80,8 @@ namespace BadgeUpClient.Tests
 		[Fact]
 		public async void BasicIntegration_GetApplication()
 		{
-			Assert.NotNull(API_KEY);
-			Assert.NotEqual(string.Empty, API_KEY);
+			if (string.IsNullOrEmpty(API_KEY))
+				return;
 
 			var client = new BadgeUpClient(API_KEY);
 			var apiKey = ApiKey.Create(API_KEY);
@@ -95,8 +95,8 @@ namespace BadgeUpClient.Tests
 		[Fact]
 		public async void BasicIntegration_GetAccount()
 		{
-			Assert.NotNull(API_KEY);
-			Assert.NotEqual(string.Empty, API_KEY);
+			if (string.IsNullOrEmpty(API_KEY))
+				return;
 
 			var client = new BadgeUpClient(API_KEY);
 			var apiKey = ApiKey.Create(API_KEY);
