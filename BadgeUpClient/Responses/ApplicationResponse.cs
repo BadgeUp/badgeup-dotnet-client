@@ -13,7 +13,6 @@ namespace BadgeUpClient.Responses
 
 	public class ApplicationMeta : Meta
 	{
-	    public bool Demo { get; set; }
-    }
-
+		public bool Demo { get; set; }
+	}
 }

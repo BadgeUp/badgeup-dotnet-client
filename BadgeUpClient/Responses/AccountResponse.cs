@@ -13,5 +13,4 @@ namespace BadgeUpClient.Responses
 	public class AccountMeta : Meta
 	{
 	}
-
 }
