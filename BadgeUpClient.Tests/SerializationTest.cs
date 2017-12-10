@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BadgeUpClient.Responses;
 using BadgeUpClient.Types;
@@ -145,6 +146,29 @@ namespace BadgeUpClient.Tests
 
 			Assert.Equal( 20, award.Data["gold"] );
 			Assert.Equal( true, award.Data["otherNestedData"]["bool"] );
+		}
+	}
+
+	public class AccountSerializationTest
+	{
+		private string accountJson =
+			@"{
+				""id"" : ""3eknqblf51"",
+				""name"" : ""Account name with sybmols !@#$%^&*()_+"",
+				""description"" : ""Account description content"",
+				""meta"" : {
+					""created"" : ""2017-11-19T20:08:33.48""
+				}
+			}";
+
+		[Fact]
+		public void Serialization_AccountDeserialize()
+		{
+			var account = Json.Deserialize<AccountResponse>(accountJson);
+			Assert.Equal("3eknqblf51", account.Id);
+			Assert.Equal(@"Account name with sybmols !@#$%^&*()_+", account.Name);
+			Assert.Equal("Account description content", account.Description);
+			Assert.Equal(DateTime.Parse("2017-11-19T20:08:33.48"), account.Meta.Created);
 		}
 	}
 }
