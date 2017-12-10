@@ -9,7 +9,7 @@ namespace BadgeUpClient.Http
 	public class BadgeUpHttpClient : System.IDisposable
 	{
 		protected string m_host;
-		private ApiKey m_apiKey;
+		protected ApiKey m_apiKey;
 		protected HttpClient m_httpClient;
 
 		public BadgeUpHttpClient(ApiKey apiKey, string host)
