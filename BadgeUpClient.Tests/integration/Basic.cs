@@ -63,15 +63,19 @@ namespace BadgeUpClient.Tests
 				}
 			}
 
+			//some achievement icons have to be uploaded for the test to pass.
+			var icons = await  client.AchievementIcon.GetAll();
+			Assert.False(icons.Length == 0);
+
 			// var progress = result.Progress[0];
 
-			// var earnedAchievement = await client.EarnedAchievement.GetById(progress.EarnedAchievementId);
+			// var earnedAchievement = await client.EarnedAchievement.GetAll(progress.EarnedAchievementId);
 			// Assert.Equal(progress.EarnedAchievementId, earnedAchievement.Id);
 
-			// var achievement = await client.Achievement.GetById(result.Progress[0].AchievementId);
+			// var achievement = await client.Achievement.GetAll(result.Progress[0].AchievementId);
 			// Assert.Equal(progress.AchievementId, achievement.Id);
 
-			// var award = await client.Award.GetById(achievement.Awards[0]);
+			// var award = await client.Award.GetAll(achievement.Awards[0]);
 			// Assert.Equal(achievement.Awards[0], award.Id);
 			// Assert.NotNull(award.Data);
 			// Assert.Equal(5, award.Data["points"]);
