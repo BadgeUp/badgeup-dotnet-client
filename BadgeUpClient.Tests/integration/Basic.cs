@@ -63,6 +63,15 @@ namespace BadgeUpClient.Tests
 				}
 			}
 
+
+			var apiKey = ApiKey.Create(API_KEY);
+			var metric = await client.Metric.GetIndividualBySubject(@event.Subject, key);
+
+			Assert.Equal(apiKey.ApplicationId, metric.ApplicationId);
+			Assert.Equal(@event.Key, metric.Key);
+			Assert.Equal(@event.Subject, metric.Subject);
+			Assert.True(metric.Value >= @event.Modifier.Inc);
+
 			// var progress = result.Progress[0];
 
 			// var earnedAchievement = await client.EarnedAchievement.GetById(progress.EarnedAchievementId);

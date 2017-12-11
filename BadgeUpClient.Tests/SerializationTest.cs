@@ -236,4 +236,28 @@ namespace BadgeUpClient.Tests
 			Assert.Equal(DateTime.Parse("2017-12-10T10:01:08.55"), criterion.Meta.Created);
 		}
 	}
+
+	public class MetricSerializationTest
+	{
+		string metricJson =
+			@"{
+				""id"": ""cjb2jszpz6r08y06rxhmbku3p"",
+				""applicationId"": ""9hk14dln35"",
+				""key"": ""metric Key"",
+				""subject"": ""dotnet-ci-96512"",
+				""value"":5
+			}";
+
+		[Fact]
+		public void Serialization_MetricDeserialize()
+		{
+			var metric = Json.Deserialize<MetricResponse>(metricJson);
+
+			Assert.Equal("cjb2jszpz6r08y06rxhmbku3p", metric.Id);
+			Assert.Equal("9hk14dln35", metric.ApplicationId);
+			Assert.Equal("metric Key", metric.Key);
+			Assert.Equal("dotnet-ci-96512", metric.Subject);
+			Assert.Equal(5, metric.Value);
+		}
+	}
 }
