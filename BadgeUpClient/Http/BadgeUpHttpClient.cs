@@ -1,6 +1,8 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using BadgeUpClient.Responses;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace BadgeUpClient.Http
 {
@@ -39,7 +41,7 @@ namespace BadgeUpClient.Http
 				throw new BadgeUpClientException( responseContent );
 			}
 
-			return Json.Deserialize<TResponse>( responseContent );
+			return Json.Deserialize<TResponse>(responseContent);
 		}
 
 		public async Task<TResponse> Post<TResponse>( Request data, string endpointName, string path = "/v1/apps/{applicationId}", string query = null )

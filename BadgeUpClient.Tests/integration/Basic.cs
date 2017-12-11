@@ -13,15 +13,13 @@ namespace BadgeUpClient.Tests
 		public async void BasicIntegration_SendEvent()
 		{
 			if (string.IsNullOrEmpty(API_KEY))
-			{
 				return;
-			}
 
 			var client = new BadgeUpClient(API_KEY);
 			System.Random rand = new System.Random();
 			string subject = "dotnet-ci-" + rand.Next(100000);
 			string key = "test";
-			Event @event = new Event(subject, key, new Modifier { Inc = 5 });
+			Event @event = new Event(subject, key, new Modifier {Inc = 5});
 
 			EventResponse result = await client.Event.Send(@event);
 
@@ -55,6 +53,13 @@ namespace BadgeUpClient.Tests
 						int points = award.Data["points"].ToObject<int>();
 						System.Console.WriteLine($"Points awarded: {points}");
 					}
+
+					//get associated criteria
+					foreach (var criterion in prog.ProgressTree.Criteria)
+					{
+						var criterionRespone = await client.Criterion.GetById(criterion.Key);
+						Assert.Equal(criterion.Key, criterionRespone.Id);
+					}
 				}
 			}
 
@@ -70,6 +75,35 @@ namespace BadgeUpClient.Tests
 			// Assert.Equal(achievement.Awards[0], award.Id);
 			// Assert.NotNull(award.Data);
 			// Assert.Equal(5, award.Data["points"]);
+		}
+
+		[Fact]
+		public async void BasicIntegration_GetApplication()
+		{
+			if (string.IsNullOrEmpty(API_KEY))
+				return;
+
+			var client = new BadgeUpClient(API_KEY);
+			var apiKey = ApiKey.Create(API_KEY);
+
+			var application = await client.Application.GetById(apiKey.ApplicationId);
+
+			Assert.Equal(apiKey.ApplicationId, application.Id);
+			Assert.Equal(apiKey.AccountId, application.AccountId);
+		}
+
+		[Fact]
+		public async void BasicIntegration_GetAccount()
+		{
+			if (string.IsNullOrEmpty(API_KEY))
+				return;
+
+			var client = new BadgeUpClient(API_KEY);
+			var apiKey = ApiKey.Create(API_KEY);
+
+			var account = await client.Account.GetById(apiKey.AccountId);
+
+			Assert.Equal(apiKey.AccountId, account.Id);
 		}
 	}
 }
