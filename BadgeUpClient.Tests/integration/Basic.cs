@@ -9,11 +9,11 @@ namespace BadgeUpClient.Tests
 		// get a real API Key for integration testing
 		string API_KEY = System.Environment.GetEnvironmentVariable("INTEGRATION_API_KEY");
 
-		[Fact]
+		[SkippableFact]
 		public async void BasicIntegration_SendEvent()
 		{
 			if (string.IsNullOrEmpty(API_KEY))
-				return;
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
 
 			var client = new BadgeUpClient(API_KEY);
 			System.Random rand = new System.Random();
@@ -81,11 +81,11 @@ namespace BadgeUpClient.Tests
 			// Assert.Equal(5, award.Data["points"]);
 		}
 
-		[Fact]
+		[SkippableFact]
 		public async void BasicIntegration_GetApplication()
 		{
 			if (string.IsNullOrEmpty(API_KEY))
-				return;
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
 
 			var client = new BadgeUpClient(API_KEY);
 			var apiKey = ApiKey.Create(API_KEY);
@@ -96,11 +96,11 @@ namespace BadgeUpClient.Tests
 			Assert.Equal(apiKey.AccountId, application.AccountId);
 		}
 
-		[Fact]
+		[SkippableFact]
 		public async void BasicIntegration_GetAccount()
 		{
 			if (string.IsNullOrEmpty(API_KEY))
-				return;
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
 
 			var client = new BadgeUpClient(API_KEY);
 			var apiKey = ApiKey.Create(API_KEY);
