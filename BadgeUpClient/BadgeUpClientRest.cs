@@ -25,6 +25,11 @@ namespace BadgeUpClient
 		/// Interact with BadgeUp achievements
 		/// </summary>
 		public AchievementClient Achievement;
+		
+		/// <summary>
+		/// Interact with BadgeUp achievementIcons
+		/// </summary>
+		public AchievementIconClient AchievementIcon;
 
 		/// <summary>
 		/// Interact with BadgeUp applications
@@ -70,6 +75,7 @@ namespace BadgeUpClient
 
 			this.Account = new AccountClient(this.m_httpClient);
 			this.Achievement = new AchievementClient(this.m_httpClient);
+			this.AchievementIcon = new AchievementIconClient(this.m_httpClient);
 			this.Application = new ApplicationClient(this.m_httpClient);
 			this.Award = new AwardClient(this.m_httpClient);
 			this.Criterion = new CriterionClient(this.m_httpClient);
