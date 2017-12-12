@@ -63,6 +63,10 @@ namespace BadgeUpClient.Tests
 				}
 			}
 
+			//some achievement icons have to be uploaded for the test to pass.
+			var icons = await  client.AchievementIcon.GetAll();
+			Assert.False(icons.Length == 0);
+
 			// var progress = result.Progress[0];
 
 			// var earnedAchievement = await client.EarnedAchievement.GetById(progress.EarnedAchievementId);
