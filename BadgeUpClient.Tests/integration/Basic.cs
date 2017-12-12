@@ -63,10 +63,6 @@ namespace BadgeUpClient.Tests
 				}
 			}
 
-			//some achievement icons have to be uploaded for the test to pass.
-			var icons = await  client.AchievementIcon.GetAll();
-			Assert.False(icons.Length == 0);
-
 			// var progress = result.Progress[0];
 
 			// var earnedAchievement = await client.EarnedAchievement.GetById(progress.EarnedAchievementId);
@@ -108,6 +104,20 @@ namespace BadgeUpClient.Tests
 			var account = await client.Account.GetById(apiKey.AccountId);
 
 			Assert.Equal(apiKey.AccountId, account.Id);
+		}
+
+		[SkippableFact]
+		public async void BasicIntegration_GetIcons()
+		{
+			if (string.IsNullOrEmpty(API_KEY))
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
+
+			var client = new BadgeUpClient(API_KEY);
+			var apiKey = ApiKey.Create(API_KEY);
+
+			//some achievement icons have to be uploaded for the test to pass.
+			var icons = await client.AchievementIcon.GetAll();
+			Assert.False(icons.Length == 0);
 		}
 	}
 }
