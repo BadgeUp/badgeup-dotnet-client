@@ -9,11 +9,11 @@ namespace BadgeUpClient.Tests
 		// get a real API Key for integration testing
 		string API_KEY = System.Environment.GetEnvironmentVariable("INTEGRATION_API_KEY");
 
-		[Fact]
+		[SkippableFact]
 		public async void BasicIntegration_SendEvent()
 		{
 			if (string.IsNullOrEmpty(API_KEY))
-				return;
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
 
 			var client = new BadgeUpClient(API_KEY);
 			System.Random rand = new System.Random();
@@ -63,6 +63,15 @@ namespace BadgeUpClient.Tests
 				}
 			}
 
+
+			var apiKey = ApiKey.Create(API_KEY);
+			var metric = await client.Metric.GetIndividualBySubject(@event.Subject, key);
+
+			Assert.Equal(apiKey.ApplicationId, metric.ApplicationId);
+			Assert.Equal(@event.Key, metric.Key);
+			Assert.Equal(@event.Subject, metric.Subject);
+			Assert.True(metric.Value >= @event.Modifier.Inc);
+
 			// var progress = result.Progress[0];
 
 			// var earnedAchievement = await client.EarnedAchievement.GetById(progress.EarnedAchievementId);
@@ -77,11 +86,11 @@ namespace BadgeUpClient.Tests
 			// Assert.Equal(5, award.Data["points"]);
 		}
 
-		[Fact]
+		[SkippableFact]
 		public async void BasicIntegration_GetApplication()
 		{
 			if (string.IsNullOrEmpty(API_KEY))
-				return;
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
 
 			var client = new BadgeUpClient(API_KEY);
 			var apiKey = ApiKey.Create(API_KEY);
@@ -92,11 +101,11 @@ namespace BadgeUpClient.Tests
 			Assert.Equal(apiKey.AccountId, application.AccountId);
 		}
 
-		[Fact]
+		[SkippableFact]
 		public async void BasicIntegration_GetAccount()
 		{
 			if (string.IsNullOrEmpty(API_KEY))
-				return;
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
 
 			var client = new BadgeUpClient(API_KEY);
 			var apiKey = ApiKey.Create(API_KEY);
@@ -104,6 +113,20 @@ namespace BadgeUpClient.Tests
 			var account = await client.Account.GetById(apiKey.AccountId);
 
 			Assert.Equal(apiKey.AccountId, account.Id);
+		}
+
+		[SkippableFact]
+		public async void BasicIntegration_GetIcons()
+		{
+			if (string.IsNullOrEmpty(API_KEY))
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
+
+			var client = new BadgeUpClient(API_KEY);
+			var apiKey = ApiKey.Create(API_KEY);
+
+			//some achievement icons have to be uploaded for the test to pass.
+			var icons = await client.AchievementIcon.GetAll();
+			Assert.False(icons.Length == 0);
 		}
 	}
 }
