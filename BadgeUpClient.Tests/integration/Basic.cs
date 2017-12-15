@@ -128,5 +128,18 @@ namespace BadgeUpClient.Tests
 			var icons = await client.AchievementIcon.GetAll();
 			Assert.False(icons.Length == 0);
 		}
+
+		[SkippableFact]
+		public async void BasicIntegration_GetAllMetrics()
+		{
+			if (string.IsNullOrEmpty(API_KEY))
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
+
+			var client = new BadgeUpClient(API_KEY);
+
+			//there should be more then 50 metrics created, for the default page size of API is 50 elements, and we want to check multiple page retrieval 
+			var metrics = await client.Metric.GetAll();
+			Assert.True(metrics.Count > 50);
+		}
 	}
 }

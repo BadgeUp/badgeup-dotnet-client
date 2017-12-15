@@ -32,7 +32,7 @@ namespace BadgeUpClient.Http
 
 
 			var response = await m_httpClient.GetAsync(
-				m_host + path + "/" + endpointName + (query != null ? '?' + query : "") );
+				m_host + path.TrimEnd('/') + "/" + endpointName.TrimStart('/') + (query != null ? '?' + query : "") );
 
 			var responseContent = await response.Content.ReadAsStringAsync();
 

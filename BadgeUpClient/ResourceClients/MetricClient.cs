@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BadgeUpClient.Http;
 using BadgeUpClient.Responses;
@@ -23,6 +24,31 @@ namespace BadgeUpClient.ResourceClients
 		public async Task<MetricResponse> GetIndividualBySubject(string subjectId, string key)
 		{
 			return await this.m_httpClient.Get<MetricResponse>(ENDPOINT + "/" + subjectId + "/" + key);
+		}
+
+
+		/// <summary>
+		/// Retrieves a list of all metrics.
+		/// </summary>
+		/// <returns></returns>
+		public async Task<List<MetricResponse>> GetAll()
+		{
+			var result = new List<MetricResponse>();
+			string path = "/v1/apps/{applicationId}";
+
+			string url = ENDPOINT;
+
+			do
+			{
+				var response = await this.m_httpClient.Get<MetricMultipleResponse>(url, path);
+				result.AddRange(response.Data);
+				url = response.Pages?.Next;
+
+				//reset path to empty string, as it is only needed in the first call
+				path = "";
+			} while (!string.IsNullOrEmpty(url));
+
+			return result;
 		}
 	}
 }

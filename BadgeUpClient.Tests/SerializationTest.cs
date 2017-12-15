@@ -259,6 +259,67 @@ namespace BadgeUpClient.Tests
 			Assert.Equal("dotnet-ci-96512", metric.Subject);
 			Assert.Equal(5, metric.Value);
 		}
+
+		private string multipleMetricJson =
+			@"{
+				""pages"": {
+					""previous"": ""/v1/apps/9hk14dln35/metrics?before=cjb2kndex7us2y06rvu1441fs"",
+					""next"": null
+				},
+				""data"": [
+					{
+						""id"": ""cjb2kndex7us2y06rvu1441fs"",
+						""applicationId"": ""9hk14dln35"",
+						""key"": ""testtest"",
+						""subject"": ""dotnet-ci-42157"",
+						""value"": 5
+					},
+					{
+						""id"": ""cjb2knfsz7q54zz6gvgoglz7u"",
+						""applicationId"": ""9hk14dln35"",
+						""key"": ""test"",
+						""subject"": ""dotnet-ci-61897"",
+						""value"": 5
+					},
+					{
+						""id"": ""cjb2ko6ssfzvrz349zhi0xp1v"",
+						""applicationId"": ""9hk14dln35"",
+						""key"": ""test"",
+						""subject"": ""dotnet-ci-6226"",
+						""value"": 5
+					}
+				]
+			}";
+
+		[Fact]
+		public void Serialization_MetricMultipleDeserialize()
+		{
+			var metricMultiple = Json.Deserialize<MetricMultipleResponse>(multipleMetricJson);
+
+			Assert.Equal(@"/v1/apps/9hk14dln35/metrics?before=cjb2kndex7us2y06rvu1441fs", metricMultiple.Pages.Previous);
+			Assert.Null(metricMultiple.Pages.Next);
+
+			Assert.Equal(3, metricMultiple.Data.Count);
+
+			Assert.Equal("cjb2kndex7us2y06rvu1441fs", metricMultiple.Data[0].Id);
+			Assert.Equal("9hk14dln35", metricMultiple.Data[0].ApplicationId);
+			Assert.Equal("testtest", metricMultiple.Data[0].Key);
+			Assert.Equal("dotnet-ci-42157", metricMultiple.Data[0].Subject);
+			Assert.Equal(5, metricMultiple.Data[0].Value);
+
+			Assert.Equal("cjb2knfsz7q54zz6gvgoglz7u", metricMultiple.Data[1].Id);
+			Assert.Equal("9hk14dln35", metricMultiple.Data[1].ApplicationId);
+			Assert.Equal("test", metricMultiple.Data[1].Key);
+			Assert.Equal("dotnet-ci-61897", metricMultiple.Data[1].Subject);
+			Assert.Equal(5, metricMultiple.Data[1].Value);
+
+			Assert.Equal("cjb2ko6ssfzvrz349zhi0xp1v", metricMultiple.Data[2].Id);
+			Assert.Equal("9hk14dln35", metricMultiple.Data[2].ApplicationId);
+			Assert.Equal("test", metricMultiple.Data[2].Key);
+			Assert.Equal("dotnet-ci-6226", metricMultiple.Data[2].Subject);
+			Assert.Equal(5, metricMultiple.Data[2].Value);
+
+		}
 	}
   
 	public class AchievementIconSerializationTest
