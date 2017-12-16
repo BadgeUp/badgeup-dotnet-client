@@ -294,7 +294,7 @@ namespace BadgeUpClient.Tests
 		[Fact]
 		public void Serialization_MetricMultipleDeserialize()
 		{
-			var metricMultiple = Json.Deserialize<MetricMultipleResponse>(multipleMetricJson);
+			var metricMultiple = Json.Deserialize<MultipleResponse<MetricResponse>>(multipleMetricJson);
 
 			Assert.Equal(@"/v1/apps/9hk14dln35/metrics?before=cjb2kndex7us2y06rvu1441fs", metricMultiple.Pages.Previous);
 			Assert.Null(metricMultiple.Pages.Next);
