@@ -1,5 +1,3 @@
-using BadgeUpClient.Types;
-
 namespace BadgeUpClient.Responses
 {
 	public class MetricResponse : Response
