@@ -1,8 +1,7 @@
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BadgeUpClient.Responses;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace BadgeUpClient.Http
 {
@@ -42,6 +41,23 @@ namespace BadgeUpClient.Http
 			}
 
 			return Json.Deserialize<TResponse>(responseContent);
+		}
+
+		public async Task<List<TResponse>> GetAll<TResponse>(string endpoint, string path = "/v1/apps/{applicationId}", string query = null)
+		{
+			var result = new List<TResponse>();
+			string url = endpoint;
+			do
+			{
+				var response = await this.Get<MultipleResponse<TResponse>>(url, path);
+				result.AddRange(response.Data);
+				url = response.Pages?.Next;
+
+				//reset path to empty string, as it is only needed in the first call
+				path = "";
+			} while (!string.IsNullOrEmpty(url));
+
+			return result;
 		}
 
 		public async Task<TResponse> Post<TResponse>( Request data, string endpointName, string path = "/v1/apps/{applicationId}", string query = null )
