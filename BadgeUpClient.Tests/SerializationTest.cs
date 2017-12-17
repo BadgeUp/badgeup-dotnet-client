@@ -361,7 +361,6 @@ namespace BadgeUpClient.Tests
 			string dateSerialized = Json.Serialize(date);
 
 			Assert.Equal("\"2017-01-01T18:00:00+05:30\"", dateSerialized);
-
 		}
 	}
 }

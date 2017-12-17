@@ -30,7 +30,6 @@ namespace BadgeUpClient
 				{
 					ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver(),
 					NullValueHandling = NullValueHandling.Ignore
-
 				});
 		}
 	}
