@@ -359,6 +359,8 @@ namespace BadgeUpClient.Tests
 		{
 			DateTime date1 = DateTime.Parse("2017-01-01T18:00:00.000+05:30");
 			string dateSerialized = Json.Serialize(date1);
+
+			//Parse exact will throw an exception if DateTime was serialized in any format other than 2017-01-01T18:00:00.000+05:30
 			DateTime.ParseExact(dateSerialized, "\\\"yyyy-MM-ddTHH:mm:ssszzz\\\"", CultureInfo.InvariantCulture);
 
 			dateSerialized = Json.Serialize(new DateTime());
