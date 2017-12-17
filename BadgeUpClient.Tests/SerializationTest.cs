@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using BadgeUpClient.Responses;
 using BadgeUpClient.Types;
 using Xunit;
@@ -59,7 +60,7 @@ namespace BadgeUpClient.Tests
 			Assert.True( progress.IsComplete );
 			Assert.Equal( 0.81f, progress.PercentComplete );
 			Assert.NotNull( progress.ProgressTree );
-			Assert.Equal( 1, progress.ProgressTree.Criteria.Count );
+			Assert.Single( progress.ProgressTree.Criteria);
 		}
 	}
 
@@ -113,7 +114,7 @@ namespace BadgeUpClient.Tests
 			Assert.Equal( new string[] { "ciqjx77kw2684513jlb0p5l51" }, achievement.Awards );
 
 			// meta
-			Assert.Equal( System.DateTime.Parse("2016-08-07T01:18:19.061Z").ToUniversalTime(), achievement.Meta.Created );
+			Assert.Equal( System.DateTime.Parse("2016-08-07T01:18:19.061Z"), achievement.Meta.Created );
 			Assert.Equal( "https://example.com/image", achievement.Meta.Icon );
 		}
 	}
@@ -145,7 +146,7 @@ namespace BadgeUpClient.Tests
 			Assert.Equal( "20 Gold reward from the king!", award.Description );
 
 			Assert.Equal( 20, award.Data["gold"] );
-			Assert.Equal( true, award.Data["otherNestedData"]["bool"] );
+			Assert.True( (bool) award.Data["otherNestedData"]["bool"] );
 		}
 	}
 
@@ -348,6 +349,20 @@ namespace BadgeUpClient.Tests
 
 			Assert.Equal(@"https://storage.googleapis.com/badgeup-achievement-icons-useast1/3eknqblf51/9hk14dln35/EimzU11jvWBcGaEYU6LbuOh6wo.png", achievementIcons[1].Url);
 			Assert.Equal(@"Untitled.png", achievementIcons[1].FileName);
+		}
+	}
+
+	public class DateTimeSerializationTest
+	{
+		[Fact]
+		public void Serialization_DateTimeSerialize()
+		{
+			DateTime date1 = DateTime.Parse("2017-01-01T18:00:00.000+05:30");
+			string dateSerialized = Json.Serialize(date1);
+			DateTime.ParseExact(dateSerialized, "\\\"yyyy-MM-ddTHH:mm:ssszzz\\\"", CultureInfo.InvariantCulture);
+
+			dateSerialized = Json.Serialize(new DateTime());
+			DateTime.ParseExact(dateSerialized, "\\\"yyyy-MM-ddTHH:mm:ssszzz\\\"", CultureInfo.InvariantCulture);
 		}
 	}
 }
