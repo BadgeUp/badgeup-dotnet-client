@@ -114,7 +114,7 @@ namespace BadgeUpClient.Tests
 			Assert.Equal( new string[] { "ciqjx77kw2684513jlb0p5l51" }, achievement.Awards );
 
 			// meta
-			Assert.Equal( System.DateTime.Parse("2016-08-07T01:18:19.061Z"), achievement.Meta.Created );
+			Assert.Equal( System.DateTimeOffset.Parse("2016-08-07T01:18:19.061Z"), achievement.Meta.Created );
 			Assert.Equal( "https://example.com/image", achievement.Meta.Icon );
 		}
 	}
@@ -170,7 +170,7 @@ namespace BadgeUpClient.Tests
 			Assert.Equal("3eknqblf51", account.Id);
 			Assert.Equal(@"Account name with sybmols !@#$%^&*()_+", account.Name);
 			Assert.Equal("Account description content", account.Description);
-			Assert.Equal(DateTime.Parse("2017-11-19T20:08:33.48"), account.Meta.Created);
+			Assert.Equal(DateTimeOffset.Parse("2017-11-19T20:08:33.48"), account.Meta.Created);
 		}
 	}
 
@@ -196,7 +196,7 @@ namespace BadgeUpClient.Tests
 			Assert.Equal("3eknqblf51", application.AccountId);
 			Assert.Equal("vagabond volcano", application.Name);
 			Assert.Equal("Application description content", application.Description);
-			Assert.Equal(DateTime.Parse("2017-11-19T20:08:59.62"), application.Meta.Created);
+			Assert.Equal(DateTimeOffset.Parse("2017-11-19T20:08:59.62"), application.Meta.Created);
 		}
 	}
 
@@ -234,7 +234,7 @@ namespace BadgeUpClient.Tests
 			Assert.Equal(CriterionOperator.GreaterOrEqual, criterion.Evaluation.Operator);
 			Assert.Equal(5, criterion.Evaluation.Threshold);
 
-			Assert.Equal(DateTime.Parse("2017-12-10T10:01:08.55"), criterion.Meta.Created);
+			Assert.Equal(DateTimeOffset.Parse("2017-12-10T10:01:08.55"), criterion.Meta.Created);
 		}
 	}
  
@@ -357,14 +357,11 @@ namespace BadgeUpClient.Tests
 		[Fact]
 		public void Serialization_DateTimeSerialize()
 		{
-			DateTime date1 = DateTime.Parse("2017-01-01T18:00:00.000+05:30");
-			string dateSerialized = Json.Serialize(date1);
+			DateTimeOffset date = DateTimeOffset.Parse("2017-01-01T18:00:00+05:30");
+			string dateSerialized = Json.Serialize(date);
 
-			//Parse exact will throw an exception if DateTime was serialized in any format other than 2017-01-01T18:00:00.000+05:30
-			DateTime.ParseExact(dateSerialized, "\\\"yyyy-MM-ddTHH:mm:ssszzz\\\"", CultureInfo.InvariantCulture);
+			Assert.Equal("\"2017-01-01T18:00:00+05:30\"", dateSerialized);
 
-			dateSerialized = Json.Serialize(new DateTime());
-			DateTime.ParseExact(dateSerialized, "\\\"yyyy-MM-ddTHH:mm:ssszzz\\\"", CultureInfo.InvariantCulture);
 		}
 	}
 }
