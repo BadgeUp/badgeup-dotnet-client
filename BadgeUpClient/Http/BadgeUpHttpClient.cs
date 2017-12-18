@@ -20,7 +20,7 @@ namespace BadgeUpClient.Http
 			httpClient.DefaultRequestHeaders.Accept.Clear();
 			httpClient.DefaultRequestHeaders.Accept.Add( new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue( "application/json" ) );
 			httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue( "Basic", this.m_apiKey.Auth );
-			httpClient.DefaultRequestHeaders.Add("User-Agent", "BadgeUp .NET Client/0.0.1");
+			httpClient.DefaultRequestHeaders.Add("User-Agent", "BadgeUp .NET Client/0.1.0");
 
 			this.m_httpClient = httpClient;
 		}

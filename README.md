@@ -60,6 +60,6 @@ dotnet test
 ## Release Instructions
 ```sh
 dotnet build --configuration Release
-dotnet pack --output nupkgs --configuration Release
-dotnet nuget push .\BadgeUpClient\nupkgs\BadgeUpClient.0.0.1.nupkg --api-key <key> --source https://www.nuget.org/api.v2/package
+dotnet pack --output nupkgs --include-symbols --include-source --configuration Release
+dotnet nuget push .\BadgeUpClient\nupkgs\BadgeUpClient.0.0.1.nupkg --api-key <key> --source https://api.nuget.org/v3/index.json
 ```
