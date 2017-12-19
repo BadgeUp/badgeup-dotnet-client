@@ -139,6 +139,7 @@ namespace BadgeUpClient.Tests
 
 			//there should be more then 50 metrics created, for the default page size of API is 50 elements, and we want to check multiple page retrieval 
 			var metrics = await client.Metric.GetAll();
+			System.Console.WriteLine($"Metrics count: {metrics.Count}");
 			Assert.True(metrics.Count > 50);
 		}
 	}
