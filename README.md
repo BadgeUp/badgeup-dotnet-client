@@ -16,7 +16,7 @@ using BadgeUpClient.Types;
 using BadgeUpClient.Responses;
 
 // instantiate the client
-var badgeup = new BadgeUpClient('<api key here>');
+var badgeup = new BadgeUpClient("<api key here>");
 
 // send an event
 EventResponse response = badgeup.Event.Send(new Event( "some_user", "jump", new Modifier { Inc = 1 } ));
