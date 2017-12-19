@@ -69,7 +69,7 @@ namespace BadgeUpClient.Tests
 			response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
 			// setup the response action
-			mockHttp.When(HttpMethod.Post, url).WithContent("{\"subject\":\"subject_foo\",\"key\":\"eat:apple\",\"modifier\":{\"@inc\":1}}").Respond(req => response);
+			mockHttp.When(HttpMethod.Post, url).WithContent("{\"subject\":\"subject_foo\",\"key\":\"eat:apple\",\"timestamp\":\"0001-01-01T00:00:00+00:00\",\"modifier\":{\"@inc\":1}}").Respond(req => response);
 
 			using (var client = new BadgeUpClient( ApiRequestTest.ApiKey ))
 			{

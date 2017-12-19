@@ -1,3 +1,5 @@
+using System;
+
 namespace BadgeUpClient.Types
 {
 	/// <summary>
@@ -10,7 +12,7 @@ namespace BadgeUpClient.Types
 		public string ApplicationId { get; set; }
 		public string Subject { get; set; }
 		public string Key { get; set; }
-		public string Timestamp { get; set; }
+		public DateTimeOffset Timestamp { get; set; }
 		public string Data { get; set; }
 
 		public Modifier Modifier { get; set; }
