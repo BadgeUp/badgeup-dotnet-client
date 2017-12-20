@@ -2,16 +2,16 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>BadgeUpClient</id>
+    <version>0.1.0</version>
+    <description>Official BadgeUp .NET client</description>
     <authors>BadgeUp</authors>
     <owners>BadgeUp</owners>
+    <copyright>BadgeUp LLC</copyright>
     <licenseUrl>https://github.com/badgeup/badgeup-node-client/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/badgeup/badgeup-node-client</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/badgeup/badgeup-node-client/master/sentry-icon.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/badgeup/badgeup-dotnet-client/master/badgeup-icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Official BadgeUp .NET client</description>
-    <copyright>BadgeUp LLC</copyright>
     <tags>achievements goals awards SaaS</tags>
     <repository url="https://github.com/BadgeUp/badgeup-dotnet-client" />
-    <iconUrl>https://assets.badgeup.io/badgeup_icon_64_64.png</iconUrl>
   </metadata>
 </package>
