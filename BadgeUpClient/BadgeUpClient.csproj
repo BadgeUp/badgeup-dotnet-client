@@ -4,7 +4,7 @@
     <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netcoreapp1.1</TargetFrameworks>
     <Copyright>BadgeUp LLC</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <RepositoryUrl>https://github.com/BadgeUp/badgeup-dotnet-client</RepositoryUrl>
     <PackageTags />
     <Authors>BadgeUp</Authors>
