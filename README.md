@@ -21,7 +21,7 @@ var badgeup = new BadgeUpClient('<api key here>');
 // create an event
 var badgeupEvent = new Event("some_user", "jump", new Modifier { Inc = 1 });
 
-//Use DateTimeOffset for Timestamp in order to preserve original timezone offset
+// optionally provide a DateTimeOffset for when the event occurred
 badgeupEvent.Timestamp = DateTimeOffset.Parse("2017-01-01T18:00:00+05:30");
 
 //send an event
