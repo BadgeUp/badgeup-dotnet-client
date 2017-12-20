@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using RichardSzalay.MockHttp;
 using Xunit;
@@ -69,14 +70,14 @@ namespace BadgeUpClient.Tests
 			response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
 			// setup the response action
-			mockHttp.When(HttpMethod.Post, url).WithContent("{\"subject\":\"subject_foo\",\"key\":\"eat:apple\",\"modifier\":{\"@inc\":1}}").Respond(req => response);
+			mockHttp.When(HttpMethod.Post, url).WithContent("{\"subject\":\"subject_foo\",\"key\":\"eat:apple\",\"timestamp\":\"2017-01-01T18:00:00+05:30\",\"modifier\":{\"@inc\":1}}").Respond(req => response);
 
 			using (var client = new BadgeUpClient( ApiRequestTest.ApiKey ))
 			{
 
 				client._SetHttpClient(mockHttp.ToHttpClient());
 
-				var result = await client.Event.Send( new Types.Event( "subject_foo", "eat:apple", new Types.Modifier { Inc = 1 } ) );
+				var result = await client.Event.Send( new Types.Event( "subject_foo", "eat:apple", new Types.Modifier { Inc = 1 } ){Timestamp = new DateTimeOffset(2017, 1, 1, 18, 0, 0, new TimeSpan(5, 30, 0))} );
 
 				Assert.NotNull(result.Event);
 				Assert.Single(result.Progress);

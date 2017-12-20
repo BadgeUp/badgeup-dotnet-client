@@ -18,8 +18,14 @@ using BadgeUpClient.Responses;
 // instantiate the client
 var badgeup = new BadgeUpClient("<api key here>");
 
-// send an event
-EventResponse response = badgeup.Event.Send(new Event( "some_user", "jump", new Modifier { Inc = 1 } ));
+// create an event
+var badgeupEvent = new Event("some_user", "jump", new Modifier { Inc = 1 });
+
+// optionally provide a DateTimeOffset for when the event occurred
+badgeupEvent.Timestamp = DateTimeOffset.Parse("2017-01-01T18:00:00+05:30");
+
+//send an event
+EventResponse response = await badgeup.Event.Send(badgeupEvent);
 
 // loop through all the progress results
 foreach (var prog in response.Progress)

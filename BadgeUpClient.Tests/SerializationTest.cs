@@ -9,12 +9,12 @@ namespace BadgeUpClient.Tests
 {
 	public class EventSerializationTest
 	{
-		const string EventJson = "{\"subject\":\"subject_foo\",\"key\":\"key_foo\",\"modifier\":{\"@dec\":2}}";
+		const string EventJson = "{\"subject\":\"subject_foo\",\"key\":\"key_foo\",\"timestamp\":\"2017-01-01T18:00:00+05:30\",\"modifier\":{\"@dec\":2}}";
 
 		[Fact]
 		public void Serialization_EventSerialize()
 		{
-			var @event = new Types.Event( "subject_foo", "key_foo", new Types.Modifier { Dec = 2 } );
+			var @event = new Types.Event( "subject_foo", "key_foo", new Types.Modifier { Dec = 2 } ){ Timestamp = DateTimeOffset.Parse("2017-01-01T18:00:00+05:30") };
 
 			var json = Json.Serialize( @event );
 			Assert.Equal( EventJson, json );
