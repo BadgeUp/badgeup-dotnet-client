@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+using BadgeUpClient.ResourceClients;
 using Xunit;
 using BadgeUpClient.Types;
 using BadgeUpClient.Responses;
@@ -140,6 +143,34 @@ namespace BadgeUpClient.Tests
 			//there should be more then 50 metrics created, for the default page size of API is 50 elements, and we want to check multiple page retrieval 
 			var metrics = await client.Metric.GetAll();
 			Assert.True(metrics.Count > 50);
+		}
+
+
+		[SkippableFact]
+		public async void BasicIntegration_GetAllEarnedAchiements()
+		{
+			if (string.IsNullOrEmpty(API_KEY))
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
+
+			var client = new BadgeUpClient(API_KEY);
+
+			var achievements = await client.EarnedAchievement.GetAll(new EarnedAchievementQueryParams() { Since = DateTime.UtcNow.AddYears(1)});
+			//There should be no achievements made in future
+			Assert.Empty(achievements);
+
+			achievements = await client.EarnedAchievement.GetAll(new EarnedAchievementQueryParams() { AchievementId = "foo" });
+			//There should be no achievements with invalid AchievementId
+			Assert.Empty(achievements);
+
+			achievements = await client.EarnedAchievement.GetAll(new EarnedAchievementQueryParams() { Subject = "bar" });
+			//There should be no achievements with invalid subject
+			Assert.Empty(achievements);
+
+			achievements = await client.EarnedAchievement.GetAll();
+			//There should be some achievements
+			Assert.NotEmpty(achievements);
+
+
 		}
 	}
 }

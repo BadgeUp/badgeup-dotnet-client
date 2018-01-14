@@ -1,6 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using BadgeUpClient.Http;
 using BadgeUpClient.Responses;
+using BadgeUpClient.Types;
 
 namespace BadgeUpClient.ResourceClients
 {
@@ -15,7 +19,7 @@ namespace BadgeUpClient.ResourceClients
 		}
 
 		/// <summary>
-		/// Retrieves an achievement by ID
+		/// Retrieves an earned achievement by ID
 		/// </summary>
 		/// <param name="id">A string that uniquely identifies this achievement</param>
 		/// <returns><see cref="EarnedAchievementResponse"/></returns>
@@ -23,5 +27,16 @@ namespace BadgeUpClient.ResourceClients
 		{
 			return await this.m_httpClient.Get<EarnedAchievementResponse>(ENDPOINT + "/" + id);
 		}
+
+		/// <summary>
+		/// Retrieves all earned achievements
+		/// </summary>
+		/// <param name="param">Optional QueryParams object, to filter the earned achievements by AchievementId, Subject, Since and Until parameters </param>
+		/// <returns><see cref="EarnedAchievementResponse"/></returns>
+		public async Task<List<EarnedAchievementResponse>> GetAll(EarnedAchievementQueryParams param = null)
+		{
+			return await this.m_httpClient.GetAll<EarnedAchievementResponse>(ENDPOINT, query: param?.ToQueryString());
+		}
+
 	}
 }

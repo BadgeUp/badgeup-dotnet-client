@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using BadgeUpClient.ResourceClients;
 
 namespace BadgeUpClient.Http
 {

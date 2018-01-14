@@ -1,4 +1,7 @@
+using System;
 using BadgeUpClient.Http;
+using BadgeUpClient.ResourceClients;
+using BadgeUpClient.Types;
 using Xunit;
 
 namespace BadgeUpClient.Tests
