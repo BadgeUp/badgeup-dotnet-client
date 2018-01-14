@@ -17,24 +17,5 @@ namespace BadgeUpClient.Tests
 
 			Assert.Equal( "key1=value1&key2=value2", query.ToString() );
 		}
-
-		[Fact]
-		public void HttpQuery_GetQueryStringFromObject()
-		{
-			var param = new EarnedAchievementQueryParams
-			{
-				AchievementId = "foo",
-				Since = new DateTime(2000, 1, 1),
-				Until = new DateTime(2001, 1, 1),
-				Subject = "bar"
-			};
-			var res = HttpQuery.GetQueryStringFromObject(param);
-
-			Assert.Contains("subject=bar", res);
-			Assert.Contains("achievementId=foo", res);
-			Assert.Contains("since=2000-01-01T00:00:00", res);
-			Assert.Contains("until=2001-01-01T00:00:00", res);
-
-		}
 	}
 }

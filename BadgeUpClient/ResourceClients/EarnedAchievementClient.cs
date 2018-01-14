@@ -28,7 +28,6 @@ namespace BadgeUpClient.ResourceClients
 			return await this.m_httpClient.Get<EarnedAchievementResponse>(ENDPOINT + "/" + id);
 		}
 
-
 		/// <summary>
 		/// Retrieves all earned achievements
 		/// </summary>
@@ -36,7 +35,7 @@ namespace BadgeUpClient.ResourceClients
 		/// <returns><see cref="EarnedAchievementResponse"/></returns>
 		public async Task<List<EarnedAchievementResponse>> GetAll(EarnedAchievementQueryParams param = null)
 		{
-			return await this.m_httpClient.GetAll<EarnedAchievementResponse>(ENDPOINT, query: HttpQuery.GetQueryStringFromObject(param));
+			return await this.m_httpClient.GetAll<EarnedAchievementResponse>(ENDPOINT, query: param?.ToQueryString());
 		}
 
 	}
