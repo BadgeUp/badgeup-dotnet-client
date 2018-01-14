@@ -1,8 +1,10 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using BadgeUpClient.Http;
 using BadgeUpClient.Responses;
+using BadgeUpClient.Types;
 
 namespace BadgeUpClient.ResourceClients
 {
@@ -10,7 +12,6 @@ namespace BadgeUpClient.ResourceClients
 	{
 		const string ENDPOINT = "earnedachievements";
 		protected BadgeUpHttpClient m_httpClient;
-		private QueryParams _params;
 
 		public EarnedAchievementClient(BadgeUpHttpClient httpClient)
 		{
@@ -18,7 +19,7 @@ namespace BadgeUpClient.ResourceClients
 		}
 
 		/// <summary>
-		/// Retrieves an achievement by ID
+		/// Retrieves an earned achievement by ID
 		/// </summary>
 		/// <param name="id">A string that uniquely identifies this achievement</param>
 		/// <returns><see cref="EarnedAchievementResponse"/></returns>
@@ -27,69 +28,16 @@ namespace BadgeUpClient.ResourceClients
 			return await this.m_httpClient.Get<EarnedAchievementResponse>(ENDPOINT + "/" + id);
 		}
 
-		private Task<List<EarnedAchievementResponse>> GetAll(bool useQueryParams = false)
+
+		/// <summary>
+		/// Retrieves all earned achievements
+		/// </summary>
+		/// <param name="param">Optional QueryParams object, to filter the earned achievements by AchievementId, Subject, Since and Until parameters </param>
+		/// <returns><see cref="EarnedAchievementResponse"/></returns>
+		public async Task<List<EarnedAchievementResponse>> GetAll(EarnedAchievementQueryParams param = null)
 		{
-			throw new NotImplementedException();
+			return await this.m_httpClient.GetAll<EarnedAchievementResponse>(ENDPOINT, query: HttpQuery.GetQueryStringFromObject(param));
 		}
 
-		public IQueryParams Query()
-		{
-			return this._params = new QueryParams(this);
-		}
-
-		private class QueryParams : IQueryParams
-		{
-			private readonly EarnedAchievementClient _client;
-
-			public QueryParams(EarnedAchievementClient client)
-			{
-				_client = client;
-			}
-
-			public string Subject { get; set; }
-			public string AchievementId { get; set; }
-			public DateTimeOffset Since { get; set; }
-			public DateTimeOffset Until { get; set; }
-
-			IQueryParams IQueryParams.Subject(string subject)
-			{
-				Subject = subject;
-				return this;
-			}
-
-			IQueryParams IQueryParams.AchievementId(string achievementId)
-			{
-				AchievementId = achievementId;
-				return this;
-			}
-
-			IQueryParams IQueryParams.Since(DateTimeOffset since)
-			{
-				Since = since;
-				return this;
-			}
-
-			IQueryParams IQueryParams.Until(DateTimeOffset until)
-			{
-				Until = until;
-				return this;
-			}
-
-			public Task<List<EarnedAchievementResponse>> GetAll()
-			{
-				return _client.GetAll(true);
-			}
-		}
-
-		public interface IQueryParams
-		{
-			IQueryParams Subject(string subject);
-			IQueryParams AchievementId(string achievementId);
-			IQueryParams Since(DateTimeOffset since);
-			IQueryParams Until(DateTimeOffset until);
-			Task<List<EarnedAchievementResponse>> GetAll();
-		}
 	}
 }
-
-//bup.EarnedAchievements.Query().Subject("bob").AchievementId("a1b2c3").GetAll()

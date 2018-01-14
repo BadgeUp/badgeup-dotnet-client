@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using BadgeUpClient.ResourceClients;
 
 namespace BadgeUpClient.Http
 {
@@ -21,6 +24,28 @@ namespace BadgeUpClient.Http
 			}
 
 			return null;
+		}
+
+
+		public static string GetQueryStringFromObject(object param)
+		{
+			if (param == null)
+				return "";
+			var properties = param.GetType()
+				.GetTypeInfo()
+				.GetProperties()
+				.Where(p => p.GetValue(param, null) != null)
+				.Select(p => FirstCharacterToLower(p.Name) + "=" + (p.PropertyType == typeof(DateTime?) ? ((DateTime?)p.GetValue(param, null)).Value.ToString("O") : p.GetValue(param, null)).ToString());
+
+			return String.Join("&", properties.ToArray());
+		}
+
+		private static string FirstCharacterToLower(string str)
+		{
+			if (String.IsNullOrEmpty(str) || Char.IsLower(str, 0))
+				return str;
+
+			return Char.ToLowerInvariant(str[0]) + str.Substring(1);
 		}
 	}
 }

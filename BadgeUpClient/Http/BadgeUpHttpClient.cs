@@ -49,12 +49,13 @@ namespace BadgeUpClient.Http
 			string url = endpoint;
 			do
 			{
-				var response = await this.Get<MultipleResponse<TResponse>>(url, path);
+				var response = await this.Get<MultipleResponse<TResponse>>(url, path, query);
 				result.AddRange(response.Data);
 				url = response.Pages?.Next;
 
-				//reset path to empty string, as it is only needed in the first call
+				//reset path and query to empty string, as they are only needed in the first call
 				path = "";
+				query = null;
 			} while (!string.IsNullOrEmpty(url));
 
 			return result;
