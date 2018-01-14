@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using BadgeUpClient.Http;
 using BadgeUpClient.Responses;
@@ -21,8 +22,9 @@ namespace BadgeUpClient.ResourceClients
 		/// </summary>
 		/// <param name="event">Event object to send to BadgeUp</param>
 		/// <param name="showIncomplete">Show progress towards an achievement, even if it is incomplete</param>
+		/// <param name="onlyNew">Include only new progress objects </param>
 		/// <returns>Returns a <see cref="EventRequest"/> object with the <see cref="Event"/> and <see cref="Progress"/> towards any relevant achievements</returns>
-		public async Task<EventResponse> Send(Event @event, bool? showIncomplete = null)
+		public async Task<EventResponse> Send(Event @event, bool? showIncomplete = null, bool onlyNew = false)
 		{
 			HttpQuery query = new HttpQuery();
 
@@ -31,7 +33,10 @@ namespace BadgeUpClient.ResourceClients
 				query.Add("showIncomplete", showIncomplete.Value.ToString().ToLower());
 			}
 
-			return await this.m_httpClient.Post<EventResponse>(new EventRequest(@event), "events", query: query.ToString());
+			var result = await this.m_httpClient.Post<EventResponse>(new EventRequest(@event), "events", query: query.ToString());
+			if (onlyNew)
+				result.Progress = result.Progress.Where(x => x.IsNew).ToArray();
+			return result;
 		}
 	}
 }
