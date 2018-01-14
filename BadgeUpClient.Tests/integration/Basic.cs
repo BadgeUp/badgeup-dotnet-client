@@ -154,11 +154,7 @@ namespace BadgeUpClient.Tests
 
 			var client = new BadgeUpClient(API_KEY);
 
-			var achievements = await client.EarnedAchievement.GetAll(new EarnedAchievementQueryParams(){Until = new DateTime(1999, 1, 1)});
-			//There should be no achievements made so early
-			Assert.Empty(achievements);
-
-			achievements = await client.EarnedAchievement.GetAll(new EarnedAchievementQueryParams() { Since = DateTime.UtcNow.AddYears(1)});
+			var achievements = await client.EarnedAchievement.GetAll(new EarnedAchievementQueryParams() { Since = DateTime.UtcNow.AddYears(1)});
 			//There should be no achievements made in future
 			Assert.Empty(achievements);
 
