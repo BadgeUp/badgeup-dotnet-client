@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace BadgeUpClient.Types
 {
@@ -8,6 +9,7 @@ namespace BadgeUpClient.Types
 		public string ToQueryString()
 		{	
 			var properties = this.GetType()
+				.GetTypeInfo()
 				.GetProperties()
 				.Where(p => p.GetValue(this, null) != null)
 				.Select(p => FirstCharacterToLower(p.Name) + "=" + (p.PropertyType == typeof(DateTime?) ? ((DateTime?)p.GetValue(this, null)).Value.ToString("O") : p.GetValue(this, null)).ToString());
