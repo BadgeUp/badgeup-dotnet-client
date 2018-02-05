@@ -61,12 +61,18 @@ namespace BadgeUpClient.Http
 			return result;
 		}
 
-		public async Task<TResponse> Post<TResponse>( Request data, string endpointName, string path = "/v1/apps/{applicationId}", string query = null )
+		public async Task<TResponse> Post<TResponse>( Request data, string endpointName, string path = "/v1/apps/{applicationId}", string query = null, Dictionary<string, string> headers = null )
 		{
 			path = path.Replace( "{applicationId}", this.m_apiKey.ApplicationId );
 
 			var content = new StringContent( data.ToJson(), System.Text.Encoding.UTF8, "application/json" );
-
+			if (headers != null)
+			{
+				foreach (var header in headers)
+				{
+					content.Headers.Add(header.Key, header.Value);
+				}
+			}
 			var response = await m_httpClient.PostAsync(
 				m_host + path + "/" + endpointName + (query != null ? '?' + query : ""),
 				content );
