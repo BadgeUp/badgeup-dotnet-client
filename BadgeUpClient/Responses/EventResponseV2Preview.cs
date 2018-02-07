@@ -9,10 +9,10 @@ namespace BadgeUpClient.Responses
 	/// </summary>
 	public class EventResponseV2Preview : Response
 	{
-		public List<EventResposnseResultV2Preview> Results { get; set; }
+		public List<EventResponseResultV2Preview> Results { get; set; }
 	}
 
-	public class EventResposnseResultV2Preview
+	public class EventResponseResultV2Preview
 	{
 		public Event Event { get; set; }
 		public string Cause { get; set; }

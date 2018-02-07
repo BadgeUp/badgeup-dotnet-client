@@ -90,6 +90,28 @@ namespace BadgeUpClient.Tests
 		}
 
 		[SkippableFact]
+		public async void BasicIntegration_SendEvent_V2Preview()
+		{
+			if (string.IsNullOrEmpty(API_KEY))
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
+
+			var client = new BadgeUpClient(API_KEY);
+			System.Random rand = new System.Random();
+			string subject = "dotnet-ci-" + rand.Next(100000);
+			string key = "test";
+			Event @event = new Event(subject, key, new Modifier { Inc = 5 });
+
+			var result = await client.Event.SendV2Preview(@event);
+
+
+			// sanity check inputs
+			Assert.True(result.Results.Count > 0);
+			Assert.Equal(key, result.Results[0].Event.Key);
+			Assert.Equal(subject, result.Results[0].Event.Subject);
+			Assert.Equal(5, result.Results[0].Event.Modifier.Inc);
+		}
+
+		[SkippableFact]
 		public async void BasicIntegration_GetApplication()
 		{
 			if (string.IsNullOrEmpty(API_KEY))

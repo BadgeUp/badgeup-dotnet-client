@@ -30,6 +30,55 @@ namespace BadgeUpClient.Tests
 			Assert.NotNull( @event.Modifier );
 			Assert.Equal( 2, @event.Modifier.Dec );
 		}
+
+		private const string EventResponseV2PreviewJson =
+			@"{
+				""results"": [
+					{
+						""event"": {
+							""subject"": ""dotnet-ci-1567"",
+							""key"": ""test"",
+							""modifier"": {
+								""@inc"": 5
+							},
+							""timestamp"": ""2018-02-07T15:30:20.703Z"",
+							""data"": null,
+							""options"": null,
+							""applicationId"": ""9hk14dln35"",
+							""id"": ""cjdd8dm743o0qm2blmaddzrmi""
+						},
+						""cause"": ""CauseStr"",
+						""progress"": [
+							{
+								""achievementId"": ""cjb0ls0fdxk75y06r03erl494"",
+								""earnedAchievementId"": ""cjdd8dm7n3o0sm2blbx2jheuj"",
+								""isComplete"": true,
+								""isNew"": true,
+								""percentComplete"": 1,
+								""progressTree"": {
+									""type"": ""GROUP"",
+									""groups"": [],
+									""criteria"": {
+										""cjb0ln006esruzz6gymu12c6f"": 1
+									},
+									""condition"": ""AND""
+								}
+							}
+						]
+					}]}";
+
+		[Fact]
+		public void Serialization_EventResponseV2_Deserialize()
+		{
+			var @event = Json.Deserialize<EventResponseV2Preview>(EventResponseV2PreviewJson);
+
+			Assert.Equal(1, @event.Results.Count);
+			Assert.Equal("cjdd8dm743o0qm2blmaddzrmi", @event.Results[0].Event.Id);
+			Assert.Equal("dotnet-ci-1567", @event.Results[0].Event.Subject);
+			Assert.Equal("test", @event.Results[0].Event.Key);
+			Assert.Equal("CauseStr", @event.Results[0].Cause);
+			Assert.Equal("cjb0ls0fdxk75y06r03erl494", @event.Results[0].Progress[0].AchievementId);
+		}
 	}
 
 	public class ProgressSerializationTest
