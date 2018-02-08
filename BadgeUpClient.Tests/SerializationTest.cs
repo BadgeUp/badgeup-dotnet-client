@@ -47,7 +47,7 @@ namespace BadgeUpClient.Tests
 							""applicationId"": ""9hk14dln35"",
 							""id"": ""cjdd8dm743o0qm2blmaddzrmi""
 						},
-						""cause"": ""CauseStr"",
+						""cause"": ""cjddueqtd000001mn2zf421jj"",
 						""progress"": [
 							{
 								""achievementId"": ""cjb0ls0fdxk75y06r03erl494"",
@@ -72,11 +72,11 @@ namespace BadgeUpClient.Tests
 		{
 			var @event = Json.Deserialize<EventResponseV2Preview>(EventResponseV2PreviewJson);
 
-			Assert.Equal(1, @event.Results.Count);
+			Assert.Single(@event.Results);
 			Assert.Equal("cjdd8dm743o0qm2blmaddzrmi", @event.Results[0].Event.Id);
 			Assert.Equal("dotnet-ci-1567", @event.Results[0].Event.Subject);
 			Assert.Equal("test", @event.Results[0].Event.Key);
-			Assert.Equal("CauseStr", @event.Results[0].Cause);
+			Assert.Equal("cjddueqtd000001mn2zf421jj", @event.Results[0].Cause);
 			Assert.Equal("cjb0ls0fdxk75y06r03erl494", @event.Results[0].Progress[0].AchievementId);
 		}
 	}
