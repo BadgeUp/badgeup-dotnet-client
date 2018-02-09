@@ -86,13 +86,13 @@ namespace BadgeUpClient.Http
 					content.Headers.Add(header.Key, header.Value);
 				}
 			}
-			var response = await m_httpClient.PostAsync(
-				m_host + path + "/" + endpointName + (query != null ? '?' + query : ""),
-				content );
 
 			string responseContent = "";
 			for (int i = 0; i < _retryCount; i++)
 			{
+				var response = await m_httpClient.PostAsync(
+					m_host + path + "/" + endpointName + (query != null ? '?' + query : ""),
+					content);
 				responseContent = await response.Content.ReadAsStringAsync();
 
 				if (response.StatusCode == System.Net.HttpStatusCode.Created)
