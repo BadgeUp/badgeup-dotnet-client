@@ -10,6 +10,7 @@ namespace BadgeUpClient.Http
 		protected string m_host;
 		protected ApiKey m_apiKey;
 		protected HttpClient m_httpClient;
+		private int _retryCount = 3;
 
 		public BadgeUpHttpClient(ApiKey apiKey, string host)
 		{
@@ -30,17 +31,29 @@ namespace BadgeUpClient.Http
 			path = path.Replace( "{applicationId}", this.m_apiKey.ApplicationId );
 
 
-			var response = await m_httpClient.GetAsync(
-				m_host + path.TrimEnd('/') + "/" + endpointName.TrimStart('/') + (query != null ? '?' + query : "") );
+			
 
-			var responseContent = await response.Content.ReadAsStringAsync();
 
-			if (response.StatusCode != System.Net.HttpStatusCode.OK)
+			string responseContent = "";
+			for (int i = 0; i < _retryCount; i++)
 			{
-				throw new BadgeUpClientException( responseContent );
-			}
+				var response = await m_httpClient.GetAsync(
+					m_host + path.TrimEnd('/') + "/" + endpointName.TrimStart('/') + (query != null ? '?' + query : ""));
 
-			return Json.Deserialize<TResponse>(responseContent);
+				responseContent = await response.Content.ReadAsStringAsync();
+
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				{
+					return Json.Deserialize<TResponse>(responseContent);
+				}
+				//Ignore only 5XX errors
+				else if (((int) response.StatusCode).ToString()[0] != '5')
+				{
+					throw new BadgeUpClientException(responseContent);
+				}
+			}
+			throw new BadgeUpClientException(responseContent);
+			
 		}
 
 		public async Task<List<TResponse>> GetAll<TResponse>(string endpoint, string path = "/v1/apps/{applicationId}", string query = null)
@@ -77,14 +90,24 @@ namespace BadgeUpClient.Http
 				m_host + path + "/" + endpointName + (query != null ? '?' + query : ""),
 				content );
 
-			var responseContent = await response.Content.ReadAsStringAsync();
-
-			if (response.StatusCode != System.Net.HttpStatusCode.Created)
+			string responseContent = "";
+			for (int i = 0; i < _retryCount; i++)
 			{
-				throw new BadgeUpClientException( responseContent );
+				responseContent = await response.Content.ReadAsStringAsync();
+
+				if (response.StatusCode == System.Net.HttpStatusCode.Created)
+				{
+					return Json.Deserialize<TResponse>(responseContent);
+				}
+				//Ignore only 5XX errors
+				else if (((int)response.StatusCode).ToString()[0] != '5')
+				{
+					throw new BadgeUpClientException(responseContent);
+				}
 			}
 
-			return Json.Deserialize<TResponse>( responseContent );
+			throw new BadgeUpClientException(responseContent);
+
 		}
 
 		// for test purposes only
