@@ -39,7 +39,7 @@ namespace BadgeUpClient.Http
 						m_host + path.TrimEnd('/') + "/" + endpointName.TrimStart('/') + (query != null ? '?' + query : ""));
 					responseContent = await response.Content.ReadAsStringAsync();
 
-					if (response.StatusCode == System.Net.HttpStatusCode.OK)
+					if (response.IsSuccessStatusCode)
 					{
 						return Json.Deserialize<TResponse>(responseContent);
 					}
@@ -55,7 +55,7 @@ namespace BadgeUpClient.Http
 				}
 			}
 			throw new BadgeUpClientException(responseContent);
-			
+
 		}
 
 		public async Task<List<TResponse>> GetAll<TResponse>(string endpoint, string path = "/v1/apps/{applicationId}", string query = null)
@@ -99,7 +99,7 @@ namespace BadgeUpClient.Http
 						content);
 					responseContent = await response.Content.ReadAsStringAsync();
 
-					if (response.StatusCode == System.Net.HttpStatusCode.Created)
+					if (response.IsSuccessStatusCode)
 					{
 						return Json.Deserialize<TResponse>(responseContent);
 					}
