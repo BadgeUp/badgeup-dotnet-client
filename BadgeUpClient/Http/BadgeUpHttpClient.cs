@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -29,27 +30,28 @@ namespace BadgeUpClient.Http
 		public async Task<TResponse> Get<TResponse>( string endpointName, string path = "/v1/apps/{applicationId}", string query = null )
 		{
 			path = path.Replace( "{applicationId}", this.m_apiKey.ApplicationId );
-
-
-			
-
-
 			string responseContent = "";
 			for (int i = 0; i < _retryCount; i++)
 			{
-				var response = await m_httpClient.GetAsync(
-					m_host + path.TrimEnd('/') + "/" + endpointName.TrimStart('/') + (query != null ? '?' + query : ""));
-
-				responseContent = await response.Content.ReadAsStringAsync();
-
-				if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				try
 				{
-					return Json.Deserialize<TResponse>(responseContent);
+					var response = await m_httpClient.GetAsync(
+						m_host + path.TrimEnd('/') + "/" + endpointName.TrimStart('/') + (query != null ? '?' + query : ""));
+					responseContent = await response.Content.ReadAsStringAsync();
+
+					if (response.StatusCode == System.Net.HttpStatusCode.OK)
+					{
+						return Json.Deserialize<TResponse>(responseContent);
+					}
+					//Ignore only 5XX errors
+					else if (((int)response.StatusCode).ToString()[0] != '5')
+					{
+						throw new BadgeUpClientException(responseContent);
+					}
 				}
-				//Ignore only 5XX errors
-				else if (((int) response.StatusCode).ToString()[0] != '5')
+				catch (TaskCanceledException)
 				{
-					throw new BadgeUpClientException(responseContent);
+					//thrown on timeout, ignore.
 				}
 			}
 			throw new BadgeUpClientException(responseContent);
@@ -90,19 +92,26 @@ namespace BadgeUpClient.Http
 			string responseContent = "";
 			for (int i = 0; i < _retryCount; i++)
 			{
-				var response = await m_httpClient.PostAsync(
-					m_host + path + "/" + endpointName + (query != null ? '?' + query : ""),
-					content);
-				responseContent = await response.Content.ReadAsStringAsync();
+				try
+				{
+					var response = await m_httpClient.PostAsync(
+						m_host + path + "/" + endpointName + (query != null ? '?' + query : ""),
+						content);
+					responseContent = await response.Content.ReadAsStringAsync();
 
-				if (response.StatusCode == System.Net.HttpStatusCode.Created)
-				{
-					return Json.Deserialize<TResponse>(responseContent);
+					if (response.StatusCode == System.Net.HttpStatusCode.Created)
+					{
+						return Json.Deserialize<TResponse>(responseContent);
+					}
+					//Ignore only 5XX errors
+					else if (((int)response.StatusCode).ToString()[0] != '5')
+					{
+						throw new BadgeUpClientException(responseContent);
+					}
 				}
-				//Ignore only 5XX errors
-				else if (((int)response.StatusCode).ToString()[0] != '5')
+				catch (TaskCanceledException)
 				{
-					throw new BadgeUpClientException(responseContent);
+					//thrown on timeout, ignore
 				}
 			}
 
