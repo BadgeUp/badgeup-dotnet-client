@@ -33,12 +33,12 @@ namespace BadgeUpClient.Tests
 
 			//setup mock httpClient
 			var mockHttp = new MockHttpMessageHandler();
-			mockHttp.Expect(HttpMethod.Get, "http://www.badgeup.io/v1/apps/1337/").Respond(r => errorResponse);
-			mockHttp.Expect(HttpMethod.Get, "http://www.badgeup.io/v1/apps/1337/").Respond(r => errorResponse);
-			mockHttp.Expect(HttpMethod.Get, "http://www.badgeup.io/v1/apps/1337/").Respond(r => successResponse);
+			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v1/apps/1337/").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v1/apps/1337/").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v1/apps/1337/").Respond(r => successResponse);
 
 			//Test
-			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.badgeup.io");
+			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.x.badgeup.io");
 			client._SetHttpClient(mockHttp.ToHttpClient());
 			await client.Get<object>("");
 
@@ -56,12 +56,12 @@ namespace BadgeUpClient.Tests
 
 			//setup mock httpClient
 			var mockHttp = new MockHttpMessageHandler();
-			mockHttp.Expect(HttpMethod.Get, "http://www.badgeup.io/v1/apps/1337/").Respond(r => errorResponse);
-			mockHttp.Expect(HttpMethod.Get, "http://www.badgeup.io/v1/apps/1337/").Respond(r => errorResponse);
-			mockHttp.Expect(HttpMethod.Get, "http://www.badgeup.io/v1/apps/1337/").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v1/apps/1337/").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v1/apps/1337/").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v1/apps/1337/").Respond(r => errorResponse);
 
 			//Test
-			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.badgeup.io");
+			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.x.badgeup.io");
 			client._SetHttpClient(mockHttp.ToHttpClient());
 
 			await Assert.ThrowsAsync<BadgeUpClientException>(async () => await client.Get<object>(""));
@@ -83,12 +83,12 @@ namespace BadgeUpClient.Tests
 
 			//setup mock httpClient
 			var mockHttp = new MockHttpMessageHandler();
-			mockHttp.Expect(HttpMethod.Post, "http://www.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => errorResponse);
-			mockHttp.Expect(HttpMethod.Post, "http://www.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => errorResponse);
-			mockHttp.Expect(HttpMethod.Post, "http://www.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => successResponse);
+			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => successResponse);
 
 			//Test
-			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.badgeup.io");
+			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.x.badgeup.io");
 			client._SetHttpClient(mockHttp.ToHttpClient());
 			await client.Post<object>(new EventRequest(new Event("subject","key")), "testEndpoint");
 
@@ -106,12 +106,12 @@ namespace BadgeUpClient.Tests
 
 			//setup mock httpClient
 			var mockHttp = new MockHttpMessageHandler();
-			mockHttp.Expect(HttpMethod.Post, "http://www.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => errorResponse);
-			mockHttp.Expect(HttpMethod.Post, "http://www.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => errorResponse);
-			mockHttp.Expect(HttpMethod.Post, "http://www.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => errorResponse);
 
 			//Test
-			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.badgeup.io");
+			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.x.badgeup.io");
 			client._SetHttpClient(mockHttp.ToHttpClient());
 
 			await Assert.ThrowsAsync<BadgeUpClientException>(async () => await client.Post<object>(new EventRequest(new Event("subject", "key")), "testEndpoint"));
