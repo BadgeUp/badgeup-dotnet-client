@@ -15,7 +15,8 @@ namespace BadgeUpClient.Tests
 {
 	public class HttpClientRetryTest
 	{
-		private const string Key = "eyJhY2NvdW50SWQiOiJmdmp0c2dsbjFmIiwiYXBwbGljYXRpb25JZCI6Imc2anRzaGxuNDgiLCJrZXkiOiJjamE3NGRjcGJqdHN0bGc3bmY0bW5ieTk5In0=";
+		// fake API key
+		private const string Key = "eyJhY2NvdW50SWQiOiJ0aGViZXN0IiwiYXBwbGljYXRpb25JZCI6IjEzMzciLCJrZXkiOiJpY2VjcmVhbWFuZGNvb2tpZXN5dW0ifQ==";
 
 		[Fact]
 		public async void HttpClient_Get_Retry_success_with_two_errors()

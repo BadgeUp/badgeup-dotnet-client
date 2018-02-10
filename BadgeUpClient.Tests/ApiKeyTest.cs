@@ -4,6 +4,7 @@ namespace BadgeUpClient.Tests
 {
 	public class ApiKeyTest
 	{
+		// fake API key
 		string key = "eyJhY2NvdW50SWQiOiJ0aGViZXN0IiwiYXBwbGljYXRpb25JZCI6IjEzMzciLCJrZXkiOiJpY2VjcmVhbWFuZGNvb2tpZXN5dW0ifQ==";
 
 
