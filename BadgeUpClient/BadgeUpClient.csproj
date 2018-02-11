@@ -6,7 +6,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>0.1.4</Version>
     <RepositoryUrl>https://github.com/BadgeUp/badgeup-dotnet-client</RepositoryUrl>
-    <PackageLicenseUrl>https://github.com/badgeup/badgeup-node-client/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/badgeup/badgeup-dotnet-client/blob/master/LICENSE</PackageLicenseUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/badgeup/badgeup-dotnet-client/master/badgeup-icon.png</PackageIconUrl>
     <PackageTags />
     <Authors>BadgeUp</Authors>
