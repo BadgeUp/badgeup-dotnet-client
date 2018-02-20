@@ -5,13 +5,13 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using BadgeUpClient.Http;
-using BadgeUpClient.Requests;
-using BadgeUpClient.Types;
+using BadgeUp.Http;
+using BadgeUp.Requests;
+using BadgeUp.Types;
 using RichardSzalay.MockHttp;
 using Xunit;
 
-namespace BadgeUpClient.Tests
+namespace BadgeUp.Tests
 {
 	public class HttpClientRetryTest
 	{

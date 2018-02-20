@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BadgeUpClient.Responses;
+using BadgeUp.Responses;
 
-namespace BadgeUpClient.Http
+namespace BadgeUp.Http
 {
 	public class BadgeUpHttpClient : System.IDisposable
 	{

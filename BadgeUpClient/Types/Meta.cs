@@ -1,4 +1,4 @@
-namespace BadgeUpClient.Types
+namespace BadgeUp.Types
 {
 	public class Meta
 	{

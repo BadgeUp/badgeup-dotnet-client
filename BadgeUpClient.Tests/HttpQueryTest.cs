@@ -1,10 +1,10 @@
 using System;
-using BadgeUpClient.Http;
-using BadgeUpClient.ResourceClients;
-using BadgeUpClient.Types;
+using BadgeUp.Http;
+using BadgeUp.ResourceClients;
+using BadgeUp.Types;
 using Xunit;
 
-namespace BadgeUpClient.Tests
+namespace BadgeUp.Tests
 {
 	public class HttpQueryTest
 	{

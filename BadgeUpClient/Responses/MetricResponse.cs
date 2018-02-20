@@ -1,4 +1,4 @@
-namespace BadgeUpClient.Responses
+namespace BadgeUp.Responses
 {
 	public class MetricResponse : Response
 	{

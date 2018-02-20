@@ -1,7 +1,7 @@
 using System.Runtime.Serialization;
-using BadgeUpClient.Types;
+using BadgeUp.Types;
 
-namespace BadgeUpClient.Responses
+namespace BadgeUp.Responses
 {
 	public class CriterionResponse : Response
 	{

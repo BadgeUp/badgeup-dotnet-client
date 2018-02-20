@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using BadgeUpClient.ResourceClients;
+using BadgeUp.ResourceClients;
 
-namespace BadgeUpClient.Http
+namespace BadgeUp.Http
 {
 	public class HttpQuery
 	{

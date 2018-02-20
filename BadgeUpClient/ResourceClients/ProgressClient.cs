@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BadgeUpClient.Http;
-using BadgeUpClient.Responses;
-using BadgeUpClient.Types;
+using BadgeUp.Http;
+using BadgeUp.Types;
+using BadgeUp.Responses;
 
-namespace BadgeUpClient.ResourceClients
+namespace BadgeUp.ResourceClients
 {
 	public class ProgressClient
 	{

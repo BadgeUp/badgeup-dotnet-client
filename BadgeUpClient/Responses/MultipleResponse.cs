@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using BadgeUpClient.Types;
+using BadgeUp.Types;
 
-namespace BadgeUpClient.Responses
+namespace BadgeUp.Responses
 {
 	public class MultipleResponse<TResponse>
 	{

@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace BadgeUpClient.Types
+namespace BadgeUp.Types
 {
 	public class EarnedAchievementQueryParams : QueryParams
 	{

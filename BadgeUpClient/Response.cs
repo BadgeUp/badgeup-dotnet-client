@@ -1,4 +1,4 @@
-namespace BadgeUpClient
+namespace BadgeUp
 {
 	public class Response
 	{

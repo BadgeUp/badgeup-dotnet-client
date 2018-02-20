@@ -1,6 +1,6 @@
 using System;
 
-namespace BadgeUpClient
+namespace BadgeUp
 {
 	public class BadgeUpClientException : Exception
 	{

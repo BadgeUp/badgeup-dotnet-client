@@ -1,7 +1,7 @@
-using BadgeUpClient.Http;
-using BadgeUpClient.ResourceClients;
+using BadgeUp.Http;
+using BadgeUp.ResourceClients;
 
-namespace BadgeUpClient
+namespace BadgeUp
 {
 	/// <summary>
 	/// BadgeUp Client

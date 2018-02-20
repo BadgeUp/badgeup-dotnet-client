@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace BadgeUpClient
+namespace BadgeUp
 {
 	public class ApiKey
 	{

@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace BadgeUpClient.Tests
+namespace BadgeUp.Tests
 {
 	public class ApiKeyTest
 	{

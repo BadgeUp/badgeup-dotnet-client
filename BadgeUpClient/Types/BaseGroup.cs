@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BadgeUpClient.Types
+namespace BadgeUp.Types
 {
 	public abstract class BaseGroup<T>
 	{

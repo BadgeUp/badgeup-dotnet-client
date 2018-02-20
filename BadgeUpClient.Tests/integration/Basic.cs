@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
-using BadgeUpClient.ResourceClients;
+using BadgeUp.Responses;
+using BadgeUp.Types;
+using BadgeUp.ResourceClients;
 using Xunit;
-using BadgeUpClient.Types;
-using BadgeUpClient.Responses;
 
-namespace BadgeUpClient.Tests
+namespace BadgeUp.Tests
 {
 	public class BasicIntegration
 	{
