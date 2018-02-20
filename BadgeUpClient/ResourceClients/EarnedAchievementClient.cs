@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using BadgeUpClient.Http;
-using BadgeUpClient.Responses;
-using BadgeUpClient.Types;
+using BadgeUp.Http;
+using BadgeUp.Responses;
+using BadgeUp.Types;
 
-namespace BadgeUpClient.ResourceClients
+namespace BadgeUp.ResourceClients
 {
 	public class EarnedAchievementClient
 	{

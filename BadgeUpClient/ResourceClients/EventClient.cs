@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BadgeUpClient.Http;
-using BadgeUpClient.Responses;
-using BadgeUpClient.Requests;
-using BadgeUpClient.Types;
+using BadgeUp.Http;
+using BadgeUp.Requests;
+using BadgeUp.Responses;
+using BadgeUp.Types;
 
-namespace BadgeUpClient.ResourceClients
+namespace BadgeUp.ResourceClients
 {
 	public class EventClient
 	{

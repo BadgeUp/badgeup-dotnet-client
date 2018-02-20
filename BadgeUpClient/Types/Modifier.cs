@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace BadgeUpClient.Types
+namespace BadgeUp.Types
 {
 	/// <summary>
 	/// Metric modifier key/value pair

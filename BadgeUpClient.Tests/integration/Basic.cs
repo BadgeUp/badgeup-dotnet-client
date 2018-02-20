@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
-using BadgeUpClient.ResourceClients;
+using BadgeUp.Responses;
+using BadgeUp.Types;
+using BadgeUp.ResourceClients;
 using Xunit;
-using BadgeUpClient.Types;
-using BadgeUpClient.Responses;
 
-namespace BadgeUpClient.Tests
+namespace BadgeUp.Tests
 {
 	public class BasicIntegration
 	{
@@ -64,6 +64,11 @@ namespace BadgeUpClient.Tests
 						Assert.Equal(criterion.Key, criterionRespone.Id);
 					}
 				}
+
+				var allProgressRecords = await client.Progress.GetProgress(subject);
+				var retrievedProg = allProgressRecords.First(x => x.AchievementId == prog.AchievementId);
+				Assert.Equal(retrievedProg.EarnedAchievementId, prog.EarnedAchievementId);
+
 			}
 
 

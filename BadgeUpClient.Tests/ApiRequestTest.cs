@@ -3,7 +3,7 @@ using System.Net.Http;
 using RichardSzalay.MockHttp;
 using Xunit;
 
-namespace BadgeUpClient.Tests
+namespace BadgeUp.Tests
 {
 	public class ApiRequestTest
 	{
@@ -28,7 +28,7 @@ namespace BadgeUpClient.Tests
 		{
 			var mockHttp = new MockHttpMessageHandler();
 
-			var apiKey = global::BadgeUpClient.ApiKey.Create( ApiRequestTest.ApiKey );
+			var apiKey = global::BadgeUp.ApiKey.Create( ApiRequestTest.ApiKey );
 			string url = "https://api.useast1.badgeup.io/v1/apps/" + apiKey.ApplicationId + "/events";
 
 			string responseJson =
@@ -72,7 +72,7 @@ namespace BadgeUpClient.Tests
 			// setup the response action
 			mockHttp.When(HttpMethod.Post, url).WithContent("{\"subject\":\"subject_foo\",\"key\":\"eat:apple\",\"timestamp\":\"2017-01-01T18:00:00+05:30\",\"modifier\":{\"@inc\":1}}").Respond(req => response);
 
-			using (var client = new BadgeUpClient( ApiRequestTest.ApiKey ))
+			using (var client = new BadgeUpClient(ApiRequestTest.ApiKey ))
 			{
 
 				client._SetHttpClient(mockHttp.ToHttpClient());

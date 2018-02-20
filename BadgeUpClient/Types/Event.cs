@@ -1,6 +1,6 @@
 using System;
 
-namespace BadgeUpClient.Types
+namespace BadgeUp.Types
 {
 	/// <summary>
 	/// BadgeUp Event object.

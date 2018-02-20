@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using BadgeUpClient.Responses;
-using BadgeUpClient.Types;
+using BadgeUp.Responses;
+using BadgeUp.Types;
 using Xunit;
 
-namespace BadgeUpClient.Tests
+namespace BadgeUp.Tests
 {
 	public class EventSerializationTest
 	{

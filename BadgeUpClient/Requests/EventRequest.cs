@@ -1,6 +1,6 @@
-using BadgeUpClient.Types;
+using BadgeUp.Types;
 
-namespace BadgeUpClient.Requests
+namespace BadgeUp.Requests
 {
 	public class EventRequest : Request
 	{

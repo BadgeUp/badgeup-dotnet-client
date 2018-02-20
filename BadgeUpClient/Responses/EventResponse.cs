@@ -1,6 +1,6 @@
-using BadgeUpClient.Types;
+using BadgeUp.Types;
 
-namespace BadgeUpClient.Responses
+namespace BadgeUp.Responses
 {
 	/// <summary>
 	/// BadgeUp Event response.

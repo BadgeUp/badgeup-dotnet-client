@@ -1,8 +1,8 @@
 ﻿using System;
-using BadgeUpClient.Types;
+using BadgeUp.Types;
 using Xunit;
 
-namespace BadgeUpClient.Tests
+namespace BadgeUp.Tests
 {
 	public class QueryParamTests
 	{

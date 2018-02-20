@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using BadgeUpClient.Http;
-using BadgeUpClient.Responses;
+using BadgeUp.Http;
+using BadgeUp.Responses;
 
-namespace BadgeUpClient.ResourceClients
+namespace BadgeUp.ResourceClients
 {
 	public class CriterionClient
 	{
