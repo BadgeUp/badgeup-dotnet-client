@@ -72,7 +72,6 @@ namespace BadgeUp.Tests
 			// setup the response action
 			mockHttp.When(HttpMethod.Post, url).WithContent("{\"subject\":\"subject_foo\",\"key\":\"eat:apple\",\"timestamp\":\"2017-01-01T18:00:00+05:30\",\"modifier\":{\"@inc\":1}}").Respond(req => response);
 
-			using (var client = new BadgeUpClient( ApiRequestTest.ApiKey ))
 			using (var client = new BadgeUpClient(ApiRequestTest.ApiKey ))
 			{
 
