@@ -64,11 +64,6 @@ namespace BadgeUpClient.Tests
 						Assert.Equal(criterion.Key, criterionRespone.Id);
 					}
 				}
-
-				var allProgressRecords = await client.Progress.GetProgress(subject);
-				var retrievedProg = allProgressRecords.First(x => x.AchievementId == prog.AchievementId);
-				Assert.Equal(retrievedProg.EarnedAchievementId, prog.EarnedAchievementId);
-
 			}
 
 

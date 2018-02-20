@@ -60,11 +60,6 @@ namespace BadgeUpClient
 		/// Interact with BadgeUp metrics
 		/// </summary>
 		public MetricClient Metric;
-		
-		/// <summary>
-		/// Interact with BadgeUp progress
-		/// </summary>
-		public ProgressClient Progress;
 
 		/// <summary>
 		/// Instantiate the BadgeUpClient, providing an instance of <see cref="ApiKey"/>
@@ -87,7 +82,6 @@ namespace BadgeUpClient
 			this.EarnedAchievement = new EarnedAchievementClient(this.m_httpClient);
 			this.Event = new EventClient(this.m_httpClient);
 			this.Metric = new MetricClient(this.m_httpClient);
-			this.Progress = new ProgressClient(this.m_httpClient);
 		}
 
 		/// <summary>
