@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BadgeUp.Http;
 using BadgeUp.Responses;
@@ -22,6 +23,15 @@ namespace BadgeUp.ResourceClients
 		public async Task<AchievementResponse> GetById(string id)
 		{
 			return await this.m_httpClient.Get<AchievementResponse>(ENDPOINT + "/" + id);
+		}
+
+		/// <summary>
+		/// Retrieves a list of all achievements.
+		/// </summary>
+		/// <returns></returns>
+		public async Task<List<AchievementResponse>> GetAll()
+		{
+			return await this.m_httpClient.GetAll<AchievementResponse>(ENDPOINT);
 		}
 	}
 }

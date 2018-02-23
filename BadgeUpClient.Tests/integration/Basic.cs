@@ -199,5 +199,34 @@ namespace BadgeUp.Tests
 
 
 		}
+
+		[SkippableFact]
+		public async void BasicIntegration_GetAllAwards()
+		{
+			if (string.IsNullOrEmpty(API_KEY))
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
+
+			var client = new BadgeUpClient(API_KEY);
+
+			var awards = await client.Award.GetAll();
+
+			//There should be some awards
+			Assert.NotEmpty(awards);
+		}
+
+		[SkippableFact]
+		public async void BasicIntegration_GetAllAChievements()
+		{
+			if (string.IsNullOrEmpty(API_KEY))
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
+
+			var client = new BadgeUpClient(API_KEY);
+
+			var achievements = await client.Achievement.GetAll();
+
+			//There should be some achievements
+			Assert.NotEmpty(achievements);
+		}
+
 	}
 }
