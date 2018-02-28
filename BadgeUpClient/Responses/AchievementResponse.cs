@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using BadgeUp.Types;
 
 namespace BadgeUp.Responses
@@ -12,6 +13,13 @@ namespace BadgeUp.Responses
 		public string[] Awards { get; set; }
 		public AchievementMeta Meta { get; set; }
 		public AchievementOptions Options { get; set; }
+		public AchievementResource Resources { get; set; }
+	}
+
+	public class AchievementResource
+	{
+		public List<CriterionResponse> Criteria { get; set; }
+		public List<AwardResponse> Awards { get; set; }
 	}
 
 	public class AchievementMeta : Meta

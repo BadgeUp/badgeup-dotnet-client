@@ -228,5 +228,35 @@ namespace BadgeUp.Tests
 			Assert.NotEmpty(achievements);
 		}
 
+		[SkippableFact]
+		public async void BasicIntegration_GetProgress_IncludeParameters()
+		{
+			if (string.IsNullOrEmpty(API_KEY))
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
+
+			var client = new BadgeUpClient(API_KEY);
+
+			var subject = (await client.Metric.GetAll()).First().Subject;
+			var achievements = await client.Achievement.GetAll();
+			var progress = await client.Progress.GetProgress(subject);
+
+			Assert.Equal(achievements.Count, progress.Count);
+			progress.ForEach(p => Assert.Null(p.Achievement));
+
+			progress = await client.Progress.GetProgress(subject, includeAwards: true);
+			progress.ForEach(p => Assert.Null(p.Achievement.Resources.Criteria));
+			progress.ForEach(p => Assert.NotNull(p.Achievement.Resources.Awards));
+
+			progress = await client.Progress.GetProgress(subject, includeCriteria: true);
+			progress.ForEach(p => Assert.NotNull(p.Achievement.Resources.Criteria));
+			progress.ForEach(p => Assert.Null(p.Achievement.Resources.Awards));
+
+			progress = await client.Progress.GetProgress(subject, includeAchievements: true);
+			progress.ForEach(p => Assert.NotNull(p.Achievement));
+			progress.ForEach(p => Assert.Null(p.Achievement.Resources.Criteria));
+			progress.ForEach(p => Assert.Null(p.Achievement.Resources.Awards));
+
+		}
+
 	}
 }
