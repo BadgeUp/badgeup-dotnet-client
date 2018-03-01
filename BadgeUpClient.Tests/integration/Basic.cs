@@ -167,7 +167,7 @@ namespace BadgeUp.Tests
 
 			var client = new BadgeUpClient(API_KEY);
 
-			//there should be more then 50 metrics created, for the default page size of API is 50 elements, and we want to check multiple page retrieval 
+			//there should be more then 50 metrics created, for the default page size of API is 50 elements, and we want to check multiple page retrieval
 			var metrics = await client.Metric.GetAll();
 			Assert.True(metrics.Count > 50);
 		}
@@ -196,8 +196,6 @@ namespace BadgeUp.Tests
 			achievements = await client.EarnedAchievement.GetAll();
 			//There should be some achievements
 			Assert.NotEmpty(achievements);
-
-
 		}
 
 		[SkippableFact]
@@ -255,7 +253,6 @@ namespace BadgeUp.Tests
 			progress.ForEach(p => Assert.NotNull(p.Achievement));
 			progress.ForEach(p => Assert.Null(p.Achievement.Resources.Criteria));
 			progress.ForEach(p => Assert.Null(p.Achievement.Resources.Awards));
-
 		}
 
 	}
