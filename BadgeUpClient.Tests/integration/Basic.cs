@@ -12,8 +12,8 @@ namespace BadgeUp.Tests
 		// get a real API Key for integration testing
 		string API_KEY = System.Environment.GetEnvironmentVariable("INTEGRATION_API_KEY");
 
-		string RandomString() {
-			return Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("=", "");
+		string RandomSubject() {
+			return "dotnet-ci-" + Guid.NewGuid().ToString("N");
 		}
 
 		[SkippableFact]
@@ -23,7 +23,7 @@ namespace BadgeUp.Tests
 				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
 
 			var client = new BadgeUpClient(API_KEY);
-			string subject = "dotnet-ci-" + RandomString();
+			string subject = RandomSubject();
 			string key = "test";
 			Event @event = new Event(subject, key, new Modifier {Inc = 5});
 
@@ -104,7 +104,7 @@ namespace BadgeUp.Tests
 				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
 
 			var client = new BadgeUpClient(API_KEY);
-			string subject = "dotnet-ci-" + RandomString();
+			string subject = RandomSubject();
 			string key = "test";
 			Event @event = new Event(subject, key, new Modifier { Inc = 5 });
 
