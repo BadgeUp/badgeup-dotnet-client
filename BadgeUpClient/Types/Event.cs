@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json.Linq;
 
 namespace BadgeUp.Types
 {
@@ -13,7 +14,7 @@ namespace BadgeUp.Types
 		public string Subject { get; set; }
 		public string Key { get; set; }
 		public DateTimeOffset? Timestamp { get; set; }
-		public string Data { get; set; }
+		public JObject Data { get; set; }
 
 		public Modifier Modifier { get; set; }
 		public Options Options { get; set; }
