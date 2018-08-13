@@ -265,7 +265,19 @@ namespace BadgeUp.Tests
 				""name"": ""Account name with sybmols !@#$%^&*()_+"",
 				""description"": ""Account description content"",
 				""meta"" : {
-					""created"": ""2017-11-19T20:08:33.48""
+					""created"": ""2017-11-19T20:08:33.48"",
+					""custom account id"": ""DAEA9D61-1297-41E2-9F14-E41B67C3EEF2"",
+					""custom int field"": 2384793,
+					""custom untyped object field"": {
+						""string field"" : ""some account description"",
+						""object field"" : { 
+							""string field"" : ""an account""
+						}
+					},
+					""custom typed field"": {
+						""name"": ""John Doe"",
+						""age"": 35
+					}
 				}
 			}";
 
@@ -278,6 +290,16 @@ namespace BadgeUp.Tests
 			Assert.Equal(@"Account name with sybmols !@#$%^&*()_+", account.Name);
 			Assert.Equal("Account description content", account.Description);
 			Assert.Equal(DateTimeOffset.Parse("2017-11-19T20:08:33.48"), account.Meta.Created);
+
+			// meta custom fields
+			Assert.Equal("DAEA9D61-1297-41E2-9F14-E41B67C3EEF2", account.Meta.GetCustomField<string>("custom account id"));
+			Assert.Equal(2384793, account.Meta.GetCustomField<int>("custom int field"));
+			Assert.Equal("some account description", account.Meta.GetCustomField<JToken>("custom untyped object field")["string field"].Value<string>());
+			Assert.Equal("an account", account.Meta.GetCustomField<JToken>("custom untyped object field")["object field"]["string field"]);
+
+			SerializableTestPerson person = account.Meta.GetCustomField<SerializableTestPerson>("custom typed field");
+			Assert.Equal("John Doe", person.Name);
+			Assert.Equal(35, person.Age);
 		}
 	}
 
