@@ -31,7 +31,7 @@ namespace BadgeUp.ResourceClients
 		/// <summary>
 		/// Retrieves all earned achievements
 		/// </summary>
-		/// <param name="param">Optional QueryParams object, to filter the earned achievements by AchievementId, Subject, Since and Until parameters </param>
+		/// <param name="param">Optional QueryParams object, to filter the earned achievements by AwardId, EarnedAchievementId, Subject, Since and Until parameters</param>
 		/// <returns><see cref="EarnedAwardResponse"/></returns>
 		public async Task<List<EarnedAwardResponse>> GetAll(EarnedAwardQueryParams param = null)
 		{
