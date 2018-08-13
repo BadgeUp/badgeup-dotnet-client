@@ -366,7 +366,19 @@ namespace BadgeUp.Tests
 					""threshold"": 5
 				},
 				""meta"": {
-					""created"": ""2017-12-10T10:01:08.55""
+					""created"": ""2017-12-10T10:01:08.55"",
+					""custom criterion"": ""is the criterion working?"",
+					""custom int field"": 198231,
+					""custom untyped object field"": {
+						""criterion-db-description"" : ""the criterion in our database"",
+						""object field"" : { 
+							""string field"" : ""criterion working!""
+						}
+					},
+					""custom typed field"": {
+						""name"": ""John Doe"",
+						""age"": 35
+					}
 				}
 			}";
 
@@ -386,6 +398,16 @@ namespace BadgeUp.Tests
 			Assert.Equal(5, criterion.Evaluation.Threshold);
 
 			Assert.Equal(DateTimeOffset.Parse("2017-12-10T10:01:08.55"), criterion.Meta.Created);
+
+			// meta custom fields
+			Assert.Equal("is the criterion working?", criterion.Meta.GetCustomField<string>("custom criterion"));
+			Assert.Equal(198231, criterion.Meta.GetCustomField<int>("custom int field"));
+			Assert.Equal("the criterion in our database", criterion.Meta.GetCustomField<JToken>("custom untyped object field")["criterion-db-description"].Value<string>());
+			Assert.Equal("criterion working!", criterion.Meta.GetCustomField<JToken>("custom untyped object field")["object field"]["string field"]);
+
+			SerializableTestPerson person = criterion.Meta.GetCustomField<SerializableTestPerson>("custom typed field");
+			Assert.Equal("John Doe", person.Name);
+			Assert.Equal(35, person.Age);
 		}
 	}
 
