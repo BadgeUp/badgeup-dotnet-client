@@ -214,7 +214,23 @@ namespace BadgeUp.Tests
 					""otherNestedData"": {
 						""bool"": true
 					}
-				}
+				},
+				""meta"": {
+					""created"": ""2016-08-07T01:18:19.061Z"",
+					""icon"": ""https://example.com/image"",
+					""custom award id in database"": ""DAEA9D61-1297-41E2-9F14-E41B67C3EEF2"",
+					""custom int field"": 5,
+					""custom untyped object field"": {
+						""string field"" : ""the award name"",
+						""object field"" : { 
+							""string field"" : ""got an award!""
+						}
+					},
+					""custom typed field"": {
+						""name"": ""John Doe"",
+						""age"": 35
+					}
+				},
 			}";
 
 		[Fact]
@@ -229,6 +245,16 @@ namespace BadgeUp.Tests
 
 			Assert.Equal( 20, award.Data["gold"] );
 			Assert.True( (bool) award.Data["otherNestedData"]["bool"] );
+
+			// meta custom fields
+			Assert.Equal( "DAEA9D61-1297-41E2-9F14-E41B67C3EEF2", award.Meta.GetCustomField<string>("custom award id in database") );
+			Assert.Equal( 5, award.Meta.GetCustomField<int>("custom int field") );
+			Assert.Equal( "the award name", award.Meta.GetCustomField<JToken>("custom untyped object field")["string field"].Value<string>() );
+			Assert.Equal( "got an award!", award.Meta.GetCustomField<JToken>("custom untyped object field")["object field"]["string field"] );
+
+			SerializableTestPerson person = award.Meta.GetCustomField<SerializableTestPerson>("custom typed field");
+			Assert.Equal( "John Doe", person.Name );
+			Assert.Equal( 35, person.Age );
 		}
 	}
 
