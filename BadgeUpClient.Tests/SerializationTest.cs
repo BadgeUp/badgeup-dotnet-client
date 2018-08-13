@@ -217,7 +217,6 @@ namespace BadgeUp.Tests
 				},
 				""meta"": {
 					""created"": ""2016-08-07T01:18:19.061Z"",
-					""icon"": ""https://example.com/image"",
 					""custom award id in database"": ""DAEA9D61-1297-41E2-9F14-E41B67C3EEF2"",
 					""custom int field"": 5,
 					""custom untyped object field"": {
