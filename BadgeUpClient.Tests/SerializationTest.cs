@@ -312,7 +312,19 @@ namespace BadgeUp.Tests
 				""name"": ""vagabond volcano"",
 				""description"": ""Application description content"",
 				""meta"": {
-					""created"": ""2017-11-19T20:08:59.62""
+					""created"": ""2017-11-19T20:08:59.62"",
+					""custom application string"": ""my app 1!2@3#4$5%"",
+					""custom int field"": -982713,
+					""custom untyped object field"": {
+						""string field"" : ""my application"",
+						""object field"" : { 
+							""int field"" : 12903812
+						}
+					},
+					""custom typed field"": {
+						""name"": ""John Doe"",
+						""age"": 35
+					}
 				}
 			}";
 
@@ -326,6 +338,16 @@ namespace BadgeUp.Tests
 			Assert.Equal("vagabond volcano", application.Name);
 			Assert.Equal("Application description content", application.Description);
 			Assert.Equal(DateTimeOffset.Parse("2017-11-19T20:08:59.62"), application.Meta.Created);
+
+			// meta custom fields
+			Assert.Equal("my app 1!2@3#4$5%", application.Meta.GetCustomField<string>("custom application string"));
+			Assert.Equal(-982713, application.Meta.GetCustomField<int>("custom int field"));
+			Assert.Equal("my application", application.Meta.GetCustomField<JToken>("custom untyped object field")["string field"].Value<string>());
+			Assert.Equal(12903812, application.Meta.GetCustomField<JToken>("custom untyped object field")["object field"]["int field"]);
+
+			SerializableTestPerson person = application.Meta.GetCustomField<SerializableTestPerson>("custom typed field");
+			Assert.Equal("John Doe", person.Name);
+			Assert.Equal(35, person.Age);
 		}
 	}
 
