@@ -19,9 +19,9 @@ namespace BadgeUp.ResourceClients
 		}
 
 		/// <summary>
-		/// Retrieves an earned achievement by ID
+		/// Retrieves an earned award by ID
 		/// </summary>
-		/// <param name="id">A string that uniquely identifies this achievement</param>
+		/// <param name="id">A string that uniquely identifies this award</param>
 		/// <returns><see cref="EarnedAwardResponse"/></returns>
 		public async Task<EarnedAwardResponse> GetById(string id)
 		{
@@ -29,14 +29,13 @@ namespace BadgeUp.ResourceClients
 		}
 
 		/// <summary>
-		/// Retrieves all earned achievements
+		/// Retrieves all earned awards
 		/// </summary>
-		/// <param name="param">Optional QueryParams object, to filter the earned achievements by AwardId, EarnedAchievementId, Subject, Since and Until parameters</param>
+		/// <param name="param">Optional QueryParams object, to filter the earned awards by AwardId, EarnedAchievementId, Subject, Since and Until parameters</param>
 		/// <returns><see cref="EarnedAwardResponse"/></returns>
 		public async Task<List<EarnedAwardResponse>> GetAll(EarnedAwardQueryParams param = null)
 		{
 			return await this.m_httpClient.GetAll<EarnedAwardResponse>(ENDPOINT, query: param?.ToQueryString());
 		}
-
 	}
 }
