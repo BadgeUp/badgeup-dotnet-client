@@ -172,7 +172,6 @@ namespace BadgeUp.Tests
 			Assert.True(metrics.Count > 50);
 		}
 
-
 		[SkippableFact]
 		public async void BasicIntegration_GetAllEarnedAchiements()
 		{
@@ -181,7 +180,7 @@ namespace BadgeUp.Tests
 
 			var client = new BadgeUpClient(API_KEY);
 
-			var achievements = await client.EarnedAchievement.GetAll(new EarnedAchievementQueryParams() { Since = DateTime.UtcNow.AddYears(1)});
+			var achievements = await client.EarnedAchievement.GetAll(new EarnedAchievementQueryParams() { Since = DateTime.UtcNow.AddYears(1) });
 			//There should be no achievements made in future
 			Assert.Empty(achievements);
 
@@ -195,6 +194,31 @@ namespace BadgeUp.Tests
 
 			achievements = await client.EarnedAchievement.GetAll();
 			//There should be some achievements
+			Assert.NotEmpty(achievements);
+		}
+
+		[SkippableFact]
+		public async void BasicIntegration_GetAllEarnedAwards()
+		{
+			if (string.IsNullOrEmpty(API_KEY))
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
+
+			var client = new BadgeUpClient(API_KEY);
+
+			var achievements = await client.EarnedAward.GetAll(new EarnedAwardQueryParams() { Since = DateTime.UtcNow.AddYears(1) });
+			//There should be no earned awards made in future
+			Assert.Empty(achievements);
+
+			achievements = await client.EarnedAward.GetAll(new EarnedAwardQueryParams() { EarnedAchievementId = "foo" });
+			//There should be no earned awards with invalid EarnedAchievementId
+			Assert.Empty(achievements);
+
+			achievements = await client.EarnedAward.GetAll(new EarnedAwardQueryParams() { Subject = "bar" });
+			//There should be no earned awards with invalid subject
+			Assert.Empty(achievements);
+
+			achievements = await client.EarnedAward.GetAll();
+			//There should be some earned awards
 			Assert.NotEmpty(achievements);
 		}
 
@@ -255,5 +279,28 @@ namespace BadgeUp.Tests
 			progress.ForEach(p => Assert.Null(p.Achievement.Resources.Awards));
 		}
 
+		[SkippableFact]
+		public async void BasicIntegration_GetEarnedAwardById()
+		{
+			if (string.IsNullOrEmpty(API_KEY))
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
+
+			var client = new BadgeUpClient(API_KEY);
+
+			var earnedAwards = await client.EarnedAward.GetAll();
+
+			// There should be some earned awards
+			Assert.NotEmpty(earnedAwards);
+
+			// Use the first earned award and look it up by id as a second request
+			var firstEarnedAward = earnedAwards.First();
+			var earnedAwardId = firstEarnedAward.Id;
+			var earnedAward = await client.EarnedAward.GetById(earnedAwardId);
+
+			// The same earned award should be returned
+			Assert.NotNull(earnedAward);
+
+			// TODO: Verify that all the fields of both awards are the same.
+		}
 	}
 }

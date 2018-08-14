@@ -52,15 +52,20 @@ namespace BadgeUp
 		public EarnedAchievementClient EarnedAchievement;
 
 		/// <summary>
+		/// Interact with BadgeUp earned awards
+		/// </summary>
+		public EarnedAwardClient EarnedAward;
+
+		/// <summary>
 		/// Interact with BadgeUp events
 		/// </summary>
 		public EventClient Event;
-		
+
 		/// <summary>
 		/// Interact with BadgeUp metrics
 		/// </summary>
 		public MetricClient Metric;
-		
+
 		/// <summary>
 		/// Interact with BadgeUp progress
 		/// </summary>
@@ -85,6 +90,7 @@ namespace BadgeUp
 			this.Award = new AwardClient(this.m_httpClient);
 			this.Criterion = new CriterionClient(this.m_httpClient);
 			this.EarnedAchievement = new EarnedAchievementClient(this.m_httpClient);
+			this.EarnedAward = new EarnedAwardClient(this.m_httpClient);
 			this.Event = new EventClient(this.m_httpClient);
 			this.Metric = new MetricClient(this.m_httpClient);
 			this.Progress = new ProgressClient(this.m_httpClient);
