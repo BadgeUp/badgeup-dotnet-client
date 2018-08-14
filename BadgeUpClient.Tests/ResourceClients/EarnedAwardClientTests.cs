@@ -56,11 +56,11 @@ namespace BadgeUp.Tests
 				Assert.NotNull(result);
 				Assert.Equal("cjktcmn5o635wmyd0w4ps", result.Id);
 				Assert.Equal("g6jtshln48", result.ApplicationId);
-				// Assert.Equal("cjktccaf8rsfdia9ea565npch", result.AchievementId);
+				Assert.Equal("cjktccaf8rsfdia9ea565npch", result.AchievementId);
 				Assert.Equal("cjktcmn5n635w69dhfjp3", result.EarnedAchievementId);
 				Assert.Equal("cjktceks5dxfy1n8e04bcnl1g", result.AwardId);
 				Assert.Equal("subject-1", result.Subject);
-				// Assert.Equal("APPROVED", result.State);
+				Assert.Equal(EarnedAwardState.Approved, result.State);
 				Assert.Equal(new DateTime(2016, 09, 12, 06, 51, 35, 453, DateTimeKind.Utc), result.Meta.Created);
 			}
 		}
@@ -86,7 +86,7 @@ namespace BadgeUp.Tests
 						'earnedAchievementId': 'cjktcmn5n635w69dhfjp3',
 						'awardId': 'cjktceks5dxfy1n8e04bcnl1g',
 						'subject': 'subject-1',
-						'state': 'CREATED',
+						'state': 'REDEEMED',
 						'meta': {
 							'created': '2016-07-12T06:51:35.453Z'
 						}
@@ -110,7 +110,7 @@ namespace BadgeUp.Tests
 						'earnedAchievementId': 'cjktcmyhl635wjshv2kc2',
 						'awardId': 'cjktceks5dxfy1n8e04bcnl1g',
 						'subject': 'subject-3',
-						'state': 'REDEEMED',
+						'state': 'CREATED',
 						'meta': {
 							'created': '2016-09-18T06:51:50.137Z'
 						}
@@ -140,11 +140,11 @@ namespace BadgeUp.Tests
 				Assert.Equal(3, result.Count);
 				Assert.Equal("cjktcmn5o635wmyd0w4ps", result[0].Id);
 				Assert.Equal("g6jtshln48", result[0].ApplicationId);
-				//Assert.Equal("cjktccaf8rsfdia9ea565npch", result[0].AchievementId);
+				Assert.Equal("cjktccaf8rsfdia9ea565npch", result[0].AchievementId);
 				Assert.Equal("cjktcmn5n635w69dhfjp3", result[0].EarnedAchievementId);
 				Assert.Equal("cjktceks5dxfy1n8e04bcnl1g", result[0].AwardId);
 				Assert.Equal("subject-1", result[0].Subject);
-				//Assert.Equal("CREATED", result[0].State);
+				Assert.Equal(EarnedAwardState.Redeemed, result[0].State);
 				Assert.Equal(new DateTime(2016, 07, 12, 06, 51, 35, 453, DateTimeKind.Utc), result[0].Meta.Created);
 			}
 		}
@@ -205,11 +205,11 @@ namespace BadgeUp.Tests
 				Assert.Single(result);
 				Assert.Equal("cjktcmn5o635wmyd0w4ps", result[0].Id);
 				Assert.Equal("g6jtshln48", result[0].ApplicationId);
-				//Assert.Equal("cjktccaf8rsfdia9ea565npch", result[0].AchievementId);
+				Assert.Equal("cjktccaf8rsfdia9ea565npch", result[0].AchievementId);
 				Assert.Equal("cjktcmn5n635w69dhfjp3", result[0].EarnedAchievementId);
 				Assert.Equal("cjktceks5dxfy1n8e04bcnl1g", result[0].AwardId);
 				Assert.Equal("subject-1", result[0].Subject);
-				//Assert.Equal("CREATED", result[0].State);
+				Assert.Equal(EarnedAwardState.Created, result[0].State);
 				Assert.Equal(new DateTime(2016, 07, 12, 06, 51, 35, 453, DateTimeKind.Utc), result[0].Meta.Created);
 			}
 		}
