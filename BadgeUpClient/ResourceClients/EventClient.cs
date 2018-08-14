@@ -29,7 +29,7 @@ namespace BadgeUp.ResourceClients
 		{
 			HttpQuery query = new HttpQuery();
 
-			if (showIncomplete.HasValue)
+			if (showIncomplete.GetValueOrDefault(false))
 			{
 				query.Add("showIncomplete", showIncomplete.Value.ToString().ToLower());
 			}
@@ -51,12 +51,12 @@ namespace BadgeUp.ResourceClients
 		{
 			HttpQuery query = new HttpQuery();
 
-			if (showIncomplete.HasValue)	
+			if (showIncomplete.GetValueOrDefault(false))
 			{
 				query.Add("showIncomplete", showIncomplete.Value.ToString().ToLower());
 			}
 
-			var result = await this.m_httpClient.Post<EventResponseV2Preview>(new EventRequest(@event), "events", query: query.ToString(), headers: new Dictionary<string, string>{{ "X-V2-PREVIEW", "true" } });
+			var result = await this.m_httpClient.Post<EventResponseV2Preview>(new EventRequest(@event), "events", query: query.ToString(), headers: new Dictionary<string, string> { { "X-V2-PREVIEW", "true" } });
 			if (onlyNew)
 				result.Results.ForEach(res => res.Progress = res.Progress.Where(x => x.IsNew).ToArray());
 			return result;
