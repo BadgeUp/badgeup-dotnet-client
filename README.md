@@ -49,6 +49,11 @@ foreach (var prog in response.Progress)
             int points = award.Data["points"].ToObject<int>();
             System.Console.WriteLine($"Points awarded: {points}");
         }
+
+        // you can get pre-existing specific custom metadata fields for this achievement
+        string fieldValueAsString = achievement.Meta.GetCustomField<string>("my_custom_field_name");
+        int fieldValueAsInteger = achievement.Meta.GetCustomField<int>("some_age_field");
+        MyClass fieldValueAsSpecificType = achievement.Meta.GetCustomField<MyClass>("custom_field_name");
     }
 }
 ```
