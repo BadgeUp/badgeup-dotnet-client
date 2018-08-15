@@ -53,6 +53,16 @@ foreach (var prog in response.Progress)
 }
 ```
 
+### Custom Meta Fields
+To help relate BadgeUp resources to your product's internal resources, BadgeUp generally allows you to set custom fields in `meta`.
+
+```cs
+// you can get custom metadata fields for an achievement
+string internalId = achievement.Meta.GetCustomField<string>("internal_id");
+int fieldValueAsInteger = achievement.Meta.GetCustomField<int>("some_age_field");
+MyClass fieldValueAsSpecificType = achievement.Meta.GetCustomField<MyClass>("custom_field_name");
+```
+
 ## Development
 ```sh
 dotnet restore
