@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using BadgeUp.ResourceClients;
+using BadgeUpClient.Encoding;
 
 namespace BadgeUp.Http
 {
 	public class HttpQuery
 	{
 		List<KeyValuePair<string, string>> m_values = new List<KeyValuePair<string, string>>();
-
 
 		public void Add<T>( string name, T value )
 		{
@@ -20,7 +20,7 @@ namespace BadgeUp.Http
 		{
 			if (m_values.Count > 0)
 			{
-				return m_values.Select( a => a.Key + '=' + a.Value ).Aggregate( ( a, b ) => a + "&" + b );
+				return m_values.Select( a => a.Key.UrlEncode() + '=' + a.Value.UrlEncode() ).Aggregate( ( a, b ) => a + "&" + b );
 			}
 
 			return null;
