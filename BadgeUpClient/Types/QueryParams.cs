@@ -1,3 +1,4 @@
+using BadgeUpClient.Encoding;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -12,7 +13,7 @@ namespace BadgeUp.Types
 				.GetTypeInfo()
 				.GetProperties()
 				.Where(p => p.GetValue(this, null) != null)
-				.Select(p => FirstCharacterToLower(p.Name) + "=" + (p.PropertyType == typeof(DateTime?) ? ((DateTime?)p.GetValue(this, null)).Value.ToString("O") : p.GetValue(this, null)).ToString());
+				.Select(p => FirstCharacterToLower(p.Name).UrlEncode() + "=" + (p.PropertyType == typeof(DateTime?) ? ((DateTime?)p.GetValue(this, null)).Value.ToString("O") : p.GetValue(this, null)).ToString().UrlEncode());
 
 			return String.Join("&", properties.ToArray());
 		}
