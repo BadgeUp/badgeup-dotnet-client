@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BadgeUp.Http;
 using BadgeUp.Responses;
+using BadgeUpClient.Encoding;
 
 namespace BadgeUp.ResourceClients
 {
@@ -23,7 +24,7 @@ namespace BadgeUp.ResourceClients
 		/// <returns><see cref="MetricResponse"/></returns>
 		public async Task<MetricResponse> GetIndividualBySubject(string subjectId, string key)
 		{
-			return await this.m_httpClient.Get<MetricResponse>(ENDPOINT + "/" + subjectId + "/" + key);
+			return await this.m_httpClient.Get<MetricResponse>(ENDPOINT + "/" + subjectId.UrlEncode() + "/" + key.UrlEncode());
 		}
 
 
