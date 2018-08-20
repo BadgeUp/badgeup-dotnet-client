@@ -257,6 +257,38 @@ namespace BadgeUp.Tests
 		}
 	}
 
+	public class EarnedAwardSerializationTest
+	{
+		string earnedAwardJson =
+			@"{
+			  ""id"": ""cisl9b24f0001jmp5sqnm5yl9"",
+			  ""applicationId"": ""y70ujss"",
+			  ""awardId"": ""cirjwz12q000csp3jsdgtx2pk"",
+			  ""achievementId"": ""cjktccaf8rsfdia9ea565npch"",
+			  ""earnedAchievementId"": ""cjixxhwsm0010seruoa32zz58"",
+			  ""subject"": ""100"",
+			  ""state"": ""APPROVED"",
+			  ""meta"": {
+				""created"": ""2016-09-02T04:24:41.091Z""
+			  }
+			}";
+
+		[Fact]
+		public void Serialization_EarnedAwardDeserialize()
+		{
+			var award = Json.Deserialize<EarnedAwardResponse>(earnedAwardJson);
+
+			Assert.Equal("cisl9b24f0001jmp5sqnm5yl9", award.Id);
+			Assert.Equal("y70ujss", award.ApplicationId);
+			Assert.Equal("cirjwz12q000csp3jsdgtx2pk", award.AwardId);
+			Assert.Equal("cjktccaf8rsfdia9ea565npch", award.AchievementId);
+			Assert.Equal("cjixxhwsm0010seruoa32zz58", award.EarnedAchievementId);
+			Assert.Equal("100", award.Subject);
+			Assert.Equal(EarnedAwardState.Approved, award.State);
+			Assert.Equal(new DateTime(2016, 09, 02, 04, 24, 41, 91, DateTimeKind.Utc), award.Meta.Created);
+		}
+	}
+
 	public class AccountSerializationTest
 	{
 		string accountJson =

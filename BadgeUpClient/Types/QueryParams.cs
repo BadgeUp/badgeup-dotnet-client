@@ -7,7 +7,7 @@ namespace BadgeUp.Types
 	public class QueryParams
 	{
 		public string ToQueryString()
-		{	
+		{
 			var properties = this.GetType()
 				.GetTypeInfo()
 				.GetProperties()
