@@ -14,6 +14,7 @@
     <Product>BadgeUp .NET Client</Product>
     <description>Official BadgeUp .NET client</description>
     <PackageTags>achievements;goals;awards;SaaS</PackageTags>
+    <RootNamespace>BadgeUp</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />

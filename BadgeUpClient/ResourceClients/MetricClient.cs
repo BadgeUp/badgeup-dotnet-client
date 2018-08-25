@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BadgeUp.Http;
 using BadgeUp.Responses;
-using BadgeUpClient.Encoding;
+using BadgeUp.Extensions;
 
 namespace BadgeUp.ResourceClients
 {

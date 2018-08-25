@@ -1,4 +1,4 @@
-using BadgeUpClient.Encoding;
+using BadgeUp.Extensions;
 using System;
 using System.Linq;
 using System.Reflection;
