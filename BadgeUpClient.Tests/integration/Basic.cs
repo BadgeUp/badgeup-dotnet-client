@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using BadgeUp.Responses;
 using BadgeUp.Types;
-using BadgeUp.ResourceClients;
 using Xunit;
 
 namespace BadgeUp.Tests
@@ -10,7 +9,7 @@ namespace BadgeUp.Tests
 	public class BasicIntegration
 	{
 		// get a real API Key for integration testing
-		string API_KEY = System.Environment.GetEnvironmentVariable("INTEGRATION_API_KEY");
+		string API_KEY = IntegrationApiKey.Get();
 
 		string RandomSubject() {
 			return "dotnet-ci-" + Guid.NewGuid().ToString("N");

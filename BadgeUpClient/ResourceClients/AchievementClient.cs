@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BadgeUp.Http;
+using BadgeUp.Requests;
 using BadgeUp.Responses;
+using BadgeUp.Types;
 
 namespace BadgeUp.ResourceClients
 {
@@ -26,9 +29,21 @@ namespace BadgeUp.ResourceClients
 		}
 
 		/// <summary>
+		/// Creates a single achievement with the given parameters.
+		/// </summary>
+		/// <param name="achievement">The achievement to create.</param>
+		/// <returns>The created achievement.</returns>
+		public async Task<AchievementResponse> CreateAchievement(Achievement achievement)
+		{
+			var request = new AchievementRequest(achievement);
+			var result = await this.m_httpClient.Post<AchievementResponse>(request, ENDPOINT);
+			return result;
+		}
+
+		/// <summary>
 		/// Retrieves a list of all achievements.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>The list of all achievements.</returns>
 		public async Task<List<AchievementResponse>> GetAll()
 		{
 			return await this.m_httpClient.GetAll<AchievementResponse>(ENDPOINT);
