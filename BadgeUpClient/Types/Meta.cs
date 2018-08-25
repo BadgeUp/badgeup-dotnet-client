@@ -9,7 +9,7 @@ namespace BadgeUp.Types
 		[JsonExtensionData]
 		private readonly Dictionary<string, JToken> customFields = new Dictionary<string, JToken>();
 
-		public System.DateTime Created { get; set; }
+		public System.DateTime? Created { get; set; }
 
 		/// <summary>
 		/// Gets the value of the specified custom field.
