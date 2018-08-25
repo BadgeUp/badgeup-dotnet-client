@@ -10,7 +10,7 @@ namespace BadgeUp.ResourceClients
 {
 	public class AchievementClient
 	{
-		const string ENDPOINT = "achievements";
+		private const string ENDPOINT = "achievements";
 		protected BadgeUpHttpClient m_httpClient;
 
 		public AchievementClient(BadgeUpHttpClient httpClient)
@@ -35,6 +35,11 @@ namespace BadgeUp.ResourceClients
 		/// <returns>The created achievement.</returns>
 		public async Task<AchievementResponse> CreateAchievement(Achievement achievement)
 		{
+			if (achievement == null)
+			{
+				throw new ArgumentNullException(nameof(achievement));
+			}
+
 			var request = new AchievementRequest(achievement);
 			var result = await this.m_httpClient.Post<AchievementResponse>(request, ENDPOINT);
 			return result;
