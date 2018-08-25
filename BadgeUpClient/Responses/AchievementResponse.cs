@@ -21,14 +21,4 @@ namespace BadgeUp.Responses
 		public List<CriterionResponse> Criteria { get; set; }
 		public List<AwardResponse> Awards { get; set; }
 	}
-
-	public class AchievementMeta : Meta
-	{
-		public string Icon { get; set; }
-	}
-
-	public class AchievementOptions
-	{
-		public bool Suspended { get; set; } = false;
-	}
 }
