@@ -1,4 +1,4 @@
-﻿using BadgeUp.Http;
+using BadgeUp.Http;
 using BadgeUp.ResourceClients;
 using BadgeUp.Types;
 using RichardSzalay.MockHttp;
@@ -36,7 +36,7 @@ namespace BadgeUp.Tests
 			}".Replace("'", "\"");
 
 			// setup the response action
-			var url = $"{Host}/v1/apps/{apiKey.ApplicationId}/earnedawards/cjktcmn5o635wmyd0w4ps";
+			var url = $"{Host}/v2/apps/{apiKey.ApplicationId}/earnedawards/cjktcmn5o635wmyd0w4ps";
 			var mockHttp = new MockHttpMessageHandler();
 			var expectedRequest = mockHttp.Expect(HttpMethod.Get, url).Respond("application/json", responseJson);
 			mockHttp.Fallback.Throw(new InvalidOperationException("No matching mock handler"));
@@ -119,7 +119,7 @@ namespace BadgeUp.Tests
 			}".Replace("'", "\"");
 
 			// setup the response action
-			var url = $"{Host}/v1/apps/{apiKey.ApplicationId}/earnedawards";
+			var url = $"{Host}/v2/apps/{apiKey.ApplicationId}/earnedawards";
 			var mockHttp = new MockHttpMessageHandler();
 			var expectedRequest = mockHttp.Expect(HttpMethod.Get, url).Respond("application/json", responseJson);
 			mockHttp.Fallback.Throw(new InvalidOperationException("No matching mock handler"));
@@ -179,7 +179,7 @@ namespace BadgeUp.Tests
 			}".Replace("'", "\"");
 
 			// setup the response action
-			var url = $"{Host}/v1/apps/{apiKey.ApplicationId}/earnedawards";
+			var url = $"{Host}/v2/apps/{apiKey.ApplicationId}/earnedawards";
 			var mockHttp = new MockHttpMessageHandler();
 			var expectedRequest = mockHttp.Expect(HttpMethod.Get, url)
 				.WithQueryString("subject", "subject-1")

@@ -6,7 +6,7 @@ namespace BadgeUp.ResourceClients
 {
 	public class ApplicationClient
 	{
-		const string ENDPOINT = "v1/apps";
+		const string ENDPOINT = "v2/apps";
 		protected BadgeUpHttpClient m_httpClient;
 
 		public ApplicationClient(BadgeUpHttpClient httpClient)

@@ -27,7 +27,7 @@ namespace BadgeUp.Http
 			this.m_httpClient = httpClient;
 		}
 
-		public async Task<TResponse> Get<TResponse>( string endpointName, string path = "/v1/apps/{applicationId}", string query = null )
+		public async Task<TResponse> Get<TResponse>( string endpointName, string path = "/v2/apps/{applicationId}", string query = null )
 		{
 			path = path.Replace( "{applicationId}", this.m_apiKey.ApplicationId );
 			string responseContent = "";
@@ -58,7 +58,7 @@ namespace BadgeUp.Http
 
 		}
 
-		public async Task<List<TResponse>> GetAll<TResponse>(string endpoint, string path = "/v1/apps/{applicationId}", string query = null)
+		public async Task<List<TResponse>> GetAll<TResponse>(string endpoint, string path = "/v2/apps/{applicationId}", string query = null)
 		{
 			var result = new List<TResponse>();
 			string url = endpoint;
@@ -76,7 +76,7 @@ namespace BadgeUp.Http
 			return result;
 		}
 
-		public async Task<TResponse> Post<TResponse>( Request data, string endpointName, string path = "/v1/apps/{applicationId}", string query = null, Dictionary<string, string> headers = null )
+		public async Task<TResponse> Post<TResponse>( Request data, string endpointName, string path = "/v2/apps/{applicationId}", string query = null, Dictionary<string, string> headers = null )
 		{
 			path = path.Replace( "{applicationId}", this.m_apiKey.ApplicationId );
 

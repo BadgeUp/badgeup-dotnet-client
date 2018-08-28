@@ -21,7 +21,7 @@ namespace BadgeUp.ResourceClients
 		/// <returns><see cref="AccountResponse"/></returns>
 		public async Task<AccountResponse> GetById(string id)
 		{
-			return await this.m_httpClient.Get<AccountResponse>(ENDPOINT + "/" + id, "/v1");
+			return await this.m_httpClient.Get<AccountResponse>(ENDPOINT + "/" + id, "/v2");
 		}
 	}
 }

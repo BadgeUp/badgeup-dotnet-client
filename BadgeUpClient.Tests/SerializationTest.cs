@@ -488,7 +488,7 @@ namespace BadgeUp.Tests
 		private string multipleMetricJson =
 			@"{
 				""pages"": {
-					""previous"": ""/v1/apps/9hk14dln35/metrics?before=cjb2kndex7us2y06rvu1441fs"",
+					""previous"": ""/v2/apps/9hk14dln35/metrics?before=cjb2kndex7us2y06rvu1441fs"",
 					""next"": null
 				},
 				""data"": [
@@ -521,7 +521,7 @@ namespace BadgeUp.Tests
 		{
 			var metricMultiple = Json.Deserialize<MultipleResponse<MetricResponse>>(multipleMetricJson);
 
-			Assert.Equal(@"/v1/apps/9hk14dln35/metrics?before=cjb2kndex7us2y06rvu1441fs", metricMultiple.Pages.Previous);
+			Assert.Equal(@"/v2/apps/9hk14dln35/metrics?before=cjb2kndex7us2y06rvu1441fs", metricMultiple.Pages.Previous);
 			Assert.Null(metricMultiple.Pages.Next);
 
 			Assert.Equal(3, metricMultiple.Data.Count);

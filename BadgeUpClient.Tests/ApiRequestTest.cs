@@ -30,7 +30,7 @@ namespace BadgeUp.Tests
 			var mockHttp = new MockHttpMessageHandler();
 
 			var apiKey = global::BadgeUp.ApiKey.Create( ApiRequestTest.ApiKey );
-			string url = "https://api.useast1.badgeup.io/v1/apps/" + apiKey.ApplicationId + "/events";
+			string url = "https://api.useast1.badgeup.io/v2/apps/" + apiKey.ApplicationId + "/events";
 
 			string responseJson =
 @"{
