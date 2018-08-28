@@ -274,6 +274,15 @@ namespace BadgeUp.Tests
 			}";
 
 		[Fact]
+		public void Serialization_EarnedAwardStateSerialize()
+		{
+			Assert.Equal("\"created\"", Json.Serialize(EarnedAwardState.Created));
+			Assert.Equal("\"approved\"", Json.Serialize(EarnedAwardState.Approved));
+			Assert.Equal("\"rejected\"", Json.Serialize(EarnedAwardState.Rejected));
+			Assert.Equal("\"redeemed\"", Json.Serialize(EarnedAwardState.Redeemed));
+		}
+
+		[Fact]
 		public void Serialization_EarnedAwardDeserialize()
 		{
 			var award = Json.Deserialize<EarnedAwardResponse>(earnedAwardJson);
@@ -413,6 +422,16 @@ namespace BadgeUp.Tests
 					}
 				}
 			}";
+
+		[Fact]
+		public void Serialization_CriterionOperatorSerialize()
+		{
+			Assert.Equal("\"@gt\"", Json.Serialize(CriterionOperator.Greater));
+			Assert.Equal("\"@gte\"", Json.Serialize(CriterionOperator.GreaterOrEqual));
+			Assert.Equal("\"@lt\"", Json.Serialize(CriterionOperator.Less));
+			Assert.Equal("\"@lte\"", Json.Serialize(CriterionOperator.LessOrEqual));
+			Assert.Equal("\"@eq\"", Json.Serialize(CriterionOperator.Equal));
+		}
 
 		[Fact]
 		public void Serialization_CriterionDeserialize()

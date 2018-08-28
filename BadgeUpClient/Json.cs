@@ -18,7 +18,7 @@ namespace BadgeUp
 				new JsonSerializerSettings
 				{
 					ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver(),
-					Converters = new List<JsonConverter>() {new StringEnumConverter {CamelCaseText = true}}
+					Converters = new List<JsonConverter>() { new StringEnumConverter { CamelCaseText = true } }
 				});
 		}
 
@@ -29,7 +29,8 @@ namespace BadgeUp
 				new JsonSerializerSettings
 				{
 					ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver(),
-					NullValueHandling = NullValueHandling.Ignore
+					NullValueHandling = NullValueHandling.Ignore,
+					Converters = new List<JsonConverter>() { new StringEnumConverter { CamelCaseText = true } }
 				});
 		}
 	}
