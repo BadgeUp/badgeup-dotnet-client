@@ -444,7 +444,7 @@ namespace BadgeUp.Tests
 			Assert.Equal("criterion description", criterion.Description);
 			Assert.Equal("key content", criterion.Key);
 
-			Assert.Equal("standard", criterion.Evaluation.Type);
+			Assert.Equal(CriterionEvaluationType.Standard, criterion.Evaluation.Type);
 			Assert.Equal(CriterionOperator.GreaterOrEqual, criterion.Evaluation.Operator);
 			Assert.Equal(5, criterion.Evaluation.Threshold);
 

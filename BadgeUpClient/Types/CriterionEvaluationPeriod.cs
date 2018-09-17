@@ -1,8 +1,8 @@
-﻿namespace BadgeUp.Types
+namespace BadgeUp.Types
 {
 	public class CriterionEvaluationPeriod
 	{
-		public decimal Number { get; set; }
+		public decimal Value { get; set; }
 		public CriterionTimeseriesPeriodUnits Unit { get; set; }
 	}
 }

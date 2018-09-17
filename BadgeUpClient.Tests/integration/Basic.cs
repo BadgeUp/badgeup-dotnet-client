@@ -174,6 +174,19 @@ namespace BadgeUp.Tests
 		}
 
 		[SkippableFact]
+		public async void BasicIntegration_GetAllCriteria()
+		{
+			if (string.IsNullOrEmpty(API_KEY))
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
+
+			var client = new BadgeUpClient(API_KEY);
+
+			// TODO: Test multiple page retrieval for criteria
+			var criteria = await client.Criterion.GetAll();
+			Assert.NotEmpty(criteria);
+		}
+
+		[SkippableFact]
 		public async void BasicIntegration_GetAllEarnedAchiements()
 		{
 			if (string.IsNullOrEmpty(API_KEY))
