@@ -75,7 +75,6 @@ namespace BadgeUp.Tests
 				// When there's a showIncomplete=false query param, throw an exception.
 				var mockHttpHandler = new MockHttpMessageHandler();
 				mockHttpHandler.When(HttpMethod.Post, "https://api.useast1.badgeup.io/v2/apps/1337/events*")
-							.WithHeaders("X-V2-PREVIEW", "true")
 							.WithQueryString("showIncomplete", "false")
 							.Throw(new InvalidOperationException("URL shouldn't have the showIncomplete param appended"));
 				mockHttpHandler.Fallback.Respond("application/json",
@@ -114,9 +113,9 @@ namespace BadgeUp.Tests
 				var client = new EventClient(badgeUpClient);
 
 				// act
-				await client.SendV2Preview(new BadgeUp.Types.Event("subject-1", "jump"), showIncomplete: false);
-				await client.SendV2Preview(new BadgeUp.Types.Event("subject-1", "jump"), showIncomplete: true);
-				await client.SendV2Preview(new BadgeUp.Types.Event("subject-1", "jump"), showIncomplete: null);
+				await client.Send(new BadgeUp.Types.Event("subject-1", "jump"), showIncomplete: false);
+				await client.Send(new BadgeUp.Types.Event("subject-1", "jump"), showIncomplete: true);
+				await client.Send(new BadgeUp.Types.Event("subject-1", "jump"), showIncomplete: null);
 			}
 		}
 	}

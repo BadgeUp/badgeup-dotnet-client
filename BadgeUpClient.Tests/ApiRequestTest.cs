@@ -19,8 +19,8 @@ namespace BadgeUp.Tests
 			{
 				var result = client.Event.Send( new Types.Event( "subject_foo", "eat:apple", new Types.Modifier { Inc = 1 } ) ).Result;
 
-				Assert.Equal( "subject_foo", result.Event.Subject );
-				Assert.Equal( "eat:apple", result.Event.Key );
+				Assert.Equal( "subject_foo", result.Results[0].Event.Subject );
+				Assert.Equal( "eat:apple", result.Results[0].Event.Key );
 			}
 		}
 
@@ -33,7 +33,7 @@ namespace BadgeUp.Tests
 			string url = "https://api.useast1.badgeup.io/v2/apps/" + apiKey.ApplicationId + "/events";
 
 			string responseJson =
-@"{
+@"{results: [{
 	'event': {
 		'id': 'cja92jvpj1gummf5lf3jj5fx3',
 		'applicationId': '1337',
@@ -61,7 +61,7 @@ namespace BadgeUp.Tests
 			}
 		}
 	]
-}".Replace("'", "\"");
+}]}".Replace("'", "\"");
 
 			// setup the response
 			var response = new HttpResponseMessage(System.Net.HttpStatusCode.Created)
@@ -86,8 +86,10 @@ namespace BadgeUp.Tests
 				// send the event
 				var result = await client.Event.Send(e);
 
-				Assert.NotNull(result.Event);
-				Assert.Single(result.Progress);
+				Assert.NotNull(result);
+				Assert.NotEmpty(result.Results);
+				Assert.NotNull(result.Results[0].Event);
+				Assert.Single(result.Results[0].Progress);
 			}
 		}
 	}

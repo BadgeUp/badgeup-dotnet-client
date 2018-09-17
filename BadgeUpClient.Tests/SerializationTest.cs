@@ -81,7 +81,7 @@ namespace BadgeUp.Tests
 		[Fact]
 		public void Serialization_EventResponseV2_Deserialize()
 		{
-			var @event = Json.Deserialize<EventResponseV2Preview>(EventResponseV2PreviewJson);
+			var @event = Json.Deserialize<EventResponse>(EventResponseV2PreviewJson);
 
 			Assert.Single(@event.Results);
 			Assert.Equal("cjdd8dm743o0qm2blmaddzrmi", @event.Results[0].Event.Id);
