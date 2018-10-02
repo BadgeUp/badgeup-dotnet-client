@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -33,9 +33,9 @@ namespace BadgeUp.Tests
 
 			//setup mock httpClient
 			var mockHttp = new MockHttpMessageHandler();
-			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v1/apps/1337/").Respond(r => errorResponse);
-			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v1/apps/1337/").Throw(new TaskCanceledException("Simulated timeout exception"));
-			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v1/apps/1337/").Respond(r => successResponse);
+			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v2/apps/1337/").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v2/apps/1337/").Throw(new TaskCanceledException("Simulated timeout exception"));
+			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v2/apps/1337/").Respond(r => successResponse);
 
 			//Test
 			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.x.badgeup.io");
@@ -56,9 +56,9 @@ namespace BadgeUp.Tests
 
 			//setup mock httpClient
 			var mockHttp = new MockHttpMessageHandler();
-			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v1/apps/1337/").Respond(r => errorResponse);
-			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v1/apps/1337/").Throw(new TaskCanceledException("Simulated timeout exception"));
-			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v1/apps/1337/").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v2/apps/1337/").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v2/apps/1337/").Throw(new TaskCanceledException("Simulated timeout exception"));
+			mockHttp.Expect(HttpMethod.Get, "http://www.x.badgeup.io/v2/apps/1337/").Respond(r => errorResponse);
 
 			//Test
 			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.x.badgeup.io");
@@ -83,9 +83,9 @@ namespace BadgeUp.Tests
 
 			//setup mock httpClient
 			var mockHttp = new MockHttpMessageHandler();
-			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => errorResponse);
-			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v1/apps/1337/testEndpoint").Throw(new TaskCanceledException("Simulated timeout exception"));
-			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => successResponse);
+			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v2/apps/1337/testEndpoint").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v2/apps/1337/testEndpoint").Throw(new TaskCanceledException("Simulated timeout exception"));
+			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v2/apps/1337/testEndpoint").Respond(r => successResponse);
 
 			//Test
 			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.x.badgeup.io");
@@ -106,9 +106,9 @@ namespace BadgeUp.Tests
 
 			//setup mock httpClient
 			var mockHttp = new MockHttpMessageHandler();
-			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => errorResponse);
-			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v1/apps/1337/testEndpoint").Throw(new TaskCanceledException("Simulated timeout exception"));
-			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v1/apps/1337/testEndpoint").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v2/apps/1337/testEndpoint").Respond(r => errorResponse);
+			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v2/apps/1337/testEndpoint").Throw(new TaskCanceledException("Simulated timeout exception"));
+			mockHttp.Expect(HttpMethod.Post, "http://www.x.badgeup.io/v2/apps/1337/testEndpoint").Respond(r => errorResponse);
 
 			//Test
 			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.x.badgeup.io");
