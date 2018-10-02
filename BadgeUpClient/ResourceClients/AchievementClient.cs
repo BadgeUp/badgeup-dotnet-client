@@ -33,7 +33,7 @@ namespace BadgeUp.ResourceClients
 		/// </summary>
 		/// <param name="achievement">The achievement to create.</param>
 		/// <returns>The created achievement.</returns>
-		public async Task<AchievementResponse> CreateAchievement(Achievement achievement)
+		public async Task<AchievementResponse> Create(Achievement achievement)
 		{
 			if (achievement == null)
 			{

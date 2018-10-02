@@ -15,14 +15,14 @@ namespace BadgeUp.Tests
 		private const string Host = "https://api.useast1.badgeup.io";
 
 		[Fact]
-		public async Task WhenCriterionIsNull_CreateCriterionThrowsException()
+		public async Task WhenCriterionIsNull_CreateThrowsException()
 		{
 			var client = new CriterionClient(null);
-			await Assert.ThrowsAsync<ArgumentNullException>(() => client.CreateCriterion(null));
+			await Assert.ThrowsAsync<ArgumentNullException>(() => client.Create(null));
 		}
 
 		[Fact]
-		public async Task WhenSetupWithResponseData_CreateCriterion_CallsUrlOnceAndReturnsCorrectResult()
+		public async Task WhenSetupWithResponseData_Create_CallsUrlOnceAndReturnsCorrectResult()
 		{
 			var apiKey = BadgeUp.ApiKey.Create(ApiKey);
 
@@ -56,7 +56,7 @@ namespace BadgeUp.Tests
 				badgeUpHttpClient._SetHttpClient(mockHttp.ToHttpClient());
 				var client = new CriterionClient(badgeUpHttpClient);
 
-				var result = await client.CreateCriterion(new Criterion()
+				var result = await client.Create(new Criterion()
 				{
 					Name = "Criterion",
 					Description = "criterion description",

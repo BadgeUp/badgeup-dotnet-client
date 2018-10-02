@@ -42,7 +42,7 @@ namespace BadgeUp.ResourceClients
 		/// </summary>
 		/// <param name="criterion">The criterion to create.</param>
 		/// <returns>The created criterion.</returns>
-		public async Task<CriterionResponse> CreateCriterion(Criterion criterion)
+		public async Task<CriterionResponse> Create(Criterion criterion)
 		{
 			if (criterion == null)
 			{

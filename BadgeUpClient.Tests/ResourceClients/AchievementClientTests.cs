@@ -15,14 +15,14 @@ namespace BadgeUp.Tests
 		private const string Host = "https://api.useast1.badgeup.io";
 
 		[Fact]
-		public async Task WhenAchievementIsNull_CreateAchievementThrowsException()
+		public async Task WhenAchievementIsNull_CreateThrowsException()
 		{
 			var client = new AchievementClient(null);
-			await Assert.ThrowsAsync<ArgumentNullException>(() => client.CreateAchievement(null));
+			await Assert.ThrowsAsync<ArgumentNullException>(() => client.Create(null));
 		}
 
 		[Fact]
-		public async Task WhenSetupWithResponseData_CreateAchievement_CallsUrlOnceAndReturnsCorrectResult()
+		public async Task WhenSetupWithResponseData_Create_CallsUrlOnceAndReturnsCorrectResult()
 		{
 			var apiKey = BadgeUp.ApiKey.Create(ApiKey);
 
@@ -54,7 +54,7 @@ namespace BadgeUp.Tests
 				badgeUpHttpClient._SetHttpClient(mockHttp.ToHttpClient());
 				var client = new AchievementClient(badgeUpHttpClient);
 
-				var result = await client.CreateAchievement(new Achievement()
+				var result = await client.Create(new Achievement()
 				{
 					Name = "Achievement name",
 					Description = "Achievement description",

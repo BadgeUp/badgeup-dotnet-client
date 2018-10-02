@@ -16,7 +16,7 @@ namespace BadgeUp.Tests
 		}
 
 		[SkippableFact]
-		public async Task AchievementsIntegration_CreateAchievement()
+		public async Task AchievementsIntegration_Create()
 		{
 			if (string.IsNullOrEmpty(this.API_KEY))
 				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
@@ -29,7 +29,7 @@ namespace BadgeUp.Tests
 			Assert.NotEmpty(awards);
 
 			// Create a new achievement
-			var result = await client.Achievement.CreateAchievement(new Achievement()
+			var result = await client.Achievement.Create(new Achievement()
 			{
 				Name = "Test Achievement",
 				Description = "Test Description",

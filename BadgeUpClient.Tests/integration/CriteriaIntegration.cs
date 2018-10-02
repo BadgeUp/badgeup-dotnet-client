@@ -58,7 +58,7 @@ namespace BadgeUp.Tests
 			var client = new BadgeUpClient(this.API_KEY);
 
 			// Create a new criterion
-			var result = await client.Criterion.CreateCriterion(new Criterion()
+			var result = await client.Criterion.Create(new Criterion()
 			{
 				Name = "Test Criterion",
 				Description = "Test Criterion Description",
@@ -107,7 +107,7 @@ namespace BadgeUp.Tests
 			var client = new BadgeUpClient(this.API_KEY);
 
 			// Create a new criterion
-			var result = await client.Criterion.CreateCriterion(new Criterion()
+			var result = await client.Criterion.Create(new Criterion()
 			{
 				Name = "Test Criterion",
 				Description = "Test Criterion Description",
