@@ -25,91 +25,11 @@ namespace BadgeUp.Tests
 			var client = new BadgeUpClient(API_KEY);
 			string subject = RandomSubject();
 			string key = "test";
-			Event @event = new Event(subject, key, new Modifier {Inc = 5});
-
-			EventResponse result = await client.Event.Send(@event);
-
-			// sanity check inputs
-			Assert.Equal(key, result.Event.Key);
-			Assert.Equal(subject, result.Event.Subject);
-			Assert.Equal(5, result.Event.Modifier.Inc);
-
-			// expect the achievemnt to be earned
-			Assert.Single(result.Progress);
-			Assert.True(result.Progress[0].IsComplete);
-			Assert.True(result.Progress[0].IsNew);
-			Assert.Equal(1, result.Progress[0].PercentComplete);
-
-			foreach (var prog in result.Progress)
-			{
-				if (prog.IsComplete && prog.IsNew)
-				{
-					string earnedAchievementId = prog.EarnedAchievementId;
-					string achievementId = prog.AchievementId;
-					System.Console.WriteLine($"Achievement with ID {prog.AchievementId} Earned!");
-
-					// from here you can use AchievementId and EarnedAchievementId to get the original achievement and awards objects
-					var earnedAchievement = await client.EarnedAchievement.GetById(earnedAchievementId);
-					var achievement = await client.Achievement.GetById(achievementId);
-
-					// get associated award information
-					foreach (var awardId in achievement.Awards)
-					{
-						var award = await client.Award.GetById(awardId);
-						int points = award.Data["points"].ToObject<int>();
-						System.Console.WriteLine($"Points awarded: {points}");
-					}
-
-					//get associated criteria
-					foreach (var criterion in prog.ProgressTree.Criteria)
-					{
-						var criterionRespone = await client.Criterion.GetById(criterion.Key);
-						Assert.Equal(criterion.Key, criterionRespone.Id);
-					}
-				}
-
-				var allProgressRecords = await client.Progress.GetProgress(subject);
-				var retrievedProg = allProgressRecords.First(x => x.AchievementId == prog.AchievementId);
-				Assert.Equal(retrievedProg.EarnedAchievementId, prog.EarnedAchievementId);
-
-			}
-
-
-			var apiKey = ApiKey.Create(API_KEY);
-			var metric = await client.Metric.GetIndividualBySubject(@event.Subject, key);
-
-			Assert.Equal(apiKey.ApplicationId, metric.ApplicationId);
-			Assert.Equal(@event.Key, metric.Key);
-			Assert.Equal(@event.Subject, metric.Subject);
-			Assert.True(metric.Value >= @event.Modifier.Inc);
-
-			// var progress = result.Progress[0];
-
-			// var earnedAchievement = await client.EarnedAchievement.GetById(progress.EarnedAchievementId);
-			// Assert.Equal(progress.EarnedAchievementId, earnedAchievement.Id);
-
-			// var achievement = await client.Achievement.GetById(result.Progress[0].AchievementId);
-			// Assert.Equal(progress.AchievementId, achievement.Id);
-
-			// var award = await client.Award.GetById(achievement.Awards[0]);
-			// Assert.Equal(achievement.Awards[0], award.Id);
-			// Assert.NotNull(award.Data);
-			// Assert.Equal(5, award.Data["points"]);
-		}
-
-		[SkippableFact]
-		public async void BasicIntegration_SendEvent_V2Preview()
-		{
-			if (string.IsNullOrEmpty(API_KEY))
-				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
-
-			var client = new BadgeUpClient(API_KEY);
-			string subject = RandomSubject();
-			string key = "test";
 			Event @event = new Event(subject, key, new Modifier { Inc = 5 });
 
-			var result = await client.Event.SendV2Preview(@event);
+			var result = await client.Event.Send(@event);
 
+			// TODO: Expand this test with code from V1 event tests.
 
 			// sanity check inputs
 			Assert.True(result.Results.Count > 0);
