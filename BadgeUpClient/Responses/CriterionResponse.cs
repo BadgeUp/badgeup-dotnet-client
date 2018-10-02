@@ -13,25 +13,4 @@ namespace BadgeUp.Responses
 		public Meta Meta { get; set; }
 		public CriterionEvaluation Evaluation { get; set; }
 	}
-
-	public class CriterionEvaluation
-	{
-		public string Type { get; set; }
-		public CriterionOperator Operator { get; set; }
-		public int Threshold { get; set; }
-	}
-
-	public enum CriterionOperator
-	{
-		[EnumMember(Value = "@gt")]
-		Greater,
-		[EnumMember(Value = "@gte")]
-		GreaterOrEqual,
-		[EnumMember(Value = "@lt")]
-		Less,
-		[EnumMember(Value = "@lte")]
-		LessOrEqual,
-		[EnumMember(Value = "@eq")]
-		Equal
-	}
 }

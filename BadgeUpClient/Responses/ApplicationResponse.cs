@@ -10,9 +10,4 @@ namespace BadgeUp.Responses
 		public string Description { get; set; }
 		public ApplicationMeta Meta { get; set; }
 	}
-
-	public class ApplicationMeta : Meta
-	{
-		public bool Demo { get; set; }
-	}
 }
