@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using BadgeUp.Requests;
 using BadgeUp.Responses;
 using BadgeUp.Types;
 using Newtonsoft.Json.Linq;
@@ -276,10 +277,10 @@ namespace BadgeUp.Tests
 		[Fact]
 		public void Serialization_EarnedAwardStateSerialize()
 		{
-			Assert.Equal("\"created\"", Json.Serialize(EarnedAwardState.Created));
-			Assert.Equal("\"approved\"", Json.Serialize(EarnedAwardState.Approved));
-			Assert.Equal("\"rejected\"", Json.Serialize(EarnedAwardState.Rejected));
-			Assert.Equal("\"redeemed\"", Json.Serialize(EarnedAwardState.Redeemed));
+			Assert.Equal("\"CREATED\"", Json.Serialize(EarnedAwardState.Created));
+			Assert.Equal("\"APPROVED\"", Json.Serialize(EarnedAwardState.Approved));
+			Assert.Equal("\"REJECTED\"", Json.Serialize(EarnedAwardState.Rejected));
+			Assert.Equal("\"REDEEMED\"", Json.Serialize(EarnedAwardState.Redeemed));
 		}
 
 		[Fact]
@@ -295,6 +296,18 @@ namespace BadgeUp.Tests
 			Assert.Equal("100", award.Subject);
 			Assert.Equal(EarnedAwardState.Approved, award.State);
 			Assert.Equal(new DateTime(2016, 09, 02, 04, 24, 41, 91, DateTimeKind.Utc), award.Meta.Created);
+		}
+	}
+
+	public class EarnedAwardRequestSerializationTest
+	{
+		[Fact]
+		public void Serialization_EarnedAwardRequestSerialize()
+		{
+			Assert.Equal("{\"state\":\"CREATED\"}", new EarnedAwardRequest(EarnedAwardState.Created).ToJson());
+			Assert.Equal("{\"state\":\"APPROVED\"}", new EarnedAwardRequest(EarnedAwardState.Approved).ToJson());
+			Assert.Equal("{\"state\":\"REJECTED\"}", new EarnedAwardRequest(EarnedAwardState.Rejected).ToJson());
+			Assert.Equal("{\"state\":\"REDEEMED\"}", new EarnedAwardRequest(EarnedAwardState.Redeemed).ToJson());
 		}
 	}
 
