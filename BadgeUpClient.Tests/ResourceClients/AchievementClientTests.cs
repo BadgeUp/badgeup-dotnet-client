@@ -44,7 +44,7 @@ namespace BadgeUp.Tests
 			}".Replace("'", "\"");
 
 			// setup the response action
-			var url = $"{Host}/v1/apps/{apiKey.ApplicationId}/achievements";
+			var url = $"{Host}/v2/apps/{apiKey.ApplicationId}/achievements";
 			var mockHttp = new MockHttpMessageHandler();
 			var expectedRequest = mockHttp.Expect(HttpMethod.Post, url).Respond("application/json", responseJson);
 			mockHttp.Fallback.Throw(new InvalidOperationException("No matching mock handler"));
