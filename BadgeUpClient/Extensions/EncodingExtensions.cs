@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace BadgeUpClient.Encoding
+namespace BadgeUp.Extensions
 {
 	/// <summary>
 	/// Represents a common helper class to encode strings like URI params.

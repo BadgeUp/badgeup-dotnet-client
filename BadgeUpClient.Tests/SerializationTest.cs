@@ -186,7 +186,7 @@ namespace BadgeUp.Tests
 			Assert.Equal( new string[] { "ciqjx77kw2684513jlb0p5l51" }, achievement.Awards );
 
 			// meta
-			Assert.Equal( System.DateTimeOffset.Parse("2016-08-07T01:18:19.061Z"), achievement.Meta.Created );
+			Assert.Equal( System.DateTimeOffset.Parse("2016-08-07T01:18:19.061Z"), achievement.Meta.Created.Value );
 			Assert.Equal( "https://example.com/image", achievement.Meta.Icon );
 
 			// meta custom fields
@@ -330,7 +330,7 @@ namespace BadgeUp.Tests
 			Assert.Equal("3eknqblf51", account.Id);
 			Assert.Equal(@"Account name with sybmols !@#$%^&*()_+", account.Name);
 			Assert.Equal("Account description content", account.Description);
-			Assert.Equal(DateTimeOffset.Parse("2017-11-19T20:08:33.48"), account.Meta.Created);
+			Assert.Equal(DateTimeOffset.Parse("2017-11-19T20:08:33.48"), account.Meta.Created.Value);
 
 			// meta custom fields
 			Assert.Equal("DAEA9D61-1297-41E2-9F14-E41B67C3EEF2", account.Meta.GetCustomField<string>("custom account id"));
@@ -378,7 +378,7 @@ namespace BadgeUp.Tests
 			Assert.Equal("3eknqblf51", application.AccountId);
 			Assert.Equal("vagabond volcano", application.Name);
 			Assert.Equal("Application description content", application.Description);
-			Assert.Equal(DateTimeOffset.Parse("2017-11-19T20:08:59.62"), application.Meta.Created);
+			Assert.Equal(DateTimeOffset.Parse("2017-11-19T20:08:59.62"), application.Meta.Created.Value);
 
 			// meta custom fields
 			Assert.Equal("my app 1!2@3#4$5%", application.Meta.GetCustomField<string>("custom application string"));
@@ -444,11 +444,11 @@ namespace BadgeUp.Tests
 			Assert.Equal("criterion description", criterion.Description);
 			Assert.Equal("key content", criterion.Key);
 
-			Assert.Equal("standard", criterion.Evaluation.Type);
+			Assert.Equal(CriterionEvaluationType.Standard, criterion.Evaluation.Type);
 			Assert.Equal(CriterionOperator.GreaterOrEqual, criterion.Evaluation.Operator);
 			Assert.Equal(5, criterion.Evaluation.Threshold);
 
-			Assert.Equal(DateTimeOffset.Parse("2017-12-10T10:01:08.55"), criterion.Meta.Created);
+			Assert.Equal(DateTimeOffset.Parse("2017-12-10T10:01:08.55"), criterion.Meta.Created.Value);
 
 			// meta custom fields
 			Assert.Equal("is the criterion working?", criterion.Meta.GetCustomField<string>("custom criterion"));
