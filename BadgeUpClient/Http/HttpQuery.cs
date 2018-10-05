@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using BadgeUp.ResourceClients;
-using BadgeUpClient.Encoding;
+using BadgeUp.Extensions;
 
 namespace BadgeUp.Http
 {

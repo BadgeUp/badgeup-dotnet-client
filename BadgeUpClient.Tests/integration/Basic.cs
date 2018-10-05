@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using BadgeUp.Responses;
 using BadgeUp.Types;
-using BadgeUp.ResourceClients;
 using Xunit;
 
 namespace BadgeUp.Tests
@@ -10,7 +9,7 @@ namespace BadgeUp.Tests
 	public class BasicIntegration
 	{
 		// get a real API Key for integration testing
-		string API_KEY = System.Environment.GetEnvironmentVariable("INTEGRATION_API_KEY");
+		string API_KEY = IntegrationApiKey.Get();
 
 		string RandomSubject() {
 			return "dotnet-ci-" + Guid.NewGuid().ToString("N");
@@ -92,6 +91,19 @@ namespace BadgeUp.Tests
 			//there should be more then 50 metrics created, for the default page size of API is 50 elements, and we want to check multiple page retrieval
 			var metrics = await client.Metric.GetAll();
 			Assert.True(metrics.Count > 50);
+		}
+
+		[SkippableFact]
+		public async void BasicIntegration_GetAllCriteria()
+		{
+			if (string.IsNullOrEmpty(API_KEY))
+				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
+
+			var client = new BadgeUpClient(API_KEY);
+
+			// TODO: Test multiple page retrieval for criteria
+			var criteria = await client.Criterion.GetAll();
+			Assert.NotEmpty(criteria);
 		}
 
 		[SkippableFact]
