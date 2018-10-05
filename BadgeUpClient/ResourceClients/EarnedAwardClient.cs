@@ -53,8 +53,13 @@ namespace BadgeUp.ResourceClients
 			var request = new EarnedAwardRequest(state);
 			var result = await this.m_httpClient.Post<EarnedAwardResponse>(request, ENDPOINT + "/" + id + "/state");
 
-			// Return null on purpose. This REST endpoint returns an empty JSON object ( {} ).
-			return null;
+			// Return null when the REST endpoint returns an empty JSON object ( {} ).
+			if(string.IsNullOrEmpty(result?.Id))
+			{
+				return null;
+			}
+
+			return result;
 		}
 	}
 }
