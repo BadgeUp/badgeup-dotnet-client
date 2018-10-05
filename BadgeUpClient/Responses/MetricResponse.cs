@@ -8,5 +8,4 @@ namespace BadgeUp.Responses
 		public string Subject { get; set; }
 		public int Value { get; set; }
 	}
-
 }

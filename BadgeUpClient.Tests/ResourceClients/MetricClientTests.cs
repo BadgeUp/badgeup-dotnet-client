@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BadgeUp.Http;
@@ -9,6 +10,13 @@ namespace BadgeUp.Tests
 {
 	public class MetricClientTests
 	{
+		[Fact]
+		public async Task WhenMetricIsNull_CreateThrowsException()
+		{
+			var client = new MetricClient(null);
+			await Assert.ThrowsAsync<ArgumentNullException>(() => client.Create(null));
+		}
+
 		[Fact]
 		public async Task WhenSubjectAndKeyContainRestrictedCharacters_GetIndividualBySubject_UrlEncodesRestrictedCharacters()
 		{
