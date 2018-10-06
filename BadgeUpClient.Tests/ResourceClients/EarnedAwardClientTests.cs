@@ -235,7 +235,18 @@ namespace BadgeUp.Tests
 
 			var apiKey = BadgeUp.ApiKey.Create(ApiKey);
 
-			var responseJson = "{}";
+			var responseJson = @"{
+				'id': 'cjktcmn5o635wmyd0w4ps',
+				'applicationId': 'g6jtshln48',
+				'achievementId': 'cjktccaf8rsfdia9ea565npch',
+				'earnedAchievementId': 'cjktcmngk629ssk6jufko',
+				'awardId': 'cjktceks5dxfy1n8e04bcnl1g',
+				'subject': 'subject-2',
+				'state': 'redeemed',
+				'meta': {
+					'created': '2016-07-14T06:51:35.844Z'
+				}
+			}".Replace("'","\"");
 
 			// setup the response action
 			var url = $"{Host}/v2/apps/{apiKey.ApplicationId}/earnedawards/cjktcmn5o635wmyd0w4ps/state";
@@ -255,7 +266,15 @@ namespace BadgeUp.Tests
 				mockHttp.VerifyNoOutstandingExpectation();
 
 				// assert result was parsed correctly
-				Assert.Null(result);
+				Assert.NotNull(result);
+				Assert.Equal("cjktcmn5o635wmyd0w4ps", result.Id);
+				Assert.Equal("g6jtshln48", result.ApplicationId);
+				Assert.Equal("cjktccaf8rsfdia9ea565npch", result.AchievementId);
+				Assert.Equal("cjktcmngk629ssk6jufko", result.EarnedAchievementId);
+				Assert.Equal("cjktceks5dxfy1n8e04bcnl1g", result.AwardId);
+				Assert.Equal("subject-2", result.Subject);
+				Assert.Equal(EarnedAwardState.Redeemed, result.State);
+				Assert.Equal(new DateTime(2016, 07, 14, 06, 51, 35, 844), result.Meta.Created);
 			}
 		}
 	}
