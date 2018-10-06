@@ -13,6 +13,11 @@ namespace BadgeUp.Tests
 	{
 		private readonly string API_KEY = IntegrationApiKey.Get();
 
+		private string RandomSubject()
+		{
+			return "dotnet-ci-" + Guid.NewGuid().ToString("N");
+		}
+
 		[SkippableFact]
 		public async Task MetricsIntegration_GetAll()
 		{
@@ -97,19 +102,19 @@ namespace BadgeUp.Tests
 				throw new SkipException("Tests skipped on environments without API_KEY variable configured");
 
 			var client = new BadgeUpClient(this.API_KEY);
-
+			var subject = this.RandomSubject();
 			// Create a new metric
 			var result = await client.Metric.Create(new Metric()
 			{
 				Key = "test:metric",
-				Subject = "randomsubject",
+				Subject = subject,
 				Value = 5
 			});
 
 			// Verify the metric has been created with the same parameters
 			Assert.NotNull(result);
 			Assert.Equal("test:metric", result.Key);
-			Assert.Equal("randomsubject", result.Subject);
+			Assert.Equal(subject, result.Subject);
 			Assert.Equal(5, result.Value);
 
 			// Verify we can get the metric by id.
@@ -117,7 +122,7 @@ namespace BadgeUp.Tests
 			Assert.NotNull(metric);
 
 			Assert.Equal("test:metric", metric.Key);
-			Assert.Equal("randomsubject", metric.Subject);
+			Assert.Equal(subject, metric.Subject);
 			Assert.Equal(5, metric.Value);
 
 			// TODO: Delete the metric
