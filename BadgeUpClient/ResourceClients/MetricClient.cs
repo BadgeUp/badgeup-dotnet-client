@@ -46,8 +46,7 @@ namespace BadgeUp.ResourceClients
 		/// <returns></returns>
 		public async Task<List<MetricResponse>> GetAllBySubject(string subjectId)
 		{
-			var result = await this.m_httpClient.GetAll<MetricResponse>(ENDPOINT + "/" + subjectId);
-			return result;
+			return await this.m_httpClient.GetAll<MetricResponse>(ENDPOINT + "/" + subjectId.UrlEncode());
 		}
 
 		/// <summary>
@@ -66,7 +65,7 @@ namespace BadgeUp.ResourceClients
 
 			var request = new MetricRequest(metric);
 
-			return await this.m_httpClient.Post<MetricResponse>(request, ENDPOINT + "/" + metric.Subject);
+			return await this.m_httpClient.Post<MetricResponse>(request, ENDPOINT + "/" + metric.Subject.UrlEncode());
 		}
 	}
 }
