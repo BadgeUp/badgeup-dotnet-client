@@ -1,13 +1,16 @@
+using BadgeUp.Http;
+using BadgeUp.Requests;
+using BadgeUp.Responses;
+using BadgeUp.Types;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BadgeUp.Http;
-using BadgeUp.Responses;
 
 namespace BadgeUp.ResourceClients
 {
 	public class AwardClient
 	{
-		const string ENDPOINT = "awards";
+		private const string ENDPOINT = "awards";
 		protected BadgeUpHttpClient m_httpClient;
 
 		public AwardClient(BadgeUpHttpClient httpClient)
@@ -32,6 +35,21 @@ namespace BadgeUp.ResourceClients
 		public async Task<List<AwardResponse>> GetAll()
 		{
 			return await this.m_httpClient.GetAll<AwardResponse>(ENDPOINT);
+		}
+
+		/// <summary>
+		/// Retrieves a list of all awards.
+		/// </summary>
+		/// <returns></returns>
+		public async Task<AwardResponse> Create(Award award)
+		{
+			if (award == null)
+			{
+				throw new ArgumentNullException(nameof(award));
+			}
+
+			var request = new AwardRequest(award);
+			return await this.m_httpClient.Post<AwardResponse>(request, ENDPOINT);
 		}
 	}
 }
