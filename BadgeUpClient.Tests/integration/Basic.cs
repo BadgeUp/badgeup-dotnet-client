@@ -234,7 +234,15 @@ namespace BadgeUp.Tests
 			// The same earned award should be returned
 			Assert.NotNull(earnedAward);
 
-			// TODO: Verify that all the fields of both awards are the same.
+			// Verify that all the fields of both awards are the same.
+			Assert.Equal(firstEarnedAward.AchievementId, earnedAward.AchievementId);
+			Assert.Equal(firstEarnedAward.ApplicationId, earnedAward.ApplicationId);
+			Assert.Equal(firstEarnedAward.AwardId, earnedAward.AwardId);
+			Assert.Equal(firstEarnedAward.EarnedAchievementId, earnedAward.EarnedAchievementId);
+			Assert.Equal(firstEarnedAward.Id, earnedAward.Id);
+			Assert.Equal(firstEarnedAward.Meta.Created, earnedAward.Meta.Created);
+			Assert.Equal(firstEarnedAward.State, earnedAward.State);
+			Assert.Equal(firstEarnedAward.Subject, earnedAward.Subject);
 		}
 	}
 }

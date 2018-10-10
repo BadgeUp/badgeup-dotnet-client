@@ -1,4 +1,4 @@
-﻿namespace BadgeUp.Types
+namespace BadgeUp.Types
 {
 	public enum EarnedAwardState
 	{

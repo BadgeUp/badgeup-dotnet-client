@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using BadgeUp.Requests;
 using BadgeUp.Responses;
 using BadgeUp.Types;
 using Newtonsoft.Json.Linq;
@@ -295,6 +296,18 @@ namespace BadgeUp.Tests
 			Assert.Equal("100", award.Subject);
 			Assert.Equal(EarnedAwardState.Approved, award.State);
 			Assert.Equal(new DateTime(2016, 09, 02, 04, 24, 41, 91, DateTimeKind.Utc), award.Meta.Created);
+		}
+	}
+
+	public class EarnedAwardRequestSerializationTest
+	{
+		[Fact]
+		public void Serialization_EarnedAwardRequestSerialize()
+		{
+			Assert.Equal("{\"state\":\"created\"}", new EarnedAwardRequest(EarnedAwardState.Created).ToJson());
+			Assert.Equal("{\"state\":\"approved\"}", new EarnedAwardRequest(EarnedAwardState.Approved).ToJson());
+			Assert.Equal("{\"state\":\"rejected\"}", new EarnedAwardRequest(EarnedAwardState.Rejected).ToJson());
+			Assert.Equal("{\"state\":\"redeemed\"}", new EarnedAwardRequest(EarnedAwardState.Redeemed).ToJson());
 		}
 	}
 

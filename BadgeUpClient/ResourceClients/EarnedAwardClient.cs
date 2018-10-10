@@ -1,8 +1,8 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using BadgeUp.Http;
+using BadgeUp.Requests;
 using BadgeUp.Responses;
 using BadgeUp.Types;
 
@@ -10,7 +10,7 @@ namespace BadgeUp.ResourceClients
 {
 	public class EarnedAwardClient
 	{
-		const string ENDPOINT = "earnedawards";
+		private const string ENDPOINT = "earnedawards";
 		protected BadgeUpHttpClient m_httpClient;
 
 		public EarnedAwardClient(BadgeUpHttpClient httpClient)
@@ -36,6 +36,30 @@ namespace BadgeUp.ResourceClients
 		public async Task<List<EarnedAwardResponse>> GetAll(EarnedAwardQueryParams param = null)
 		{
 			return await this.m_httpClient.GetAll<EarnedAwardResponse>(ENDPOINT, query: param?.ToQueryString());
+		}
+
+		public async Task<EarnedAwardResponse> ChangeState(string id, EarnedAwardState state)
+		{
+			if (id == null)
+			{
+				throw new ArgumentNullException(nameof(id));
+			}
+
+			if (state == EarnedAwardState.Created)
+			{
+				throw new ArgumentException("State must be one of [APPROVED, REJECTED, REDEEMED].");
+			}
+
+			var request = new EarnedAwardRequest(state);
+			var result = await this.m_httpClient.Post<EarnedAwardResponse>(request, ENDPOINT + "/" + id + "/state");
+
+			// Return null when the REST endpoint returns an empty JSON object ( {} ).
+			if(string.IsNullOrEmpty(result?.Id))
+			{
+				return null;
+			}
+
+			return result;
 		}
 	}
 }

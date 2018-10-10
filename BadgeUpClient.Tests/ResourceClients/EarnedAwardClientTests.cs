@@ -213,5 +213,69 @@ namespace BadgeUp.Tests
 				Assert.Equal(new DateTime(2016, 07, 12, 06, 51, 35, 453, DateTimeKind.Utc), result[0].Meta.Created);
 			}
 		}
+
+		[Fact]
+		public async Task WhenStateIsCreated_ChangeState_ThrowsArgumentException()
+		{
+			var client = new EarnedAwardClient(null);
+			await Assert.ThrowsAsync<ArgumentException>(() => client.ChangeState("cjktcmn5o635wmyd0w4ps", EarnedAwardState.Created));
+		}
+
+		[Fact]
+		public async Task WhenIdIsNull_ChangeState_ThrowsArgumentNullException()
+		{
+			var client = new EarnedAwardClient(null);
+			await Assert.ThrowsAsync<ArgumentNullException>(() => client.ChangeState(null, EarnedAwardState.Approved));
+		}
+
+		[Fact]
+		public async Task WhenSetupWithResponseData_ChangeState_CallsUrlOnceAndReturnsCorrectResult()
+		{
+			Assert.False(string.IsNullOrEmpty(EarnedAwardClientTests.ApiKey));
+
+			var apiKey = BadgeUp.ApiKey.Create(ApiKey);
+
+			var responseJson = @"{
+				'id': 'cjktcmn5o635wmyd0w4ps',
+				'applicationId': 'g6jtshln48',
+				'achievementId': 'cjktccaf8rsfdia9ea565npch',
+				'earnedAchievementId': 'cjktcmngk629ssk6jufko',
+				'awardId': 'cjktceks5dxfy1n8e04bcnl1g',
+				'subject': 'subject-2',
+				'state': 'redeemed',
+				'meta': {
+					'created': '2016-07-14T06:51:35.844Z'
+				}
+			}".Replace("'","\"");
+
+			// setup the response action
+			var url = $"{Host}/v2/apps/{apiKey.ApplicationId}/earnedawards/cjktcmn5o635wmyd0w4ps/state";
+			var mockHttp = new MockHttpMessageHandler();
+			var expectedRequest = mockHttp.Expect(HttpMethod.Post, url).Respond("application/json", responseJson);
+			mockHttp.Fallback.Throw(new InvalidOperationException("No matching mock handler"));
+
+			using (var badgeUpHttpClient = new BadgeUpHttpClient(apiKey, Host))
+			{
+				badgeUpHttpClient._SetHttpClient(mockHttp.ToHttpClient());
+				var client = new EarnedAwardClient(badgeUpHttpClient);
+
+				// act
+				var result = await client.ChangeState("cjktcmn5o635wmyd0w4ps", EarnedAwardState.Redeemed);
+
+				// assert url was called only once
+				mockHttp.VerifyNoOutstandingExpectation();
+
+				// assert result was parsed correctly
+				Assert.NotNull(result);
+				Assert.Equal("cjktcmn5o635wmyd0w4ps", result.Id);
+				Assert.Equal("g6jtshln48", result.ApplicationId);
+				Assert.Equal("cjktccaf8rsfdia9ea565npch", result.AchievementId);
+				Assert.Equal("cjktcmngk629ssk6jufko", result.EarnedAchievementId);
+				Assert.Equal("cjktceks5dxfy1n8e04bcnl1g", result.AwardId);
+				Assert.Equal("subject-2", result.Subject);
+				Assert.Equal(EarnedAwardState.Redeemed, result.State);
+				Assert.Equal(new DateTime(2016, 07, 14, 06, 51, 35, 844), result.Meta.Created);
+			}
+		}
 	}
 }
