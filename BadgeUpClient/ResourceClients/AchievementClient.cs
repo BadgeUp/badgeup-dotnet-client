@@ -53,5 +53,24 @@ namespace BadgeUp.ResourceClients
 		{
 			return await this.m_httpClient.GetAll<AchievementResponse>(ENDPOINT);
 		}
+
+		/// <summary>
+		/// Retrieves a list of criteria associated with an achievement.
+		/// </summary>
+		/// <param name="achievementId">Unique achievement ID.</param>
+		/// <returns></returns>
+		public async Task<List<CriterionResponse>> GetAchievementCriteria(string achievementId)
+		{
+			return await this.m_httpClient.GetAll<CriterionResponse>(ENDPOINT + "/" + achievementId + "/criteria");
+		}
+		/// <summary>
+		/// Retrieves a list of awards associated with an achievement.
+		/// </summary>
+		/// <param name="achievementId">Unique achievement ID.</param>
+		/// <returns></returns>
+		public async Task<List<AwardResponse>> GetAchievementAwards(string achievementId)
+		{
+			return await this.m_httpClient.GetAll<AwardResponse>(ENDPOINT + "/" + achievementId + "/awards");
+		}
 	}
 }
