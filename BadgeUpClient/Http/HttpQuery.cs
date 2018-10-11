@@ -1,13 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using BadgeUp.ResourceClients;
 using BadgeUp.Extensions;
 
 namespace BadgeUp.Http
 {
-	public class HttpQuery
+	internal class HttpQuery
 	{
 		List<KeyValuePair<string, string>> m_values = new List<KeyValuePair<string, string>>();
 
