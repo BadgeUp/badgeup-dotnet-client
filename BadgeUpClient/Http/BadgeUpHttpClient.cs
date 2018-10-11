@@ -120,7 +120,7 @@ namespace BadgeUp.Http
 		}
 
 		// for test purposes only
-		internal void _SetHttpClient(HttpClient h)
+		internal void SetHttpClient(HttpClient h)
 		{
 			this.m_httpClient = h;
 		}

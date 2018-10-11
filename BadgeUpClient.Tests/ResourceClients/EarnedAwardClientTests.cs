@@ -43,7 +43,7 @@ namespace BadgeUp.Tests
 
 			using (var badgeUpHttpClient = new BadgeUpHttpClient(apiKey, Host))
 			{
-				badgeUpHttpClient._SetHttpClient(mockHttp.ToHttpClient());
+				badgeUpHttpClient.SetHttpClient(mockHttp.ToHttpClient());
 				var client = new EarnedAwardClient(badgeUpHttpClient);
 
 				// act
@@ -126,7 +126,7 @@ namespace BadgeUp.Tests
 
 			using (var badgeUpHttpClient = new BadgeUpHttpClient(apiKey, Host))
 			{
-				badgeUpHttpClient._SetHttpClient(mockHttp.ToHttpClient());
+				badgeUpHttpClient.SetHttpClient(mockHttp.ToHttpClient());
 				var client = new EarnedAwardClient(badgeUpHttpClient);
 
 				// act
@@ -188,7 +188,7 @@ namespace BadgeUp.Tests
 
 			using (var badgeUpHttpClient = new BadgeUpHttpClient(apiKey, Host))
 			{
-				badgeUpHttpClient._SetHttpClient(mockHttp.ToHttpClient());
+				badgeUpHttpClient.SetHttpClient(mockHttp.ToHttpClient());
 				var client = new EarnedAwardClient(badgeUpHttpClient);
 
 				// act
@@ -256,7 +256,7 @@ namespace BadgeUp.Tests
 
 			using (var badgeUpHttpClient = new BadgeUpHttpClient(apiKey, Host))
 			{
-				badgeUpHttpClient._SetHttpClient(mockHttp.ToHttpClient());
+				badgeUpHttpClient.SetHttpClient(mockHttp.ToHttpClient());
 				var client = new EarnedAwardClient(badgeUpHttpClient);
 
 				// act
