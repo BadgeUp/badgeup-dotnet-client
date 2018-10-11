@@ -18,9 +18,9 @@ namespace BadgeUp.ResourceClients
 		/// Retrieves all uploaded achievement icons
 		/// </summary>
 		/// <returns><see cref="AchievementIconResponse"/></returns>
-		public async Task<AchievementIconResponse[]> GetAll()
+		public Task<AchievementIconResponse[]> GetAll()
 		{
-			return await this.m_httpClient.Get<AchievementIconResponse[]>(ENDPOINT);
+			return this.m_httpClient.Get<AchievementIconResponse[]>(ENDPOINT);
 		}
 	}
 }

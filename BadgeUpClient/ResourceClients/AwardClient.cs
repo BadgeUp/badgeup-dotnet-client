@@ -23,25 +23,25 @@ namespace BadgeUp.ResourceClients
 		/// </summary>
 		/// <param name="id">A string that uniquely identifies this award</param>
 		/// <returns><see cref="AwardResponse"/></returns>
-		public async Task<AwardResponse> GetById(string id)
+		public Task<AwardResponse> GetById(string id)
 		{
-			return await this.m_httpClient.Get<AwardResponse>(ENDPOINT + "/" + id);
+			return this.m_httpClient.Get<AwardResponse>(ENDPOINT + "/" + id);
 		}
 
 		/// <summary>
 		/// Retrieves a list of all awards.
 		/// </summary>
 		/// <returns></returns>
-		public async Task<List<AwardResponse>> GetAll()
+		public Task<List<AwardResponse>> GetAll()
 		{
-			return await this.m_httpClient.GetAll<AwardResponse>(ENDPOINT);
+			return this.m_httpClient.GetAll<AwardResponse>(ENDPOINT);
 		}
 
 		/// <summary>
 		/// Retrieves a list of all awards.
 		/// </summary>
 		/// <returns></returns>
-		public async Task<AwardResponse> Create(Award award)
+		public Task<AwardResponse> Create(Award award)
 		{
 			if (award == null)
 			{
@@ -49,7 +49,7 @@ namespace BadgeUp.ResourceClients
 			}
 
 			var request = new AwardRequest(award);
-			return await this.m_httpClient.Post<AwardResponse>(request, ENDPOINT);
+			return this.m_httpClient.Post<AwardResponse>(request, ENDPOINT);
 		}
 	}
 }

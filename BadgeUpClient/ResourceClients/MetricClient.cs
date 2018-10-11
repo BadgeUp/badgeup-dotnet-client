@@ -25,18 +25,18 @@ namespace BadgeUp.ResourceClients
 		/// <param name="subjectId">Unique subject the metrics is associated with</param>
 		/// <param name="key">Unique metric key the subject's metric is associated with</param>
 		/// <returns><see cref="MetricResponse"/></returns>
-		public async Task<MetricResponse> GetIndividualBySubject(string subjectId, string key)
+		public Task<MetricResponse> GetIndividualBySubject(string subjectId, string key)
 		{
-			return await this.m_httpClient.Get<MetricResponse>(ENDPOINT + "/" + subjectId.UrlEncode() + "/" + key.UrlEncode());
+			return this.m_httpClient.Get<MetricResponse>(ENDPOINT + "/" + subjectId.UrlEncode() + "/" + key.UrlEncode());
 		}
 
 		/// <summary>
 		/// Retrieves a list of all metrics.
 		/// </summary>
 		/// <returns></returns>
-		public async Task<List<MetricResponse>> GetAll()
+		public Task<List<MetricResponse>> GetAll()
 		{
-			return await this.m_httpClient.GetAll<MetricResponse>(ENDPOINT);
+			return this.m_httpClient.GetAll<MetricResponse>(ENDPOINT);
 		}
 
 		/// <summary>
@@ -44,9 +44,9 @@ namespace BadgeUp.ResourceClients
 		/// </summary>
 		/// <param name="subjectId">Unique subject the metrics is associated with.</param>
 		/// <returns></returns>
-		public async Task<List<MetricResponse>> GetAllBySubject(string subjectId)
+		public Task<List<MetricResponse>> GetAllBySubject(string subjectId)
 		{
-			return await this.m_httpClient.GetAll<MetricResponse>(ENDPOINT + "/" + subjectId.UrlEncode());
+			return this.m_httpClient.GetAll<MetricResponse>(ENDPOINT + "/" + subjectId.UrlEncode());
 		}
 
 		/// <summary>
@@ -56,7 +56,7 @@ namespace BadgeUp.ResourceClients
 		/// <param name="subject">Identifies the subject this metric is for. This would commonly be a unique user identifier.</param>
 		/// <param name="value">Value of this metric.</param>
 		/// <returns></returns>
-		public async Task<MetricResponse> Create(Metric metric)
+		public Task<MetricResponse> Create(Metric metric)
 		{
 			if (metric == null)
 			{
@@ -65,7 +65,7 @@ namespace BadgeUp.ResourceClients
 
 			var request = new MetricRequest(metric);
 
-			return await this.m_httpClient.Post<MetricResponse>(request, ENDPOINT + "/" + metric.Subject.UrlEncode());
+			return this.m_httpClient.Post<MetricResponse>(request, ENDPOINT + "/" + metric.Subject.UrlEncode());
 		}
 	}
 }

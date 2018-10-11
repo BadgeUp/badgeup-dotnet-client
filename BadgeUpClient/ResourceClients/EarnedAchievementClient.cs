@@ -23,9 +23,9 @@ namespace BadgeUp.ResourceClients
 		/// </summary>
 		/// <param name="id">A string that uniquely identifies this achievement</param>
 		/// <returns><see cref="EarnedAchievementResponse"/></returns>
-		public async Task<EarnedAchievementResponse> GetById(string id)
+		public Task<EarnedAchievementResponse> GetById(string id)
 		{
-			return await this.m_httpClient.Get<EarnedAchievementResponse>(ENDPOINT + "/" + id);
+			return this.m_httpClient.Get<EarnedAchievementResponse>(ENDPOINT + "/" + id);
 		}
 
 		/// <summary>
@@ -33,10 +33,9 @@ namespace BadgeUp.ResourceClients
 		/// </summary>
 		/// <param name="param">Optional QueryParams object, to filter the earned achievements by AchievementId, Subject, Since and Until parameters </param>
 		/// <returns><see cref="EarnedAchievementResponse"/></returns>
-		public async Task<List<EarnedAchievementResponse>> GetAll(EarnedAchievementQueryParams param = null)
+		public Task<List<EarnedAchievementResponse>> GetAll(EarnedAchievementQueryParams param = null)
 		{
-			return await this.m_httpClient.GetAll<EarnedAchievementResponse>(ENDPOINT, query: param?.ToQueryString());
+			return this.m_httpClient.GetAll<EarnedAchievementResponse>(ENDPOINT, query: param?.ToQueryString());
 		}
-
 	}
 }

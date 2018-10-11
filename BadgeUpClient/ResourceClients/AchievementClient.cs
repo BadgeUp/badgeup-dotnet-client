@@ -23,9 +23,9 @@ namespace BadgeUp.ResourceClients
 		/// </summary>
 		/// <param name="id">A string that uniquely identifies this achievement</param>
 		/// <returns><see cref="AchievementResponse"/></returns>
-		public async Task<AchievementResponse> GetById(string id)
+		public Task<AchievementResponse> GetById(string id)
 		{
-			return await this.m_httpClient.Get<AchievementResponse>(ENDPOINT + "/" + id);
+			return this.m_httpClient.Get<AchievementResponse>(ENDPOINT + "/" + id);
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace BadgeUp.ResourceClients
 		/// </summary>
 		/// <param name="achievement">The achievement to create.</param>
 		/// <returns>The created achievement.</returns>
-		public async Task<AchievementResponse> Create(Achievement achievement)
+		public Task<AchievementResponse> Create(Achievement achievement)
 		{
 			if (achievement == null)
 			{
@@ -41,17 +41,16 @@ namespace BadgeUp.ResourceClients
 			}
 
 			var request = new AchievementRequest(achievement);
-			var result = await this.m_httpClient.Post<AchievementResponse>(request, ENDPOINT);
-			return result;
+			return this.m_httpClient.Post<AchievementResponse>(request, ENDPOINT);
 		}
 
 		/// <summary>
 		/// Retrieves a list of all achievements.
 		/// </summary>
 		/// <returns>The list of all achievements.</returns>
-		public async Task<List<AchievementResponse>> GetAll()
+		public Task<List<AchievementResponse>> GetAll()
 		{
-			return await this.m_httpClient.GetAll<AchievementResponse>(ENDPOINT);
+			return this.m_httpClient.GetAll<AchievementResponse>(ENDPOINT);
 		}
 
 		/// <summary>
@@ -59,18 +58,19 @@ namespace BadgeUp.ResourceClients
 		/// </summary>
 		/// <param name="achievementId">Unique achievement ID.</param>
 		/// <returns></returns>
-		public async Task<List<CriterionResponse>> GetAchievementCriteria(string achievementId)
+		public Task<List<CriterionResponse>> GetAchievementCriteria(string achievementId)
 		{
-			return await this.m_httpClient.GetAll<CriterionResponse>(ENDPOINT + "/" + achievementId + "/criteria");
+			return this.m_httpClient.GetAll<CriterionResponse>(ENDPOINT + "/" + achievementId + "/criteria");
 		}
+
 		/// <summary>
 		/// Retrieves a list of awards associated with an achievement.
 		/// </summary>
 		/// <param name="achievementId">Unique achievement ID.</param>
 		/// <returns></returns>
-		public async Task<List<AwardResponse>> GetAchievementAwards(string achievementId)
+		public Task<List<AwardResponse>> GetAchievementAwards(string achievementId)
 		{
-			return await this.m_httpClient.GetAll<AwardResponse>(ENDPOINT + "/" + achievementId + "/awards");
+			return this.m_httpClient.GetAll<AwardResponse>(ENDPOINT + "/" + achievementId + "/awards");
 		}
 	}
 }

@@ -23,18 +23,18 @@ namespace BadgeUp.ResourceClients
 		/// </summary>
 		/// <param name="id">A string that uniquely identifies this criterion</param>
 		/// <returns><see cref="CriterionResponse"/></returns>
-		public async Task<CriterionResponse> GetById(string id)
+		public Task<CriterionResponse> GetById(string id)
 		{
-			return await this.m_httpClient.Get<CriterionResponse>(ENDPOINT + "/" + id);
+			return this.m_httpClient.Get<CriterionResponse>(ENDPOINT + "/" + id);
 		}
 
 		/// <summary>
 		/// Retrieves a list of all criteria.
 		/// </summary>
 		/// <returns>The list of all criteria.</returns>
-		public async Task<List<CriterionResponse>> GetAll()
+		public Task<List<CriterionResponse>> GetAll()
 		{
-			return await this.m_httpClient.GetAll<CriterionResponse>(ENDPOINT);
+			return this.m_httpClient.GetAll<CriterionResponse>(ENDPOINT);
 		}
 
 		/// <summary>
@@ -42,7 +42,7 @@ namespace BadgeUp.ResourceClients
 		/// </summary>
 		/// <param name="criterion">The criterion to create.</param>
 		/// <returns>The created criterion.</returns>
-		public async Task<CriterionResponse> Create(Criterion criterion)
+		public Task<CriterionResponse> Create(Criterion criterion)
 		{
 			if (criterion == null)
 			{
@@ -50,8 +50,7 @@ namespace BadgeUp.ResourceClients
 			}
 
 			var request = new CriterionRequest(criterion);
-			var result = await this.m_httpClient.Post<CriterionResponse>(request, ENDPOINT);
-			return result;
+			return this.m_httpClient.Post<CriterionResponse>(request, ENDPOINT);
 		}
 	}
 }
