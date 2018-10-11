@@ -56,7 +56,7 @@ namespace BadgeUp.Tests
 				}".Replace("'", "\""));
 
 				// arrange
-				badgeUpClient._SetHttpClient(mockHttpHandler.ToHttpClient());
+				badgeUpClient.SetHttpClient(mockHttpHandler.ToHttpClient());
 				var client = new EventClient(badgeUpClient);
 
 				// act
@@ -109,7 +109,7 @@ namespace BadgeUp.Tests
 				}".Replace("'", "\""));
 
 				// arrange
-				badgeUpClient._SetHttpClient(mockHttpHandler.ToHttpClient());
+				badgeUpClient.SetHttpClient(mockHttpHandler.ToHttpClient());
 				var client = new EventClient(badgeUpClient);
 
 				// act

@@ -6,12 +6,12 @@ namespace BadgeUp
 	/// <summary>
 	/// BadgeUp Client
 	/// </summary>
-	public class BadgeUpClient : BadgeUpClientInterface, System.IDisposable
+	public class BadgeUpClient : System.IDisposable, IBadgeUpClient
 	{
-		const string DEFAULT_HOST = "https://api.useast1.badgeup.io";
-		protected string m_host;
-		protected ApiKey m_apiKey;
-		protected BadgeUpHttpClient m_httpClient;
+		private const string DEFAULT_HOST = "https://api.useast1.badgeup.io";
+		private string m_host;
+		private ApiKey m_apiKey;
+		private BadgeUpHttpClient m_httpClient;
 
 		// resource clients
 
@@ -19,57 +19,57 @@ namespace BadgeUp
 		/// <summary>
 		/// Interact with BadgeUp accounts
 		/// </summary>
-		public AccountClient Account;
+		public IAccountClient Account { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp achievements
 		/// </summary>
-		public AchievementClient Achievement;
+		public IAchievementClient Achievement { get; }
 		
 		/// <summary>
 		/// Interact with BadgeUp achievementIcons
 		/// </summary>
-		public AchievementIconClient AchievementIcon;
+		public IAchievementIconClient AchievementIcon { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp applications
 		/// </summary>
-		public ApplicationClient Application;
+		public IApplicationClient Application { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp awards
 		/// </summary>
-		public AwardClient Award;
+		public IAwardClient Award { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp criteria
 		/// </summary>
-		public CriterionClient Criterion;
+		public ICriterionClient Criterion { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp earned achievements
 		/// </summary>
-		public EarnedAchievementClient EarnedAchievement;
+		public IEarnedAchievementClient EarnedAchievement { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp earned awards
 		/// </summary>
-		public EarnedAwardClient EarnedAward;
+		public IEarnedAwardClient EarnedAward { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp events
 		/// </summary>
-		public EventClient Event;
+		public IEventClient Event { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp metrics
 		/// </summary>
-		public MetricClient Metric;
+		public IMetricClient Metric { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp progress
 		/// </summary>
-		public ProgressClient Progress;
+		public IProgressClient Progress { get; }
 
 		/// <summary>
 		/// Instantiate the BadgeUpClient, providing an instance of <see cref="ApiKey"/>
@@ -107,9 +107,9 @@ namespace BadgeUp
 		}
 
 		// for test purposes only
-		public void _SetHttpClient(System.Net.Http.HttpClient h)
+		internal void SetHttpClient(System.Net.Http.HttpClient h)
 		{
-			this.m_httpClient._SetHttpClient(h);
+			this.m_httpClient.SetHttpClient(h);
 		}
 
 		public void Dispose()

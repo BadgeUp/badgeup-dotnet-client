@@ -6,7 +6,7 @@ using BadgeUp.Responses;
 
 namespace BadgeUp.Http
 {
-	public class BadgeUpHttpClient : System.IDisposable
+	internal class BadgeUpHttpClient : System.IDisposable
 	{
 		protected string m_host;
 		protected ApiKey m_apiKey;
@@ -120,7 +120,7 @@ namespace BadgeUp.Http
 		}
 
 		// for test purposes only
-		public void _SetHttpClient(HttpClient h)
+		internal void SetHttpClient(HttpClient h)
 		{
 			this.m_httpClient = h;
 		}

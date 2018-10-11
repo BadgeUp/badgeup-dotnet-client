@@ -2,7 +2,7 @@ using BadgeUp.Types;
 
 namespace BadgeUp.Requests
 {
-	public class EventRequest : Request
+	internal class EventRequest : Request
 	{
 		public Event Event { get; set; }
 

@@ -1,6 +1,6 @@
 namespace BadgeUp
 {
-	public class Request
+	internal abstract class Request
 	{
 		public virtual string ToJson()
 		{

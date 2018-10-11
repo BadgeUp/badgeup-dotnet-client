@@ -2,7 +2,7 @@ using BadgeUp.Types;
 
 namespace BadgeUp.Requests
 {
-	public class AchievementRequest : Request
+	internal class AchievementRequest : Request
 	{
 		public AchievementRequest(Achievement achievement)
 		{

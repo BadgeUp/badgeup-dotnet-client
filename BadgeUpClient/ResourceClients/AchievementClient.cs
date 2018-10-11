@@ -8,7 +8,7 @@ using BadgeUp.Types;
 
 namespace BadgeUp.ResourceClients
 {
-	public class AchievementClient
+	internal class AchievementClient : IAchievementClient
 	{
 		private const string ENDPOINT = "achievements";
 		protected BadgeUpHttpClient m_httpClient;

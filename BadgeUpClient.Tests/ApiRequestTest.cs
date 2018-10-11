@@ -76,7 +76,7 @@ namespace BadgeUp.Tests
 			using (var client = new BadgeUpClient(ApiRequestTest.ApiKey ))
 			{
 
-				client._SetHttpClient(mockHttp.ToHttpClient());
+				client.SetHttpClient(mockHttp.ToHttpClient());
 
 				// create event and set properties
 				var e = new Types.Event("subject_foo", "eat:apple", new Types.Modifier { Inc = 1 });

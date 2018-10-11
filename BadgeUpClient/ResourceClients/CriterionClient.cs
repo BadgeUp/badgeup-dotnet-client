@@ -8,7 +8,7 @@ using BadgeUp.Types;
 
 namespace BadgeUp.ResourceClients
 {
-	public class CriterionClient
+	internal class CriterionClient : ICriterionClient
 	{
 		private const string ENDPOINT = "criteria";
 		protected BadgeUpHttpClient m_httpClient;

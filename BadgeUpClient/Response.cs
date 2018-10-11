@@ -1,6 +1,6 @@
 namespace BadgeUp
 {
-	public class Response
+	public abstract class Response
 	{
 	}
 }

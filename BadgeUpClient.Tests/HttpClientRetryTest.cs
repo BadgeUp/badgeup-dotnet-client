@@ -39,7 +39,7 @@ namespace BadgeUp.Tests
 
 			//Test
 			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.x.badgeup.io");
-			client._SetHttpClient(mockHttp.ToHttpClient());
+			client.SetHttpClient(mockHttp.ToHttpClient());
 			await client.Get<object>("");
 
 			mockHttp.VerifyNoOutstandingExpectation();
@@ -62,7 +62,7 @@ namespace BadgeUp.Tests
 
 			//Test
 			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.x.badgeup.io");
-			client._SetHttpClient(mockHttp.ToHttpClient());
+			client.SetHttpClient(mockHttp.ToHttpClient());
 
 			await Assert.ThrowsAsync<BadgeUpClientException>(async () => await client.Get<object>(""));
 			mockHttp.VerifyNoOutstandingExpectation();
@@ -89,7 +89,7 @@ namespace BadgeUp.Tests
 
 			//Test
 			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.x.badgeup.io");
-			client._SetHttpClient(mockHttp.ToHttpClient());
+			client.SetHttpClient(mockHttp.ToHttpClient());
 			await client.Post<object>(new EventRequest(new Event("subject","key")), "testEndpoint");
 
 			mockHttp.VerifyNoOutstandingExpectation();
@@ -112,7 +112,7 @@ namespace BadgeUp.Tests
 
 			//Test
 			var client = new BadgeUpHttpClient(ApiKey.Create(Key), "http://www.x.badgeup.io");
-			client._SetHttpClient(mockHttp.ToHttpClient());
+			client.SetHttpClient(mockHttp.ToHttpClient());
 
 			await Assert.ThrowsAsync<BadgeUpClientException>(async () => await client.Post<object>(new EventRequest(new Event("subject", "key")), "testEndpoint"));
 			mockHttp.VerifyNoOutstandingExpectation();

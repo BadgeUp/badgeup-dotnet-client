@@ -6,12 +6,12 @@ using BadgeUp.Responses;
 
 namespace BadgeUp.ResourceClients
 {
-	public class ProgressClient
+	internal class ProgressClient : IProgressClient
 	{
 		const string ENDPOINT = "progress";
 		protected BadgeUpHttpClient m_httpClient;
 
-		public ProgressClient(BadgeUpHttpClient httpClient)
+		internal ProgressClient(BadgeUpHttpClient httpClient)
 		{
 			this.m_httpClient = httpClient;
 		}

@@ -8,7 +8,7 @@ using BadgeUp.Types;
 
 namespace BadgeUp.ResourceClients
 {
-	public class EventClient
+	internal class EventClient : IEventClient
 	{
 		const string ENDPOINT = "events";
 		protected BadgeUpHttpClient m_httpClient;

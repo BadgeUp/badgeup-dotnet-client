@@ -4,7 +4,7 @@ using BadgeUp.Responses;
 
 namespace BadgeUp.ResourceClients
 {
-	public class AccountClient
+	internal class AccountClient : IAccountClient
 	{
 		const string ENDPOINT = "accounts";
 		protected BadgeUpHttpClient m_httpClient;
