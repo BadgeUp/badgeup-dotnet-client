@@ -4,7 +4,7 @@ using BadgeUp.Responses;
 
 namespace BadgeUp.ResourceClients
 {
-	public class AchievementIconClient
+	internal class AchievementIconClient : IAchievementIconClient
 	{
 		const string ENDPOINT = "achievementicons";
 		protected BadgeUpHttpClient m_httpClient;

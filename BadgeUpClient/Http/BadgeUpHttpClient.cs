@@ -6,7 +6,7 @@ using BadgeUp.Responses;
 
 namespace BadgeUp.Http
 {
-	public class BadgeUpHttpClient : System.IDisposable
+	internal class BadgeUpHttpClient : System.IDisposable
 	{
 		protected string m_host;
 		protected ApiKey m_apiKey;

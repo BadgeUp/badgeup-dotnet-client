@@ -9,7 +9,7 @@ using System;
 
 namespace BadgeUp.ResourceClients
 {
-	public class MetricClient
+	internal class MetricClient : IMetricClient
 	{
 		const string ENDPOINT = "metrics";
 		protected BadgeUpHttpClient m_httpClient;

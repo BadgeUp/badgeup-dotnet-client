@@ -8,12 +8,12 @@ using BadgeUp.Types;
 
 namespace BadgeUp.ResourceClients
 {
-	public class EarnedAwardClient
+	internal class EarnedAwardClient : IEarnedAwardClient
 	{
 		private const string ENDPOINT = "earnedawards";
-		protected BadgeUpHttpClient m_httpClient;
+		public BadgeUpHttpClient m_httpClient;
 
-		public EarnedAwardClient(BadgeUpHttpClient httpClient)
+		internal EarnedAwardClient(BadgeUpHttpClient httpClient)
 		{
 			this.m_httpClient = httpClient;
 		}

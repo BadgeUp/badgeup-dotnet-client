@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BadgeUp.ResourceClients
 {
-	public class AwardClient
+	internal class AwardClient : IAwardClient
 	{
 		private const string ENDPOINT = "awards";
 		protected BadgeUpHttpClient m_httpClient;

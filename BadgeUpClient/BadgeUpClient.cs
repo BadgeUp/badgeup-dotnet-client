@@ -8,10 +8,10 @@ namespace BadgeUp
 	/// </summary>
 	public class BadgeUpClient : System.IDisposable
 	{
-		const string DEFAULT_HOST = "https://api.useast1.badgeup.io";
-		protected string m_host;
-		protected ApiKey m_apiKey;
-		protected BadgeUpHttpClient m_httpClient;
+		private const string DEFAULT_HOST = "https://api.useast1.badgeup.io";
+		private string m_host;
+		private ApiKey m_apiKey;
+		private BadgeUpHttpClient m_httpClient;
 
 		// resource clients
 
@@ -19,57 +19,57 @@ namespace BadgeUp
 		/// <summary>
 		/// Interact with BadgeUp accounts
 		/// </summary>
-		public AccountClient Account { get; }
+		public IAccountClient Account { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp achievements
 		/// </summary>
-		public AchievementClient Achievement { get; }
+		public IAchievementClient Achievement { get; }
 		
 		/// <summary>
 		/// Interact with BadgeUp achievementIcons
 		/// </summary>
-		public AchievementIconClient AchievementIcon { get; }
+		public IAchievementIconClient AchievementIcon { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp applications
 		/// </summary>
-		public ApplicationClient Application { get; }
+		public IApplicationClient Application { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp awards
 		/// </summary>
-		public AwardClient Award { get; }
+		public IAwardClient Award { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp criteria
 		/// </summary>
-		public CriterionClient Criterion { get; }
+		public ICriterionClient Criterion { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp earned achievements
 		/// </summary>
-		public EarnedAchievementClient EarnedAchievement { get; }
+		public IEarnedAchievementClient EarnedAchievement { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp earned awards
 		/// </summary>
-		public EarnedAwardClient EarnedAward { get; }
+		public IEarnedAwardClient EarnedAward { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp events
 		/// </summary>
-		public EventClient Event { get; }
+		public IEventClient Event { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp metrics
 		/// </summary>
-		public MetricClient Metric { get; }
+		public IMetricClient Metric { get; }
 
 		/// <summary>
 		/// Interact with BadgeUp progress
 		/// </summary>
-		public ProgressClient Progress { get; }
+		public IProgressClient Progress { get; }
 
 		/// <summary>
 		/// Instantiate the BadgeUpClient, providing an instance of <see cref="ApiKey"/>
