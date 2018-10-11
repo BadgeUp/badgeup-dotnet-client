@@ -107,7 +107,7 @@ namespace BadgeUp
 		}
 
 		// for test purposes only
-		public void _SetHttpClient(System.Net.Http.HttpClient h)
+		internal void _SetHttpClient(System.Net.Http.HttpClient h)
 		{
 			this.m_httpClient._SetHttpClient(h);
 		}
