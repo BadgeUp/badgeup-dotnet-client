@@ -6,7 +6,7 @@ namespace BadgeUp
 	/// <summary>
 	/// BadgeUp Client
 	/// </summary>
-	public class BadgeUpClient : System.IDisposable
+	public class BadgeUpClient : System.IDisposable, IBadgeUpClient
 	{
 		private const string DEFAULT_HOST = "https://api.useast1.badgeup.io";
 		private string m_host;
