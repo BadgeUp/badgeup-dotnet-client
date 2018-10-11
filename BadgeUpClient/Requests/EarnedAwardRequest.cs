@@ -2,7 +2,7 @@ using BadgeUp.Types;
 
 namespace BadgeUp.Requests
 {
-	public class EarnedAwardRequest : Request
+	internal class EarnedAwardRequest : Request
 	{
 		public EarnedAwardRequest(EarnedAwardState state)
 		{

@@ -2,7 +2,7 @@ using BadgeUp.Types;
 
 namespace BadgeUp.Requests
 {
-	public class MetricRequest : Request
+	internal class MetricRequest : Request
 	{
 		public MetricRequest(Metric metric)
 		{

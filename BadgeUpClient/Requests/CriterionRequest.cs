@@ -2,7 +2,7 @@ using BadgeUp.Types;
 
 namespace BadgeUp.Requests
 {
-	public class CriterionRequest : Request
+	internal class CriterionRequest : Request
 	{
 		public CriterionRequest(Criterion criterion)
 		{
