@@ -19,9 +19,9 @@ namespace BadgeUp.ResourceClients
 		/// </summary>
 		/// <param name="id">A string that uniquely identifies this application</param>
 		/// <returns><see cref="ApplicationResponse"/></returns>
-		public async Task<ApplicationResponse> GetById(string id)
+		public Task<ApplicationResponse> GetById(string id)
 		{
-			return await this.m_httpClient.Get<ApplicationResponse>(ENDPOINT + "/" + id, "");
+			return this.m_httpClient.Get<ApplicationResponse>(ENDPOINT + "/" + id, "");
 		}
 	}
 }

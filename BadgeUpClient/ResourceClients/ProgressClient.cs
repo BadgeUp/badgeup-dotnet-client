@@ -24,7 +24,7 @@ namespace BadgeUp.ResourceClients
 		/// <param name="includeCriteria">Include related criteria</param>
 		/// <param name="includeAwards">Include related awards</param>
 		/// <returns></returns>
-		public async Task<List<Progress>> GetProgress(string subjectId, bool includeAchievements = false, bool includeCriteria = false, bool includeAwards = false)
+		public Task<List<Progress>> GetProgress(string subjectId, bool includeAchievements = false, bool includeCriteria = false, bool includeAwards = false)
 		{
 			var query = new HttpQuery();
 			query.Add("subject", subjectId);
@@ -38,7 +38,7 @@ namespace BadgeUp.ResourceClients
 				query.Add("include", "criterion");
 			if (includeAwards)
 				query.Add("include", "award");
-			return await this.m_httpClient.GetAll<Progress>(ENDPOINT, query:query.ToString());
+			return this.m_httpClient.GetAll<Progress>(ENDPOINT, query:query.ToString());
 		}
 	}
 }

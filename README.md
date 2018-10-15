@@ -12,11 +12,13 @@ Install the package [from nuget here](https://www.nuget.org/packages/BadgeUpClie
 ### Example Use
 The BadgeUp .NET client is initialized with an API key which can be generated in the BadgeUp dashboard.
 ```cs
-using BadgeUpClient.Types;
-using BadgeUpClient.Responses;
+using BadgeUp;
+using BadgeUp.Responses;
+using BadgeUp.Types;
+using System;
 
 // instantiate the client
-var badgeup = new BadgeUpClient("<api key here>");
+var client = new BadgeUpClient("<api key here>");
 
 // create an event
 var badgeupEvent = new Event("some_user", "jump", new Modifier { Inc = 1 });
@@ -25,29 +27,32 @@ var badgeupEvent = new Event("some_user", "jump", new Modifier { Inc = 1 });
 badgeupEvent.Timestamp = DateTimeOffset.Parse("2017-01-01T18:00:00+05:30");
 
 //send an event
-EventResponse response = await badgeup.Event.Send(badgeupEvent);
+EventResponse response = await client.Event.Send(badgeupEvent);
 
 // loop through all the progress results
-foreach (var prog in response.Progress)
+foreach (var eventResult in response.Results)
 {
-    // check if this is a newly-earned achievement
-    if (prog.IsComplete && prog.IsNew)
+    foreach (var prog in eventResult.Progress)
     {
-        string earnedAchievementId = prog.EarnedAchievementId;
-        string achievementId = prog.AchievementId;
-        System.Console.WriteLine($"Achievement with ID {prog.AchievementId} Earned!");
-
-        // from here you can use AchievementId and EarnedAchievementId to get the original achievement and awards objects
-        var earnedAchievement = await client.EarnedAchievement.GetById(earnedAchievementId);
-        var achievement = await client.Achievement.GetById(achievementId);
-
-        // get associated award information
-        foreach (var awardId in achievement.Awards)
+        // check if this is a newly-earned achievement
+        if (prog.IsComplete && prog.IsNew)
         {
-            var award = await client.Award.GetById(awardId);
-            // in the dashboard set the award to `{ "points": 5 }`
-            int points = award.Data["points"].ToObject<int>();
-            System.Console.WriteLine($"Points awarded: {points}");
+            string earnedAchievementId = prog.EarnedAchievementId;
+            string achievementId = prog.AchievementId;
+            System.Console.WriteLine($"Achievement with ID {prog.AchievementId} Earned!");
+
+            // from here you can use AchievementId and EarnedAchievementId to get the original achievement and awards objects
+            var earnedAchievement = await client.EarnedAchievement.GetById(earnedAchievementId);
+            var achievement = await client.Achievement.GetById(achievementId);
+
+            // get associated award information
+            foreach (var awardId in achievement.Awards)
+            {
+                var award = await client.Award.GetById(awardId);
+                // in the dashboard set the award to `{ "points": 5 }`
+                int points = award.Data["points"].ToObject<int>();
+                System.Console.WriteLine($"Points awarded: {points}");
+            }
         }
     }
 }

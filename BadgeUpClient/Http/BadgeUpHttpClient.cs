@@ -35,9 +35,9 @@ namespace BadgeUp.Http
 			{
 				try
 				{
-					var response = await m_httpClient.GetAsync(
-						m_host + path.TrimEnd('/') + "/" + endpointName.TrimStart('/') + (query != null ? '?' + query : ""));
-					responseContent = await response.Content.ReadAsStringAsync();
+					var requestUri = m_host + path.TrimEnd('/') + "/" + endpointName.TrimStart('/') + (query != null ? '?' + query : "");
+					var response = await m_httpClient.GetAsync(requestUri).ConfigureAwait(false);
+					responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
 					if (response.IsSuccessStatusCode)
 					{
@@ -64,7 +64,7 @@ namespace BadgeUp.Http
 			string url = endpoint;
 			do
 			{
-				var response = await this.Get<MultipleResponse<TResponse>>(url, path, query);
+				var response = await this.Get<MultipleResponse<TResponse>>(url, path, query).ConfigureAwait(false);
 				result.AddRange(response.Data);
 				url = response.Pages?.Next;
 
@@ -94,10 +94,9 @@ namespace BadgeUp.Http
 			{
 				try
 				{
-					var response = await m_httpClient.PostAsync(
-						m_host + path + "/" + endpointName + (query != null ? '?' + query : ""),
-						content);
-					responseContent = await response.Content.ReadAsStringAsync();
+					var requestUri = m_host + path + "/" + endpointName + (query != null ? '?' + query : "");
+					var response = await m_httpClient.PostAsync(requestUri,content).ConfigureAwait(false);
+					responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
 					if (response.IsSuccessStatusCode)
 					{

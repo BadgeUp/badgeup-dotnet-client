@@ -23,9 +23,9 @@ namespace BadgeUp.ResourceClients
 		/// </summary>
 		/// <param name="id">A string that uniquely identifies this award</param>
 		/// <returns><see cref="EarnedAwardResponse"/></returns>
-		public async Task<EarnedAwardResponse> GetById(string id)
+		public Task<EarnedAwardResponse> GetById(string id)
 		{
-			return await this.m_httpClient.Get<EarnedAwardResponse>(ENDPOINT + "/" + id);
+			return this.m_httpClient.Get<EarnedAwardResponse>(ENDPOINT + "/" + id);
 		}
 
 		/// <summary>
@@ -33,9 +33,9 @@ namespace BadgeUp.ResourceClients
 		/// </summary>
 		/// <param name="param">Optional QueryParams object, to filter the earned awards by AwardId, EarnedAchievementId, Subject, Since and Until parameters</param>
 		/// <returns><see cref="EarnedAwardResponse"/></returns>
-		public async Task<List<EarnedAwardResponse>> GetAll(EarnedAwardQueryParams param = null)
+		public Task<List<EarnedAwardResponse>> GetAll(EarnedAwardQueryParams param = null)
 		{
-			return await this.m_httpClient.GetAll<EarnedAwardResponse>(ENDPOINT, query: param?.ToQueryString());
+			return this.m_httpClient.GetAll<EarnedAwardResponse>(ENDPOINT, query: param?.ToQueryString());
 		}
 
 		public async Task<EarnedAwardResponse> ChangeState(string id, EarnedAwardState state)
